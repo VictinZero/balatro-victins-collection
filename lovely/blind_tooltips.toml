@@ -1,0 +1,15 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# Blind tooltips
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "G.GAME.orbital_choices = G.GAME.orbital_choices or {}"
+position = "before"
+payload = '''
+if blind_choice.config.vic_tooltip then blind_choice.config.vic_tooltip(blind_choice) end
+'''
+match_indent = true

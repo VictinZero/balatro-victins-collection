@@ -1,0 +1,66 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# Poker Hand level colors
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "G.hand_text_area.hand_level.config.colour = G.C.HAND_LEVELS[math.min(vals.level, 7)]"
+position = "at"
+payload = '''
+local n_colours = #G.C.VictinsCollection.HAND_LEVELS
+local idx = vals.level % n_colours
+idx = (idx == 0) and n_colours or idx
+
+G.hand_text_area.hand_level.config.colour = G.C.VictinsCollection.HAND_LEVELS[idx]
+'''
+match_indent = true
+overwrite = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "elseif _c.set == 'Planet' then"
+position = "after"
+payload = '''
+local n_colours = #G.C.VictinsCollection.HAND_LEVELS
+local idx = G.GAME.hands[_c.config.hand_type].level % n_colours
+idx = (idx == 0) and n_colours or idx
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "colours = {(G.GAME.hands[_c.config.hand_type].level==1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, G.GAME.hands[_c.config.hand_type].level)])}"
+position = "at"
+payload = '''
+colours = {(G.GAME.hands[_c.config.hand_type].level % n_colours == 1 and G.C.UI.TEXT_DARK or G.C.VictinsCollection.HAND_LEVELS[idx])}
+'''
+match_indent = true
+overwrite = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "function create_UIBox_current_hand_row(handname, simple)"
+position = "after"
+payload = '''
+local n_colours = #G.C.VictinsCollection.HAND_LEVELS
+local idx = G.GAME.hands[handname].level % n_colours
+idx = (idx == 0) and n_colours or idx
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''{n=G.UIT.C, config={align = "cm", padding = 0.01, r = 0.1, colour = G.C.HAND_LEVELS[math.min(7, G.GAME.hands[handname].level)], minw = 1.5, outline = 0.8, outline_colour = G.C.WHITE}, nodes={'''
+position = "at"
+payload = '''
+{n=G.UIT.C, config={align = "cm", padding = 0.01, r = 0.1, colour = G.C.VictinsCollection.HAND_LEVELS[idx], minw = 1.5, outline = 0.8, outline_colour = G.C.WHITE}, nodes={
+'''
+match_indent = true
+overwrite = true

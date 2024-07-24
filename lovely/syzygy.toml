@@ -1,0 +1,42 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# Syzygy
+[[patches]]
+[patches.pattern]
+target = "back.lua"
+pattern = "if self.name == 'Plasma Deck' and args.context == 'final_scoring_step' then"
+position = "before"
+payload = '''
+local calculate_syzygy = function()
+	local possible_syzygies = SMODS.find_card("j_vic_syzygy")
+	if #possible_syzygies > 0 then
+		for i = 1, #possible_syzygies do
+            if possible_syzygies[i].ability.extra.syzygy then return true end
+        end
+	end
+	return false
+end
+local calculate_balance = function()
+	return calculate_syzygy()
+end
+'''
+match_indent = true
+overwrite = false
+
+[[patches]]
+[patches.pattern]
+target = "back.lua"
+pattern = "if self.name == 'Plasma Deck' and args.context == 'final_scoring_step' then"
+position = "at"
+payload = '''
+if (self.name == 'Plasma Deck' or calculate_balance()) and args.context == 'final_scoring_step' then
+'''
+match_indent = true
+overwrite = true
+
+# payload = '''
+# if (self.name == 'Plasma Deck' or (G.GAME.VictinsCollection and G.GAME.VictinsCollection.equalize)) and args.context == 'final_scoring_step' then
+# '''

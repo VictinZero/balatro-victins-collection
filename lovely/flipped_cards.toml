@@ -1,0 +1,31 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# Flipped cards
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "if G.GAME.modifiers.flipped_cards and to == G.hand then"
+position = "before"
+payload = '''
+if G.GAME.VictinsCollection.n_flipped_cards and G.GAME.VictinsCollection.n_flipped_cards > 0 then
+    stay_flipped = true
+    G.GAME.VictinsCollection.n_flipped_cards = G.GAME.VictinsCollection.n_flipped_cards - 1
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = "if (self == G.hand) and G.GAME.modifiers.flipped_cards then"
+position = "before"
+payload = '''
+if G.GAME.VictinsCollection.n_flipped_cards and G.GAME.VictinsCollection.n_flipped_cards > 0 then
+    stay_flipped = true
+    G.GAME.VictinsCollection.n_flipped_cards = G.GAME.VictinsCollection.n_flipped_cards - 1
+end
+'''
+match_indent = true
