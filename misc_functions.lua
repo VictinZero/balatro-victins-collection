@@ -1,4 +1,4 @@
-misc = {}
+local misc = {}
 
 misc.create_blind_tooltip = function(blind_choice, func)
     if not blind_choice.animation.alerted then
@@ -80,7 +80,7 @@ end
 misc.create_UIBox_blind_popup_with_icon = function(blind_key, remove_reward)
     local blind = G.P_BLINDS[blind_key]    
     local original_UIBox = create_UIBox_blind_popup(blind, true).nodes
-    if remove_reward then table.remove(original_UIBox[2].nodes[1].nodes, 3); sendDebugMessage("Reward removed!") end -- Removes row listing money reward
+    if remove_reward then table.remove(original_UIBox[2].nodes[1].nodes, 3)--[[; sendDebugMessage("Reward removed!")]] end -- Removes row listing money reward
 
     local blind_icon = {}
     blind_icon.animation = AnimatedSprite(0,0, 1.4, 1.4, G.ANIMATION_ATLAS[blind.atlas or 'blind_chips'], blind.pos)

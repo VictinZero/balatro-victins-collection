@@ -1,7 +1,7 @@
+local misc = NFS.load(SMODS.current_mod.path .. "/misc_functions.lua")()
+
 local get_new_boss_ref = get_new_boss
-
 get_new_boss = function()
-
 	-- Tyrian Patriarch
 
 	local possible_patriarch_blinds = {

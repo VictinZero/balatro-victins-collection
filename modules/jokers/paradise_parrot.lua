@@ -26,7 +26,7 @@ return {
 
     loc_vars = function(self, info_queue, card)
         return {
-            vars = {repetitions}
+            vars = {card.ability.extra.repetitions}
         }
     end,
 }
