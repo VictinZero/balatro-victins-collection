@@ -1,9 +1,9 @@
 local misc = NFS.load(SMODS.current_mod.path .. "/misc_functions.lua")()
 
 local _generate_main_end = function(card)
-    local main_end = 0
+    local main_end = nil
     if not misc.is_in_your_collection(card) then
-        local active = (card.ability.extra.ki_rata > 0) or (G.GAME.blind and G.GAME.current_round.hands_left > 0)
+        local active = (card.ability.extra.ki_rata > 0) or (G.GAME.blind and G.GAME.blind:get_type() and G.GAME.current_round.hands_left > 0)
         local colour = (active and G.C.BLUE) or G.C.RED
         local txt = (active and '+'..((card.ability.extra.ki_rata > 0 and tostring(card.ability.extra.ki_rata)) or (G.GAME.blind and tostring(G.GAME.current_round.hands_left) or 'ERROR'))) or '0'
         main_end = {
@@ -13,8 +13,6 @@ local _generate_main_end = function(card)
                     }}
                 }}
             }
-    else
-        main_end = nil
     end
     return main_end
 end

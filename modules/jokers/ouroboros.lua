@@ -22,7 +22,7 @@ return {
     key = 'ouroboros',
     config = {},
     rarity = 1,
-    pos = { x = 0, y = 0 },
+    pos = { x = 1, y = 0 },
     atlas = 'joker_atlas',
     cost = 4,
     unlocked = true,
@@ -54,6 +54,7 @@ return {
     end,
 
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue+1] = {key = "cr_vic_ouroboros", set = "Other"}
         return {main_end = _generate_main_end(card)}
     end
 }

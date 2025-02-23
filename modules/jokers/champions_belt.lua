@@ -1,17 +1,40 @@
 local misc = NFS.load(SMODS.current_mod.path .. "/misc_functions.lua")()
 
+local custom_width = 87
+
 return {
     key = 'champions_belt',
     config = {extra={Xmult=2.5}},
     rarity = 2,
     pos = { x = 0, y = 0 },
-    atlas = 'joker_atlas',
+    atlas = 'champions_belt',
     cost = 5,
     unlocked = true,
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    soul_pos = nil,
+    soul_pos = { x = 0, y = 1 },
+
+    set_ability = function(self, card, initial, delay_sprites)
+        if self.discovered or card.bypass_discovery_center then
+            card.T.w = card.T.w * (custom_width / 71)
+            card.children.floating_sprite.T.w = card.children.floating_sprite.T.w * (custom_width / 71)
+        end
+    end,
+
+    set_sprites = function(self, card, front)
+        if self.discovered or card.bypass_discovery_center then
+            card.children.center.scale.x = card.children.center.scale.x
+            card.children.floating_sprite.scale.x = card.children.floating_sprite.scale.x --* (custom_width / 71)
+        end
+    end,
+
+    load = function(self, card, card_table, other_card)
+        if self.discovered or card.bypass_discovery_center then
+            card.T.w = card.T.w * (custom_width / 71)
+            --card.children.floating_sprite.T.w = card.children.floating_sprite.T.w * (custom_width / 71)
+        end
+    end,
 
     add_to_deck = function(self, card, from_debuff)
         sendDebugMessage("Adding Champions' Belt")
@@ -44,9 +67,10 @@ return {
     end,
 
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue+1] = {key = "cr_vic_champions_belt", set = "Other"}
         return {vars = {card.ability.extra.Xmult}}
     end,
-    
+
     subtitle = {
         text = {"The game just got harder!",}
     }

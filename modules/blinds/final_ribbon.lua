@@ -2,12 +2,12 @@ local misc = NFS.load(SMODS.current_mod.path .. "/misc_functions.lua")()
 
 return {
     name = "The Rouge Ribbon",
-    key = "final_ribbon", 
+    key = "final_ribbon",
     pos = { x = 0, y = 2 },
     atlas = "showdown_atlas",
-    dollars = 8, 
-    mult = 1.5, 
-    vars = {}, 
+    dollars = 8,
+    mult = 1.5,
+    vars = {},
     debuff = {},
     boss = {showdown = true, min = 1, max = 10},--showdown = true
     boss_colour = HEX('B29CB2'),--HEX('A91101'),

@@ -40,4 +40,5 @@ G.C.VictinsCollection.POKER_HANDS = {
 G.C.VictinsCollection.OTHERS = {
 	Purple = HEX("CB31DB"),
 	Zodiac = {0, 0, 0, 1},
+    Ophiucus = HEX("678900"),
 }

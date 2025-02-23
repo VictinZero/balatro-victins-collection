@@ -32,5 +32,6 @@ return {
 
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = "aux_vic_stheno", set = "Other"}
+        info_queue[#info_queue+1] = G.P_CENTERS.m_stone
     end,
 }

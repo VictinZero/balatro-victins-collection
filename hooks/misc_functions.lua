@@ -21,6 +21,9 @@ function loc_colour(_c, default)
 			vic_5OAFlush = G.C.VictinsCollection.POKER_HANDS['Five of a Flush'],
 
 			vic_stone = G.C.VictinsCollection.ENHANCEMENTS.Stone,
+
+			vic_perishable = G.C.PERISHABLE,
+			vic_rental = G.C.RENTAL,
 		}
 
 		for k, v in pairs(new_colors) do

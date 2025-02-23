@@ -1,6 +1,14 @@
 return {
 	descriptions = {
 		Joker = {
+            j_vic_up_your_sleeve = {
+				name = "Up Your Sleeve",
+	        	text = {
+		            "When {C:attention}round starts{},",
+		            "{C:attention}get{} a {C:chips}Temporary {C:dark_edition}Negative",
+		            "{X:black,C:white}#1#{} of {C:spades}#2#"
+		        }
+		    },
 			j_vic_moody = {
 				name = "Moody",
 	        	text = {
@@ -83,6 +91,14 @@ return {
 		            "{C:vic_wild}Wild{} cards",
 		        }
 		    },
+            j_vic_skyscraper = {
+				name = "Skyscraper",
+	        	text = {
+		            "{C:attention}Scoring cards{} give {C:chips}+1{} Chip",
+                    "per card of lower rank",
+                    "in your {C:attention}full deck"
+		        }
+		    },
 		    j_vic_grappling_hook = {
 				name = "Grappling Hook",
 	        	text = {
@@ -121,6 +137,107 @@ return {
 		            "on top of your deck"
 		        }
 		    },
+			j_vic_royal_straight_joker = {
+				name = "Royal Straight Joker (Placeholder)",
+	        	text = {
+		            "Before {C:attention}last hand of round{},",
+		            "draw an {C:attention}Ace-High Straight",--Royal Straight"
+					"{C:inactive}(A K Q J 10)",
+		        }
+		    },
+			j_vic_chimera = {
+				name = "Chimera",
+	        	text = {
+		            "If played hand contains",
+					"{C:attention}3 or fewer{} cards,",
+		            "played cards are considered",
+					"{C:attention}Face cards{} and {C:attention}all suits"
+		        }
+		    },
+            j_vic_pippi_panini = {
+				name = "Pippi Panini",
+	        	text = {
+		            "When {C:attention}round ends{},",
+                    "{C:green}#1# in #2#{} chance to",
+                    "gain {C:money}$#3#{}.",
+					"Otherwise, lose {C:money}$#4#"
+		        }
+		    },
+            j_vic_yurika_harako = {
+				name = "Yurika Harako",
+	        	text = {
+		            "If {C:attention}first discard{} of round has",
+                    "at least {C:attention}#1# ranks{} and {C:attention}#2# suits{},",
+                    "give them random {C:attention}Enhancements"
+		        }
+		    },
+            j_vic_wildheart = {
+                name = "Wildheart",
+                text = {
+                    "Each {C:vic_wild}Wild{} card",
+                    "is also a",
+                    "{C:attention}#1#",
+                    "{C:inactive}(Swaps each round)",
+                }
+            },
+            j_vic_terraforming = {
+				name = "Terraforming",
+	        	text = {
+		            "When you {C:attention}play a Hand{} and",
+                    "you haven't discarded this round,",
+                    "reroll the {C:red,E:2}Boss Blind",
+					"{C:inactive}(Once per Ante)"
+		        }
+		    },
+            j_vic_fortune_cookie = {
+                name = "Fortune Cookie",
+                text = {
+                    "{X:green,C:white} X#1# {} Luck {C:inactive}(e.g., {C:green}1 in 3{C:inactive} -> {C:green}#2# in 3{C:inactive}#4#)",
+                    "{s:0.33} ",
+                    "When {C:attention}round ends{}, {C:green}#2# in #3#{} chance to",
+                    "destroy this and create a {C:money}Golden {C:tarot}Tarot{}.",
+                    "Otherwise, this gains {X:green,C:white} X#5# {} Luck",
+                }
+            },
+            j_vic_chai_tea = {
+                name = "Chai Tea",
+                text = {
+                    "{C:attention}Retrigger{} the Joker",
+                    "to the right",
+                    "{s:0.33} ",
+                    "Lasts {C:attention}#1#{} round#2#!",
+                }
+            },
+            j_vic_copies_commons = {
+                name = "Copies Commons",
+                text = {
+                    "{C:attention}Retrigger{} all",
+                    "{X:blue,C:white}Common{} Jokers",
+                }
+            },
+			j_vic_brazilian_miku = {
+				name = "Brazilian Miku",
+	        	text = {
+		            "{E:1}HUEHUEHUE",
+		        }
+		    },
+			j_vic_nadia_om = {
+				name = "Nadia Om",
+	        	text = {
+		            "When round starts,",
+					"{C:red}destroy{} the Joker {C:attention}to the right",
+					"to earn {C:money}$#1#{} and create {C:attention}#2#{} random",
+		            "{C:dark_edition,E:1}Negative{C:vic_perishable} Perishable{C:vic_rental} Rental{} Jokers"
+		        }
+		    },
+		    j_vic_mammon = {
+				name = "Mammon",
+	        	text = {
+		            "{C:attention}Retrigger{} each played card {C:attention}#1#{} time#2#",
+		            "{s:0.33} ",
+		            "Next upgrade after you have {C:money}$#3#",
+		        }
+		    },
 		    j_vic_solomon_david = {
 				name = "Solomon David",
 	        	text = {
@@ -152,8 +269,9 @@ return {
 		            "After you {C:attetion}sell",
 		            "{C:attention}3{} {C:planet}Planet{} cards,",
 		            "create a {C:dark_edition,E:1}Black Hole",
-		            "{C:attention}#1#{C:inactive} left",
-		            "{C:inactive}(Must have room)"
+		            "{C:inactive}(Must have room)",
+                    "{s:0.33} ",
+		            "{C:attention}#1#{C:inactive} left"
 		        }
 		    },
 			j_vic_quantum_joker = {
@@ -210,6 +328,30 @@ return {
 		        }
 		    },
 		},
+        Edition = {
+            e_vic_golden = {
+                name = "Golden Edition",
+                text = {
+                    "How pretty!"
+                }
+            },
+        },
+		Enhanced = {
+			m_vic_blood = {
+				name = "Blood Card",
+				text = {
+					"When {c:attention}a Boss Blind is defeated{},",
+					"this card gains {X:red,C:white} +X#1# {} Mult"
+				}
+			},
+            m_vic_confused = {
+                name = "Confused",
+                text = {
+                    "When drawn,",
+                    "randomize suit and rank",
+                }
+            }
+		},
 		Blind = {
 			bl_vic_worm = {
 				name = "The Worm",
@@ -245,6 +387,14 @@ return {
 					"When defeated once,",
 					"play it again",
 					"(no refreshes)"
+				}
+			},
+            bl_vic_bottle = {
+				name = "The Bottle",
+				text = {
+					"Double hand size,",
+					"but discard the deck",
+					"after first hand drawn"
 				}
 			},
 			bl_vic_chaos = {
@@ -303,10 +453,24 @@ return {
 			},
 		},
 		Other = {
+			-- Credits
+            cr_vic_ouroboros = {
+				name = "cr_vic_credits",
+				text = {
+					"{C:white}Original background by{} {E:1,C:white,S:1.1}itsmythie",
+				}
+			},
 			cr_vic_the_one = {
 				name = "cr_vic_credits",
 				text = {
 					"{C:white}Original concept by{} {E:1,C:white,S:1.1}EggSlashEther",
+				}
+			},
+			cr_vic_champions_belt = {
+				name = "cr_vic_credits",
+				text = {
+					"{C:white}Original art by{} {E:1,C:white,S:1.1}B",
+					"{C:white}Soul sprite art by{} {E:1,C:white,S:1.1}Victin",
 				}
 			},
 			cr_vic_quantum_joker = {
@@ -319,6 +483,48 @@ return {
 				name = "aux_vic_stheno",
 				text = {
 					"test",
+				}
+			},
+			-- Other
+			vic_perishable = {
+				name = "Perishable",
+				text = {
+					"Debuffed after",
+					"{C:attention}#1#{} rounds",
+				},
+			},
+			vic_temporary = {
+				name = "Temporary",
+				text = {
+					"When {C:attention}round ends{},",
+					"{C:red,E:2}destroy{} this card",
+				}
+			}
+		},
+        Zodiac = {
+			c_vic_gemini = {
+				name = "Gemini",
+				text = {
+                    "If played hand is {C:vic_TwoPair,E:1}Two Pair{},",
+					"retrigger each scoring card {C:attention}#1#{} time#2#",
+		            "{s:0.33} ",
+		            " {C:attention,s:1}+#3#{C:inactive,s:1} time per level",
+				}
+			},
+            c_vic_cancer = {
+				name = "Cancer",
+				text = {
+                    "If played hand is {C:vic_3OAK,E:1}Three of a Kind{},",
+					"{C:green}#1# in #2#{} chance for {X:red,C:white} X#3# {} Mult and",
+		            "{C:green}#4# in #5#{} chance for {C:money}$#6#{}",
+		            "{s:0.33} ",
+		            " {X:red,C:white,s:1} +X#7# {C:inactive,s:1} Mult and {C:money,s:1}+$#8#{C:inactive,s:1} per level",
+				}
+			},
+            c_vic_ophiucus = {
+				name = "Ophiucus",
+				text = {
+					"Level up all Zodiacs",
 				}
 			},
 		},
@@ -336,15 +542,22 @@ return {
 	misc = {
 		dictionary = {
 			k_vic_credits = "Credits",
+            k_vic_eureka = "Eureka!",
 			k_vic_inactive = "inactive",
 			k_vic_magnificent = "Magnificent!",
 			k_vic_quantum = "Quantum!",
 			k_vic_zodiac = "Zodiac",
+            k_vic_auxiliary = "Auxiliary",
+            k_zodiac = "Zodiac",
 			k_token = "Token",
+            b_zodiac_cards = "Zodiacs",
 			b_token_cards = "Tokens",
 		},
 		labels = {
-			token = "Token"
+            k_vic_auxiliary = "Auxiliary",
+            zodiac = "Zodiac",
+			token = "Token",
+			vic_temporary = "Temporary",
 		},
 		quips = {
 			vic_solomon_title_1 = {

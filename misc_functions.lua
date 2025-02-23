@@ -78,7 +78,7 @@ misc.create_blind_tooltip = function(blind_choice, func)
 end
 
 misc.create_UIBox_blind_popup_with_icon = function(blind_key, remove_reward)
-    local blind = G.P_BLINDS[blind_key]    
+    local blind = G.P_BLINDS[blind_key]
     local original_UIBox = create_UIBox_blind_popup(blind, true).nodes
     if remove_reward then table.remove(original_UIBox[2].nodes[1].nodes, 3)--[[; sendDebugMessage("Reward removed!")]] end -- Removes row listing money reward
 
@@ -145,8 +145,9 @@ misc.generate_ui_for_zodiac = function(loc_vars)
 end
 
 misc.hand_level_for_zodiac = function(card)
-    local hand_type = card.ability.extra.hand_type
-    local level = (G.GAME and G.GAME.hands and G.GAME.hands[card.ability.extra.hand_type].level) or 1
+    -- local hand_type = card.ability.extra.hand_type
+    local zodiac = card.ability.extra.zodiac
+    local level = (G.GAME and G.GAME.VictinsCollection.zodiac[zodiac]) or 1
 
     local n_colours = #G.C.VictinsCollection.HAND_LEVELS
     local idx = level % n_colours
@@ -165,9 +166,11 @@ end
 
 misc.is_in_your_collection = function(card)
     if not G.your_collection then return false end
-    for i = 1, 3 do
+    --sendDebugMessage(tprint(card.area.config))
+    if card.area and card.area.config.collection then return true end
+    --[[for i = 1, 3 do
         if (G.your_collection[i] and card.area == G.your_collection[i]) then return true end
-    end
+    end]]
     return false
 end
 

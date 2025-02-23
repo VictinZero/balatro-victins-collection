@@ -10,7 +10,7 @@ target = "functions/common_events.lua"
 pattern = "if G.GAME.modifiers.flipped_cards and to == G.hand then"
 position = "before"
 payload = '''
-if G.GAME.VictinsCollection.n_flipped_cards and G.GAME.VictinsCollection.n_flipped_cards > 0 then
+if G.GAME.VictinsCollection and G.GAME.VictinsCollection.n_flipped_cards and G.GAME.VictinsCollection.n_flipped_cards > 0 then
     stay_flipped = true
     G.GAME.VictinsCollection.n_flipped_cards = G.GAME.VictinsCollection.n_flipped_cards - 1
 end
@@ -23,7 +23,7 @@ target = "cardarea.lua"
 pattern = "if (self == G.hand) and G.GAME.modifiers.flipped_cards then"
 position = "before"
 payload = '''
-if G.GAME.VictinsCollection.n_flipped_cards and G.GAME.VictinsCollection.n_flipped_cards > 0 then
+if G.GAME.VictinsCollection and G.GAME.VictinsCollection.n_flipped_cards and G.GAME.VictinsCollection.n_flipped_cards > 0 then
     stay_flipped = true
     G.GAME.VictinsCollection.n_flipped_cards = G.GAME.VictinsCollection.n_flipped_cards - 1
 end

@@ -51,3 +51,21 @@ function Card:vic_say_stuff(n, not_first)
         }), 'tutorial')
     end
 end
+
+local is_face_ref = Card.is_face
+function Card.is_face(self, from_boss)
+    if (not self.debuff or from_boss) and next(SMODS.find_card('j_vic_chimera')) and 1 <= #G.play.cards and #G.play.cards <= 3 and self.area == G.play then
+        return true
+    else
+        return is_face_ref(self, from_boss)
+    end
+end
+
+local is_suit_ref = Card.is_suit
+function Card.is_suit(self, suit, bypass_debuff, flush_calc)
+    if not flush_calc and next(SMODS.find_card('j_vic_chimera')) and 1 <= #G.play.cards and #G.play.cards <= 3 and self.area == G.play then
+        return true
+    else
+        return is_suit_ref(self, suit, bypass_debuff, flush_calc)
+    end
+end

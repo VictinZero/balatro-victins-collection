@@ -1,0 +1,89 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 1
+
+# card_eval_status_text alignment patches 
+[[patches]]
+[patches.pattern]
+target = 'functions/common_events.lua'
+match_indent = true
+position = 'before'
+pattern = '''elseif card.jimbo then'''
+payload = '''
+elseif card.area == G.ca_vic_zodiac then
+    y_off = 0.05*card.T.h
+'''
+
+# Zodiac cardarea
+[[patches]]
+[patches.pattern]
+target = 'game.lua'
+match_indent = true
+position = 'before'
+pattern = 'self.deck = CardArea('
+payload = '''self.ca_vic_zodiac = CardArea(
+    G.TILE_W - 6*G.CARD_W - 2.95, -1.1*G.jokers.T.h,
+    G.jokers.T.w, G.jokers.T.h,
+    { type = "joker", card_limit = 13 }
+)
+
+SMODS.add_card{key = "j_vic_gemini", area = self.ca_vic_zodiac, skip_materialize = true, no_edition = true}
+SMODS.add_card{key = "j_vic_cancer", area = self.ca_vic_zodiac, skip_materialize = true, no_edition = true}
+'''
+
+# Zodiac calculation
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/utils.lua"]'
+match_indent = true
+position = 'before'
+pattern = '-- TARGET: add your own CardAreas for joker evaluation'
+payload = '''
+local vic_joker_idx = 0
+for k, v in ipairs(t) do
+    vic_joker_idx = vic_joker_idx + 1
+    if v == G.jokers then
+       break
+    end
+end
+table.insert(t, vic_joker_idx, G.ca_vic_zodiac)
+'''
+
+# UI
+# [[patches]]
+# [patches.pattern]
+# target = 'functions/UI_definitions.lua'
+# match_indent = true
+# position = 'at'
+# pattern = '''{n=G.UIT.T, config={ref_table = G.GAME.current_round.current_hand, ref_value='hand_level', scale = scale, colour = G.C.UI.TEXT_LIGHT, id = 'hand_level', shadow = true}}'''
+# payload = '''
+# {n=G.UIT.T, config={ref_table = G.GAME.current_round.current_hand, ref_value='hand_level', scale = scale, colour = G.C.UI.TEXT_LIGHT, id = 'hand_level', shadow = true}},
+# {n=G.UIT.T, config={text = '+', scale = scale, colour = G.C.UI.TEXT_LIGHT, id = 'vic_levels_plus_sign', shadow = true}},
+# --[[{n=G.UIT.T, config={ref_table = G.GAME.VictinsCollection.zodiac, ref_value=G.GAME.VictinsCollection.zodiac_dict[G.GAME.current_round.current_hand.handname_text or 'High Card'] or 'aries', scale = scale, colour = G.C.UI.TEXT_LIGHT, id = 'vic_zodiac_level', shadow = true}},]]
+# '''
+
+
+# [[patches]]
+# [patches.pattern]
+# target = 'functions/common_events.lua'
+# match_indent = true
+# position = 'before'
+# pattern = 'if config.sound and not config.modded then play_sound(config.sound, config.pitch or 1, config.volume or 1) end'
+# payload = '''
+# local vic_handname = vals.handname or G.GAME.current_round.current_hand.handname
+# local vic_zodiac = G.GAME.VictinsCollection.zodiac[G.GAME.VictinsCollection.zodiac_dict[vic_handname]]
+# if vals.level and vic_zodiac then --and G.GAME.current_round.current_hand.hand_level ~= ' '..localize('k_lvl')..tostring(vals.level) then
+#         if vals.level == '' then
+#         G.GAME.current_round.current_hand.hand_level = vals.level
+#         else
+#         G.GAME.current_round.current_hand.hand_level = ' '..localize('k_lvl')..tostring(vals.level)
+#         if type(vals.level) == 'number' then 
+#         G.hand_text_area.hand_level.config.colour = G.C.HAND_LEVELS[math.min(vals.level, 7)]
+#         else
+#         G.hand_text_area.hand_level.config.colour = G.C.HAND_LEVELS[1]
+#         end
+#         G.hand_text_area.hand_level:juice_up()
+#         end
+# end
+# '''

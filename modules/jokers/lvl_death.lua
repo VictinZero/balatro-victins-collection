@@ -19,7 +19,7 @@ local _generate_main_end = function(card)
             active = (not backwards) and (lvl and lvl % card.ability.extra.lvl_mod == 0)
         end
 
-        local colour = (active and G.C.GREEN) or G.C.RED
+        local colour = (backwards and G.C.FILTER) or (active and G.C.GREEN) or G.C.RED
         local txt = (active and localize('k_active')) or (backwards and "???") or localize('k_vic_inactive')
         main_end = {
                 {n=G.UIT.C, config={align = "bm", padding = 0.02}, nodes={

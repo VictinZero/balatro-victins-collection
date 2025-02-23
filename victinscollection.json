@@ -1,0 +1,17 @@
+{
+	"id": "victinscollection",
+	"name": "Victin's Collection",
+	"display_name": "Victin's Collection",
+	"author": ["Victin"],
+	"description": "This mod adds Jokers",
+	"prefix": "vic",
+	"main_file": "victinscollection.lua",
+	"priority": 0,
+	"badge_colour": "ffc014",
+	"badge_text_colour": "FFFFFF",
+	"version": "0.0.0",
+	"dependencies": [
+		"Steamodded (>=1.*~)",
+		"Lovely (>=0.6.*~)"
+	]
+}

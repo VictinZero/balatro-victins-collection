@@ -13,6 +13,7 @@ return {
     blueprint_compat = true,
     eternal_compat = true,
     soul_pos = nil,
+    enhancement_gate = 'm_wild',
 
     calculate = function(self, card, context)
         if context.repetition and context.other_card.ability.name == 'Wild Card' then
@@ -24,9 +25,10 @@ return {
         end
     end,
 
-    loc_vars = function(self, info_queue, card)
+    --[[loc_vars = function(self, info_queue, card)
+        -- info_queue[#info_queue+1] = G.P_CENTERS.m_wild
         return {
             vars = {card.ability.extra.repetitions}
         }
-    end,
+    end,]]
 }
