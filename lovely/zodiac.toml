@@ -23,13 +23,13 @@ match_indent = true
 position = 'before'
 pattern = 'self.deck = CardArea('
 payload = '''self.ca_vic_zodiac = CardArea(
-    G.TILE_W - 6*G.CARD_W - 2.95, -1.1*G.jokers.T.h,
+    G.TILE_W - 6*G.CARD_W - 2.95, -1.1*G.jokers.T.h - 1.1*G.jokers.T.h, -- hide it during alpha
     G.jokers.T.w, G.jokers.T.h,
     { type = "joker", card_limit = 13 }
 )
 
-SMODS.add_card{key = "j_vic_gemini", area = self.ca_vic_zodiac, skip_materialize = true, no_edition = true}
-SMODS.add_card{key = "j_vic_cancer", area = self.ca_vic_zodiac, skip_materialize = true, no_edition = true}
+-- SMODS.add_card{key = "j_vic_gemini", area = self.ca_vic_zodiac, skip_materialize = true, no_edition = true}
+-- SMODS.add_card{key = "j_vic_cancer", area = self.ca_vic_zodiac, skip_materialize = true, no_edition = true}
 '''
 
 # Zodiac calculation

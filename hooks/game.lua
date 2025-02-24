@@ -81,7 +81,7 @@ function Game:update(dt)
 
 end
 
--- Crimson Noon and Crimson Dusk switching to lower tier
+-- Multiple Blinds
 local update_new_round_ref = Game.update_new_round
 function Game.update_new_round(self, dt)
     if self.buttons then

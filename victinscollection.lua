@@ -1,4 +1,4 @@
-_RELEASE_MODE = false -- DEBUG MODE :: REMOVE IN RELEASE
+-- _RELEASE_MODE = false -- DEBUG MODE :: REMOVE IN RELEASE
 
 -- SMODS optional features
 SMODS.current_mod.optional_features = {
@@ -55,10 +55,10 @@ SMODS.Atlas {
 -- Enable or disable additional jokers here
 local joker_list = {"up_your_sleeve", "ouroboros", "moody", "the_one", "champion", "champions_belt", "lvl_death",
                     "gas_lamp", "the_one", "paradise_parrot", "skyscraper", "pippi_panini", "yurika_harako", "syzygy",
-                    "stheno", "tower_into_space", -- alpha --
-"royal_straight_joker", "growing_tree", "chimera", "wildheart", -- "h_size_boost", "terraforming",
-"fortune_cookie", "chai_tea", "brazilian_miku", "copies_commons", "nadia_om", "mammon", "solomon_david", "jagganoth",
-                    "makes_black_holes", "quantum_joker", "cosmic_egg", "blue_dwarf", "gemini", "cancer" -- "guarantees_enhancements",
+                    "stheno", "tower_into_space" -- alpha --
+-- "royal_straight_joker", "growing_tree", "chimera", "wildheart", -- "h_size_boost", "terraforming",
+-- "fortune_cookie", "chai_tea", "brazilian_miku", "copies_commons", "nadia_om", "mammon", "solomon_david", "jagganoth",
+--                    "makes_black_holes", "quantum_joker", "cosmic_egg", "blue_dwarf", "gemini", "cancer" -- "guarantees_enhancements",
 -- "tour_guide", "grappling_hook", "bone",
 }
 
@@ -77,20 +77,13 @@ end
 -- Enhancements
 
 -- Registers the atlas
-SMODS.Atlas {
+--[[SMODS.Atlas {
     key = 'enhancement_atlas',
     px = 71,
     py = 95,
     path = 'vic_enhancement_atlas.png'
 }
-
---[[SMODS.Atlas {
-    key = 'disenhancement_confused',
-    px = 87,
-    py = 118,
-    path = 'vic_confused.png'
-}]]
-
+    
 SMODS.Atlas {
     key = 'enhancement_morning',
     px = 71,
@@ -132,7 +125,7 @@ end
 
 -- Enable or disable additional enhancements here
 local enhancement_list = { -- "blood",
-"confused", "me_first" -- "morning",
+    -- "confused", "me_first" -- "morning",
 }
 
 for _, enhancement in ipairs(enhancement_list) do
@@ -145,7 +138,7 @@ for _, enhancement in ipairs(enhancement_list) do
         SMODS.Enhancement(data)
         sendDebugMessage("VictinsCollection :: Loaded enhancement: " .. enhancement_name)
     end
-end
+end]]
 
 -- Blinds
 
@@ -354,6 +347,7 @@ end
 
 -- Consumables
 -- Zodiac
+--[[
 SMODS.Rarity {
     key = 'auxiliary',
     default_weight = 0,
@@ -394,6 +388,7 @@ for _, zodiac in ipairs(zodiac_list) do
         sendDebugMessage("VictinsCollection :: Loaded zodiac: " .. zodiac_name)
     end
 end
+]]
 
 -- Tokens
 SMODS.ConsumableType({
@@ -460,7 +455,7 @@ SMODS.Blind:take_ownership('pillar', {
 --     shader = "test",
 -- }
 
-SMODS.Shader {
+--[[SMODS.Shader {
     key = 'chowder',
     path = 'chowder.fs',
     --[[
@@ -469,7 +464,7 @@ SMODS.Shader {
         which can depend on the game window size.
         Unsure if the passed variable is correct, as I couldn't find the exact scale used.
     --]]
-    send_vars = function(sprite, card)
+--[[    send_vars = function(sprite, card)
         return {
             card_scale = card and (0.95 * G.TILESCALE) / 1.5 or 1.0
         }
@@ -509,7 +504,7 @@ SMODS.Edition {
         -- Save in card.edition table so it persists after game restart.
         card.edition.example_gold_seed = pseudorandom('e_example_gold') * 2 - 1
     end
-}
+}]]
 
 -- Stickers
 
