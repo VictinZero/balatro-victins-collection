@@ -116,8 +116,9 @@ return {
 		    j_vic_tower_into_space = {
 				name = "Baby's Building a Tower into Space",
 	        	text = {
-		            "The first {C:vic_stone}Stone{} card scored each hand",
-		            "creates that hand's {C:planet}Planet{} card",
+		            "If {C:attention}played hand{} contains",
+                    "a {C:vic_stone}Stone{} card,",
+		            "creates its {C:planet}Planet{} card",
 		            "{C:inactive}(Must have room)"
 		        }
 		    },
