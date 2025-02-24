@@ -5,7 +5,7 @@ return {
     key = 'paradise_parrot',
     config = {extra={repetitions = 1}},
     rarity = 1,
-    pos = { x = 0, y = 0 },
+    pos = { x = 0, y = 8 },
     atlas = 'joker_atlas',
     cost = 5,
     unlocked = true,

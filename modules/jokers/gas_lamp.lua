@@ -2,7 +2,7 @@ return {
     key = 'gas_lamp',
     config = {extra={extra_draw = 4, h_size = 1}},
     rarity = 1,
-    pos = { x = 0, y = 0 },
+    pos = { x = 0, y = 8 },
     atlas = 'joker_atlas',
     cost = 5,
     unlocked = true,
@@ -12,7 +12,6 @@ return {
     soul_pos = nil,
 
     add_to_deck = function(self, card, from_debuff)
-        sendDebugMessage("Added Gas Lamp to deck")
         G.hand:change_size(-card.ability.extra.h_size)
     end,
 
@@ -36,7 +35,6 @@ return {
     end,
 
     remove_from_deck = function(self, card, from_debuff)
-        sendDebugMessage("Removed Gas Lamp from deck")
         G.hand:change_size(card.ability.extra.h_size)
     end,
 

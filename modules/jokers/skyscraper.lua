@@ -86,7 +86,7 @@ return {
     rarity = 1,
     pos = {
         x = 0,
-        y = 0
+        y = 8
     },
     atlas = 'joker_atlas',
     cost = 7,

@@ -38,7 +38,7 @@ return {
     key = 'lvl_death',
     config = {extra={Xmult=3, lvl_mod=3}},
     rarity = 2,
-    pos = { x = 0, y = 0 },
+    pos = { x = 0, y = 8 },
     atlas = 'joker_atlas',
     cost = 6,
     unlocked = true,
