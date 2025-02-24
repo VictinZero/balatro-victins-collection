@@ -1,17 +1,19 @@
 {
-	"id": "victinscollection",
-	"name": "Victin's Collection",
-	"display_name": "Victin's Collection",
-	"author": ["Victin"],
-	"description": "This mod adds Jokers",
-	"prefix": "vic",
-	"main_file": "victinscollection.lua",
-	"priority": 0,
-	"badge_colour": "ffc014",
-	"badge_text_colour": "FFFFFF",
-	"version": "0.0.0",
-	"dependencies": [
-		"Steamodded (>=1.*~)",
-		"Lovely (>=0.6.*~)"
-	]
+    "id": "victinscollection",
+    "name": "Victin's Collection",
+    "display_name": "Victin's Collection",
+    "author": [
+        "Victin"
+    ],
+    "description": "This mod adds new content to Balatro. It is currently in ALPHA, for debugging and balancing. As for art credits not elsewhere listed, the fire animation in Tyrian Patriarch is thanks to CharaMaster. Special thanks to various other modders for providing code wholesale or as reference, including, but not limited to: the Cult of Jimbo, Eremel, Firch, Mysthaps, and others.",
+    "prefix": "vic",
+    "main_file": "victinscollection.lua",
+    "priority": 0,
+    "badge_colour": "ffc014",
+    "badge_text_colour": "FFFFFF",
+    "version": "0.0.0",
+    "dependencies": [
+        "Steamodded (>=1.*~)",
+        "Lovely (>=0.6.*~)"
+    ]
 }
