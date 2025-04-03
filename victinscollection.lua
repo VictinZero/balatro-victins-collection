@@ -1,6 +1,6 @@
-_RELEASE_MODE = true -- DEBUG MODE :: REMOVE IN RELEASE
+_RELEASE_MODE = false -- DEBUG MODE :: REMOVE IN RELEASE
 
-VIC_ALPHA_RELEASE = true
+VIC_ALPHA_RELEASE = false
 
 function VIC_tcat(t1, t2)
     for i = 1, #t2 do
