@@ -1,4 +1,4 @@
-local misc = NFS.load(SMODS.current_mod.path .. "/misc_functions.lua")()
+local misc = SMODS.load_file("misc_functions.lua")()
 
 local _generate_main_end = function(card)
     if not misc.is_in_your_collection(card) then
@@ -31,7 +31,7 @@ local _generate_main_end = function(card)
             local nodes_ = {}
             add_node(nodes_, '(If scored: ', G.C.UI.TEXT_INACTIVE)
 
-            for k, v in ipairs(order) do --ipairs(G.hand.highlighted) do
+            for k, v in ipairs(order) do -- ipairs(G.hand.highlighted) do
                 colour[k] = G.C.RED
                 if v.facing == 'back' then
                     txt[k] = "???"
@@ -112,8 +112,7 @@ return {
             local chips_ = counter -- math.floor(counter)
             if chips_ > 0 then
                 return {
-                    chips = chips_,
-                    card = card
+                    chips = chips_
                 }
             end
         end

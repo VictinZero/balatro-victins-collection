@@ -7,7 +7,7 @@ return {
     mult = 2,
     vars = {},
     debuff = {},
-    boss = {showdown = true, min = 10, max = 10},
+    boss = {showdown = true, min = 1, max = 10},
     boss_colour = HEX('494949'),
     discovered = true,
     loc_txt = {},

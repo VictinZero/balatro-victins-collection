@@ -19,7 +19,7 @@ return {
         if context.joker_main then
             local first_stone = nil
             for i = 1, #context.scoring_hand do
-                if context.scoring_hand[i].ability.name == 'Stone Card' then
+                if SMODS.has_enhancement(context.scoring_hand[i], 'm_stone') then
                     first_stone = context.scoring_hand[i]
                     break
                 end

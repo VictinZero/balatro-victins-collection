@@ -1,0 +1,162 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = -100
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 0.1,
+                    func = function()
+                        check_for_unlock({type = 'play_all_hearts'})
+                        G.FUNCS.draw_from_play_to_discard()
+                        G.GAME.hands_played = G.GAME.hands_played + 1
+                        G.GAME.current_round.hands_played = G.GAME.current_round.hands_played + 1
+                        return true
+                    end
+                }))
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'immediate',
+                    func = function()
+                        G.STATE_COMPLETE = false
+                        return true
+                    end
+                }))'''
+position = "at"
+payload = '''
+local vic_played_cards, vic_played_order = {}, {}
+for i = 1, #G.play.cards do
+    vic_played_cards[#vic_played_cards + 1] = G.play.cards[i]
+    vic_played_order[G.play.cards[i]] = i
+end
+
+G.E_MANAGER:add_event(Event({
+    trigger = 'after',
+    delay = 0.1,
+    func = function()
+        check_for_unlock({type = 'play_all_hearts'})
+        G.FUNCS.draw_from_play_to_discard()
+        G.GAME.hands_played = G.GAME.hands_played + 1
+        G.GAME.current_round.hands_played = G.GAME.current_round.hands_played + 1
+        return true
+    end
+}))
+
+-- local vic_replay_hand_ret = {}
+
+G.GAME.VictinsCollection.replay_hand = false
+local vic_replay_hand_ret = SMODS.calculate_context({vic_replay_hand = true})
+
+--[[
+local vic_replay_hand = false
+SMODS.calculate_repetitions(G.play.cards[1], {vic_replay_hand = true}, vic_replay_hand_ret)
+if #vic_replay_hand_ret > 0 then vic_replay_hand = true end
+
+for _, v in ipairs(vic_replay_hand_ret) do
+    -- SMODS.trigger_effects(v)
+    for kk, vv in pairs(v) do
+        if vv.repetitions then
+            vic_replay_hand = true
+            break
+        end
+    end
+    if vic_replay_hand then break end
+end
+]]
+
+if G.GAME.current_round.hands_left > 0 and G.GAME.blind.chips > G.GAME.chips and #vic_played_cards > 0 and G.GAME.VictinsCollection.replay_hand then
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.1,
+        func = function()
+            G.E_MANAGER:add_event(Event({
+                trigger = 'immediate',
+                blocking = false,
+                func = function()
+                    if not (G.play.cards and #G.play.cards > 0) then
+                        for i, v in ipairs(vic_played_cards) do
+                            if v and not v.removed then
+                                draw_card(v.area, G.hand, i*100/(#vic_played_cards or 1), 'up')
+                            end
+                        end
+
+                        local vic_position_sort = function(a, b)
+                            if vic_played_order[a] and vic_played_order[b] then
+                                return vic_played_order[a] < vic_played_order[b]
+                            else
+                                return a.T.x < b.T.x
+                            end
+                        end
+
+                        G.E_MANAGER:add_event(Event({
+                            trigger = 'immediate',
+                            func = function()
+                                G.hand:unhighlight_all()
+                                local replay_skip = true
+                                local n_highlighted = 0
+                                for i, v in ipairs(vic_played_cards) do
+                                    if v and not v.removed then
+                                        replay_skip = false
+                                        G.hand:add_to_highlighted(v, n_highlighted >= 2)
+                                        n_highlighted = n_highlighted + 1
+                                    end
+                                end
+                                if G.GAME.blind.chips > G.GAME.chips and not replay_skip then
+                                    G.E_MANAGER:add_event(Event({
+                                        trigger = 'immediate',
+                                        func = function()
+                                            local drawn_back = true
+                                            for i, v in ipairs(vic_played_cards) do
+                                                if v and not v.removed then
+                                                    if v.area ~= G.hand then
+                                                        drawn_back = false
+                                                        break
+                                                    end
+                                                end
+                                            end
+                                            table.sort(G.hand.cards, vic_position_sort)
+                                            if drawn_back then
+                                                G.E_MANAGER:add_event(Event({
+                                                    trigger = 'immediate',
+                                                    func = function()
+                                                        G.FUNCS.play_cards_from_highlighted()
+                                                        return true
+                                                    end
+                                                }))
+                                            end
+                                            return drawn_back
+                                        end
+                                    }))
+                                else
+                                    G.E_MANAGER:add_event(Event({
+                                        trigger = 'immediate',
+                                        func = function()
+                                            G.STATE_COMPLETE = false
+                                            return true
+                                        end
+                                    }))
+                                end
+                                return true
+                            end
+                        }))
+                    end
+                    return not (G.play.cards and #G.play.cards > 0)
+                end
+            }))
+            return true
+        end
+    }))
+else
+    G.E_MANAGER:add_event(Event({
+        trigger = 'immediate',
+        func = function()
+            G.STATE_COMPLETE = false
+            return true
+        end
+    }))
+end
+G.GAME.VictinsCollection.replay_hand = false
+'''
+match_indent = true

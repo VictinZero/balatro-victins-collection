@@ -1,4 +1,4 @@
-local misc = NFS.load(SMODS.current_mod.path .. "/misc_functions.lua")()
+local misc = SMODS.load_file("misc_functions.lua")()
 
 local _generate_main_end = function(card)
     local main_end = nil
@@ -28,7 +28,7 @@ return {
     unlocked = true,
     discovered = true,
     blueprint_compat = false,
-    eternal_compat = true,
+    eternal_compat = false,
     soul_pos = nil,
 
     calculate = function(self, card, context)

@@ -1,4 +1,4 @@
-local misc = NFS.load(SMODS.current_mod.path .. "/misc_functions.lua")()
+local misc = SMODS.load_file("misc_functions.lua")()
 
 local loc_vars = function(self, info_queue, card)
     local level = G.GAME and G.GAME.VictinsCollection.zodiac.cancer or card.ability.extra.level

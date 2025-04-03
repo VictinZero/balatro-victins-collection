@@ -25,7 +25,6 @@ return {
             return {
                 message = localize('k_again_ex'),
                 repetitions = retrigger_count(G.GAME.dollars + (G.GAME.dollar_buffer or 0)),
-                card = card
             }
         end
     end,

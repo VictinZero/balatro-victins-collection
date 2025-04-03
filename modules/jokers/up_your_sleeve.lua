@@ -23,13 +23,6 @@ return {
         if context.first_hand_drawn then
             G.E_MANAGER:add_event(Event({
                 func = function()
-                    --[[SMODS.add_card {
-                        set = 'Default',
-                        area = G.hand,
-                        edition = 'e_negative',
-                        stickers = {'vic_temporary'}
-                    }]]
-
                     local card_ = create_playing_card({
                         front = G.P_CARDS['S_A'],
                         center = G.P_CENTERS.c_base

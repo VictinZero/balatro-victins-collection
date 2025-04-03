@@ -1,4 +1,4 @@
-local misc = NFS.load(SMODS.current_mod.path .. "/misc_functions.lua")()
+local misc = SMODS.load_file("misc_functions.lua")()
 
 local _generate_main_end = function(card)
     local main_end = 0
@@ -14,7 +14,7 @@ local _generate_main_end = function(card)
         end
 
         local active = false
-        if handname and handname ~= 'NULL' then 
+        if handname and handname ~= 'NULL' then
             local lvl = (G.GAME.hands and G.GAME.hands[handname] and G.GAME.hands[handname].level) or nil
             active = (not backwards) and (lvl and lvl % card.ability.extra.lvl_mod == 0)
         end

@@ -1,13 +1,19 @@
 return {
     name = "The Bell",
-    key = "bell", 
-    pos = { x = 0, y = 3 },
+    key = "bell",
+    pos = {
+        x = 0,
+        y = 3
+    },
     atlas = "blind_atlas",
-    dollars = 5, 
-    mult = 2, 
-    vars = {}, 
+    dollars = 5,
+    mult = 2,
+    vars = {},
     debuff = {},
-    boss = {min = 4, max = 10},
+    boss = {
+        min = 4,
+        max = 10
+    },
     boss_colour = HEX('009CFD'),
     discovered = true,
     loc_txt = {},
@@ -20,11 +26,13 @@ return {
                     any_forced = true
                 end
             end
-            if not any_forced then 
+            if not any_forced then
                 G.hand:unhighlight_all()
                 local face_cards = {}
                 for i = 1, #G.hand.cards do
-                    if G.hand.cards[i]:is_face(true) then table.insert(face_cards, G.hand.cards[i]) end
+                    if G.hand.cards[i]:is_face(true) then
+                        table.insert(face_cards, G.hand.cards[i])
+                    end
                 end
                 if #face_cards > 0 then
                     local forced_card = pseudorandom_element(face_cards, pseudoseed('bl_vic_bell'))

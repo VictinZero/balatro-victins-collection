@@ -5,7 +5,7 @@
     "author": [
         "Victin"
     ],
-    "description": "This mod adds new content to Balatro. It is currently in ALPHA, for debugging and balancing. As for art credits not elsewhere listed, the fire animation in Tyrian Patriarch is thanks to CharaMaster. Special thanks to various other modders for providing code wholesale or as reference, including, but not limited to: the Cult of Jimbo, Eremel, Firch, Mysthaps, and others.",
+    "description": "This mod adds new content to Balatro. It is currently in ALPHA, for debugging and balancing. As for art credits not elsewhere listed, the fire animation in Tyrian Patriarch is thanks to CharaMaster. Special thanks to various other modders for providing code wholesale or as reference, including, but not limited to: Autumn Mood, the Cult of Jimbo, Eremel, Firch, Mysthaps, and others.",
     "prefix": "vic",
     "main_file": "victinscollection.lua",
     "priority": 0,

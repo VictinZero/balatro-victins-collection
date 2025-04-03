@@ -1,6 +1,24 @@
 return {
 	descriptions = {
 		Joker = {
+            -- VANILLA
+            j_certificate={
+                name="Certificate",
+                text={
+                    "When round begins,",
+                    "{C:attention}get{} a {C:attention}playing card",
+                    "with a {C:attention}seal",
+                },
+            },
+            j_dna={
+                name="DNA",
+                text={
+                    "If {C:attention}first hand{} of round",
+                    "has only {C:attention}1{} card,",
+                    "{C:attention}get{} a copy of it"
+                },
+            },
+            -- MODDED
             j_vic_up_your_sleeve = {
 				name = "Up Your Sleeve",
 	        	text = {
@@ -44,6 +62,18 @@ return {
 		            "{C:dark_edition,E:2}Showdown Boss Blind!",
 		        }
 		    },
+            j_vic_test = {
+				name = "Test",
+	        	text = {
+		            "Rotation Test"
+		        }
+		    },
+            j_vic_eye_test = {
+				name = "Eye Test",
+	        	text = {
+		            "Rotation Test"
+		        }
+		    },
 		    j_vic_ouroboros = {
 				name = "Ouroboros",
 	        	text = {
@@ -69,10 +99,8 @@ return {
 		    j_vic_gas_lamp = {
 				name = "Gas Lamp",
 	        	text = {
-	        		"When Blind is selected,",
+	        		"When round starts,",
 	        		"draw {C:attention}#1# face-down cards",
-	        		"{C:inactive,s:0.33} ",
-		            "{C:red}-#2#{} Hand size",
 		        }
 		    },
 		    j_vic_the_one = {
@@ -84,6 +112,25 @@ return {
 		            "{X:black,C:white}#3#{} of {C:spades}#4#"
 		        }
 		    },
+            j_vic_dog = {
+                name = "Dog",
+                text = {
+                    "When you {C:attention}get{} a {C:attention}Joker{},",
+                    "this Joker gains",
+                    "{C:chips}+#1#{} Chips or {C:mult}+#2#{} Mult",
+                    "{C:inactive}(Currently {C:chips}+#3#{C:inactive} Chips",
+                    "{C:inactive}and {C:mult}+#4#{C:inactive} Mult)",
+                }
+            },
+            j_vic_hamster = {
+                name = "Hamster",
+                text = {
+                    "After {C:attention}three{} {C:green}rerolls{},",
+                    "earn {C:money}$#1#",
+                    "{C:inactive}(Once per round)",
+                    "{C:inactive}({C:attention}#2#{C:inactive} rerolls left)",
+                }
+            },
 		    j_vic_paradise_parrot = {
 				name = "Paradise Parrot",
 	        	text = {
@@ -97,6 +144,89 @@ return {
 		            "{C:attention}Scoring cards{} give {C:chips}+1{} Chip",
                     "per card of lower rank",
                     "in your {C:attention}full deck"
+		        }
+		    },
+            j_vic_trapezist = {
+				name = "Trapezist",
+	        	text = {
+		            "Played cards with",
+                    "{C:attention}#1#",
+                    "give {C:chips}+#2#{} Chips when scored",
+                    "{C:inactive}(Swaps after each hand)"
+		        }
+		    },
+            j_vic_wrapped_candy = {
+                name = "Wrapped Candy",
+                text ={
+                    "When {C:attention}Blind is selected{},",
+                    "gain {C:red}+#1#{} Discards",
+                    "{C:inactive}({C:attention}#2#{C:inactive} Rounds left)"
+                }
+            },
+            j_vic_slingshot = {
+				name = "Slingshot",
+	        	text = {
+                    "Destroy your",
+                    "{C:attention}leftmost{} Consumable",
+                    "to grant {X:mult,C:white} X#1# {} Mult.",
+                    "If it's a {C:planet}Planet{} card,",
+                    "{X:red,C:white} X#2# {} Mult instead"
+		        }
+		    },
+            j_vic_jar_of_teeth = {
+				name = "Jar of Teeth",
+	        	text = {
+		            "Lose {C:money}$#1#{} per played card",
+                    "{s:0.33} ",
+                    "Earn {C:money}$#2#{} when round ends"
+		        }
+		    },
+            j_vic_broken_arm = {
+				name = "Broken Arm",
+	        	text = {
+		            "{C:red,E:2}Decrease level{} of",
+                    "played poker hand",
+		            "to earn {C:money}$#1#{}"
+		        }
+		    },
+            j_vic_flush_spades = {
+				name = "Flush Spades",
+	        	text = {
+		            "If played hand",
+                    "contains a Flush and",
+                    "a scoring {C:spades}Spades{} card,",
+                    "{C:attention}get {C:tarot}The Chariot",
+                    "{C:inactive}(Must have room)"
+		        }
+		    },
+            j_vic_flush_hearts = {
+				name = "Flush Hearts",
+	        	text = {
+		            "If played hand",
+                    "contains a Flush and",
+                    "a scoring {C:hearts}Hearts{} card,",
+                    "{C:attention}get{} a {C:tarot}Justice",
+                    "{C:inactive}(Must have room)"
+		        }
+		    },
+            j_vic_flush_clubs = {
+				name = "Flush Clubs",
+	        	text = {
+		            "If played hand",
+                    "contains a Flush and",
+                    "a scoring {C:clubs}Clubs{} card,",
+                    "{C:attention}get {C:tarot}The Magician",
+                    "{C:inactive}(Must have room)"
+		        }
+		    },
+            j_vic_flush_diamonds = {
+				name = "Flush Diamonds",
+	        	text = {
+		            "If played hand",
+                    "contains a Flush and",
+                    "a scoring {C:diamonds}Diamonds{} card,",
+                    "{C:attention}get {C:tarot}The Devil",
+                    "{C:inactive}(Must have room)"
 		        }
 		    },
 		    j_vic_grappling_hook = {
@@ -139,10 +269,10 @@ return {
 		        }
 		    },
 			j_vic_royal_straight_joker = {
-				name = "Royal Straight Joker (Placeholder)",
+				name = "Royal Family",
 	        	text = {
 		            "Before {C:attention}last hand of round{},",
-		            "draw an {C:attention}Ace-High Straight",--Royal Straight"
+		            "draw an {C:attention}Ace-High Straight",
 					"{C:inactive}(A K Q J 10)",
 		        }
 		    },
@@ -160,7 +290,7 @@ return {
 	        	text = {
 		            "When {C:attention}round ends{},",
                     "{C:green}#1# in #2#{} chance to",
-                    "gain {C:money}$#3#{}.",
+                    "earn {C:money}$#3#{}.",
 					"Otherwise, lose {C:money}$#4#"
 		        }
 		    },
@@ -172,6 +302,25 @@ return {
                     "give them random {C:attention}Enhancements"
 		        }
 		    },
+            j_vic_charon = {
+                name = "Charon",
+                text = {
+                    -- "When you {C:attention}destroy{} a playing card,",
+                    -- "this Joker gains {C:money}$#1#{} of sell value",
+                    -- "When you {C:attention}destroy",
+                    -- "a playing card,",
+                    -- "this Joker gains",
+                    -- "{C:money}$#1#{} sell value",
+                    "When you {C:attention}destroy{} a playing card,",
+                    "this Joker gains {C:money}$#1#{} sell value",
+                    "{s:0.33} ",
+                    -- "This Joker gives {C:chips}+#2#{} Chips",
+                    -- "for each {C:money}$1{} of its sell value",
+                    "This gives {C:chips}+#2#{} Chips",
+                    "per {C:money}$1{} sell value",
+                    "{C:inactive}(Currently {C:chips}+#3#{C:inactive} Chips)",
+                }
+            },
             j_vic_wildheart = {
                 name = "Wildheart",
                 text = {
@@ -190,6 +339,14 @@ return {
 					"{C:inactive}(Once per Ante)"
 		        }
 		    },
+            j_vic_double_negative = {
+                name = "Double Negative",
+                text = {
+                    "After {C:attention}#1# rounds{},",
+                    "sell this card to create",
+                    "{C:attention}2 {C:dark_edition}Negative Tags"
+                }
+            },
             j_vic_fortune_cookie = {
                 name = "Fortune Cookie",
                 text = {
@@ -209,6 +366,37 @@ return {
                     "Lasts {C:attention}#1#{} round#2#!",
                 }
             },
+            j_vic_binary_star = {
+                name = "Binary Star",
+                text = {
+                    "{C:planet}Planet{} cards are used",
+                    "{C:attention}#1# additional time#2#",
+                }
+            },
+            j_vic_kill_consume_multiply_joker = {
+                name = "Kill Consume Multiply Joker",
+                text = {
+                    "When a playing card {C:red}consumes{},",
+                    "{C:attention}get{} a copy of it"
+                }
+            },
+            j_vic_joker_devouring_its_son = {
+                name = "Joker Devouring Its Son",
+                text = {
+                    "If played hand",
+                    "contains a {C:attention}Straight{},",
+                    "this Joker {C:red}consumes",
+                    "your {C:attention}leftmost card",
+					"held in hand"
+                }
+            },
+            j_vic_butcher_vanity = {
+                name = "Butcher Vanity",
+                text = {
+                    "When {C:attention}round starts{},",
+                    "{C:attention}get{} a {C:attention}Flesh{} card",
+                }
+            },
             j_vic_copies_commons = {
                 name = "Copies Commons",
                 text = {
@@ -221,6 +409,13 @@ return {
 	        	text = {
 		            "{E:1}HUEHUEHUE",
 		        }
+		    },
+            j_vic_collared = {
+				name = "Collared",
+                text ={
+                    "Listen to Collared by Vane",
+                    "(feat. SAROS)"
+                }
 		    },
 			j_vic_nadia_om = {
 				name = "Nadia Om",
@@ -301,6 +496,24 @@ return {
 		            "{C:inactive}(Must have room)",
 		        }
 		    },
+            j_vic_aries = {
+		        name = "Aries",
+		        text = {
+		            "If played hand is {C:vic_HighCard,E:1}High Card{},",
+		            "{C:inactive}DO NOTHING",
+		            "{s:0.33} ",
+		            " {C:inactive,s:1}+NOTHING{C:inactive,s:1} time per level",
+		        }
+		    },
+            j_vic_taurus = {
+		        name = "Taurus",
+		        text = {
+		            "If played hand is {C:vic_Pair,E:1}Pair{},",
+		            "{C:inactive}DO NOTHING",
+		            "{s:0.33} ",
+		            " {C:inactive,s:1}+NOTHING{C:inactive,s:1} time per level",
+		        }
+		    },
 		    j_vic_gemini = {
 		        name = "Gemini",
 		        text = {
@@ -320,6 +533,78 @@ return {
 		            " {X:red,C:white,s:1} +X#7# {C:inactive,s:1} Mult and {C:money,s:1}+$#8#{C:inactive,s:1} per level",
 		        }
 		    },
+            j_vic_leo = {
+		        name = "Leo",
+		        text = {
+		            "If played hand is {C:vic_Straight,E:1}Straight{},",
+		            "{C:inactive}DO NOTHING",
+		            "{s:0.33} ",
+		            " {C:inactive,s:1}+NOTHING{C:inactive,s:1} time per level",
+		        }
+		    },
+            j_vic_virgo = {
+		        name = "Virgo",
+		        text = {
+		            "If played hand is {C:vic_Flush,E:1}Flush{},",
+		            "{C:inactive}DO NOTHING",
+		            "{s:0.33} ",
+		            " {C:inactive,s:1}+NOTHING{C:inactive,s:1} time per level",
+		        }
+		    },
+            j_vic_libra = {
+		        name = "Libra",
+		        text = {
+		            "If played hand is {C:vic_FullHouse,E:1}Full House{},",
+		            "{C:inactive}DO NOTHING",
+		            "{s:0.33} ",
+		            " {C:inactive,s:1}+NOTHING{C:inactive,s:1} time per level",
+		        }
+		    },
+            j_vic_scorpio = {
+		        name = "Scorpio",
+		        text = {
+		            "If played hand is {C:vic_4OAK,E:1}Four of a Kind{},",
+		            "{C:inactive}DO NOTHING",
+		            "{s:0.33} ",
+		            " {C:inactive,s:1}+NOTHING{C:inactive,s:1} time per level",
+		        }
+		    },
+            j_vic_sagittarius = {
+		        name = "Sagittarius",
+		        text = {
+		            "If played hand is {C:vic_StraightFlush,E:1}Straight Flush{},",
+		            "{C:inactive}DO NOTHING",
+		            "{s:0.33} ",
+		            " {C:inactive,s:1}+NOTHING{C:inactive,s:1} time per level",
+		        }
+		    },
+            j_vic_capricorn = {
+		        name = "Capricorn",
+		        text = {
+		            "If played hand is {C:vic_5OAK,E:1}Five of a Kind{},",
+		            "{C:inactive}DO NOTHING",
+		            "{s:0.33} ",
+		            " {C:inactive,s:1}+NOTHING{C:inactive,s:1} time per level",
+		        }
+		    },
+            j_vic_aquarius = {
+		        name = "Aquarius",
+		        text = {
+		            "If played hand is {C:vic_FlushHouse,E:1}Flush House{},",
+		            "{C:inactive}DO NOTHING",
+		            "{s:0.33} ",
+		            " {C:inactive,s:1}+NOTHING{C:inactive,s:1} time per level",
+		        }
+		    },
+            j_vic_pisces = {
+		        name = "Pisces",
+		        text = {
+		            "If played hand is {C:vic_5OAFlush,E:1}Five of a Flush{},",
+		            "{C:inactive}DO NOTHING",
+		            "{s:0.33} ",
+		            " {C:inactive,s:1}+NOTHING{C:inactive,s:1} time per level",
+		        }
+		    },
 		    j_vic_bone = {
 		        name = "Bone Card",
 		        text = {
@@ -336,6 +621,12 @@ return {
                     "How pretty!"
                 }
             },
+            e_vic_shiny = {
+                name = "Shiny Edition",
+                text = {
+                    "How #1# shiny!"
+                }
+            },
         },
 		Enhanced = {
 			m_vic_blood = {
@@ -345,6 +636,29 @@ return {
 					"this card gains {X:red,C:white} +X#1# {} Mult"
 				}
 			},
+            m_vic_flesh = {
+				name = "Flesh Card",
+				text = {
+                    "When held in hand",
+                    "at the end of round,",
+					"{C:red}consume{} the card",
+					"to the left"
+				}
+			},
+            m_vic_burning = {
+                name = "Burning",
+                text = {
+                    "When played,",
+                    "{C:red}discard{} #1# random card",
+                }
+            },
+            m_vic_paralyzed = {
+                name = "Paralyzed",
+                text = {
+                    "Debuffed each round",
+                    "until #1# hand is played",
+                }
+            },
             m_vic_confused = {
                 name = "Confused",
                 text = {
@@ -413,6 +727,20 @@ return {
 					"are drawn face down"
 				}
 			},
+            bl_vic_trash = {
+				name = "The Trash",
+				text = {
+					"Discard a copy of",
+                    "your first discard",
+				}
+			},
+            bl_vic_wind = {
+				name = "The Wind",
+				text = {
+					"After play or discard,",
+                    "-1 to the other",
+				}
+			},
 			bl_vic_dagger = {
 				name = "The Dagger",
 				text = {
@@ -436,12 +764,20 @@ return {
 					"Poker Hand's level",
 				}
 			},
-			bl_vic_final_ribbon = {
-				name = "Rouge Ribbon",
+			bl_vic_final_loop = {
+				name = "Lavender Loop",
 				text = {
 					"When defeated,",
 					"play the Loop",
 					"(no refreshes)"
+				}
+			},
+            bl_vic_final_debuff = {
+				name = "Test Debuff",
+				text = {
+					"Debuffs Jokers",
+					"except the",
+                    "4 leftmost",
 				}
 			},
 			bl_vic_final_patriarch = {
@@ -452,32 +788,49 @@ return {
 					"(1 refresh)"
 				}
 			},
+            bl_vic_final_dragon = {
+				name = "Golden Dragon",
+				text = {
+                    --"When selected,",
+					"+#1# Blind size",
+					"per $1 of",
+                    "total sell value",
+					"above $10"
+				}
+			},
+            bl_vic_final_king = {
+				name = "Red King",
+				text = {
+					"After you play a hand,",
+					"play it again"
+				}
+			},
 		},
 		Other = {
 			-- Credits
             cr_vic_ouroboros = {
 				name = "cr_vic_credits",
 				text = {
-					"{C:white}Original background by{} {E:1,C:white,S:1.1}itsmythie",
+					"{C:white}Original background by {E:1,C:white,S:1.1}itsmythie",
 				}
 			},
 			cr_vic_the_one = {
 				name = "cr_vic_credits",
 				text = {
-					"{C:white}Original concept by{} {E:1,C:white,S:1.1}EggSlashEther",
+					"{C:white}Original concept by {E:1,C:white,S:1.1}EggSlashEther",
 				}
 			},
 			cr_vic_champions_belt = {
 				name = "cr_vic_credits",
 				text = {
-					"{C:white}Original art by{} {E:1,C:white,S:1.1}B",
-					"{C:white}Soul sprite art by{} {E:1,C:white,S:1.1}Victin",
+					"{C:white}Original art by {E:1,C:white,S:1.1}B",
+					"{C:white}Joker text art by {E:1,C:white,S:1.1}Victin",
 				}
 			},
 			cr_vic_quantum_joker = {
 				name = "cr_vic_credits",
 				text = {
-					"{C:white}Original art and concept by{} {E:1,C:white,S:1.1}Gaziter",
+					"{C:white}Original art and concept by {E:1,C:white,S:1.1}Gaziter",
 				}
 			},
 			aux_vic_stheno = {
@@ -487,6 +840,13 @@ return {
 				}
 			},
 			-- Other
+            vic_consume = {
+                name = "Consume",
+                text = {
+                    "{C:red,E:2}Destroy{} a card",
+                    "to {C:attention}gain its stats"
+                }
+            },
 			vic_perishable = {
 				name = "Perishable",
 				text = {
@@ -503,6 +863,24 @@ return {
 			}
 		},
         Zodiac = {
+            c_vic_aries = {
+		        name = "Aries",
+		        text = {
+		            "If played hand is {C:vic_HighCard,E:1}High Card{},",
+		            "{C:inactive}DO NOTHING",
+		            "{s:0.33} ",
+		            " {C:inactive,s:1}+NOTHING{C:inactive,s:1} time per level",
+		        }
+		    },
+            c_vic_taurus = {
+		        name = "Taurus",
+		        text = {
+		            "If played hand is {C:vic_Pair,E:1}Pair{},",
+		            "{C:inactive}DO NOTHING",
+		            "{s:0.33} ",
+		            " {C:inactive,s:1}+NOTHING{C:inactive,s:1} time per level",
+		        }
+		    },
 			c_vic_gemini = {
 				name = "Gemini",
 				text = {
@@ -522,6 +900,78 @@ return {
 		            " {X:red,C:white,s:1} +X#7# {C:inactive,s:1} Mult and {C:money,s:1}+$#8#{C:inactive,s:1} per level",
 				}
 			},
+            c_vic_leo = {
+		        name = "Leo",
+		        text = {
+		            "If played hand is {C:vic_Straight,E:1}Straight{},",
+		            "{C:inactive}DO NOTHING",
+		            "{s:0.33} ",
+		            " {C:inactive,s:1}+NOTHING{C:inactive,s:1} time per level",
+		        }
+		    },
+            c_vic_virgo = {
+		        name = "Virgo",
+		        text = {
+		            "If played hand is {C:vic_Flush,E:1}Flush{},",
+		            "{C:inactive}DO NOTHING",
+		            "{s:0.33} ",
+		            " {C:inactive,s:1}+NOTHING{C:inactive,s:1} time per level",
+		        }
+		    },
+            c_vic_libra = {
+		        name = "Libra",
+		        text = {
+		            "If played hand is {C:vic_FullHouse,E:1}Full House{},",
+		            "{C:inactive}DO NOTHING",
+		            "{s:0.33} ",
+		            " {C:inactive,s:1}+NOTHING{C:inactive,s:1} time per level",
+		        }
+		    },
+            c_vic_scorpio = {
+		        name = "Scorpio",
+		        text = {
+		            "If played hand is {C:vic_4OAK,E:1}Four of a Kind{},",
+		            "{C:inactive}DO NOTHING",
+		            "{s:0.33} ",
+		            " {C:inactive,s:1}+NOTHING{C:inactive,s:1} time per level",
+		        }
+		    },
+            c_vic_sagittarius = {
+		        name = "Sagittarius",
+		        text = {
+		            "If played hand is {C:vic_StraightFlush,E:1}Straight Flush{},",
+		            "{C:inactive}DO NOTHING",
+		            "{s:0.33} ",
+		            " {C:inactive,s:1}+NOTHING{C:inactive,s:1} time per level",
+		        }
+		    },
+            c_vic_capricorn = {
+		        name = "Capricorn",
+		        text = {
+		            "If played hand is {C:vic_5OAK,E:1}Five of a Kind{},",
+		            "{C:inactive}DO NOTHING",
+		            "{s:0.33} ",
+		            " {C:inactive,s:1}+NOTHING{C:inactive,s:1} time per level",
+		        }
+		    },
+            c_vic_aquarius = {
+		        name = "Aquarius",
+		        text = {
+		            "If played hand is {C:vic_FlushHouse,E:1}Flush House{},",
+		            "{C:inactive}DO NOTHING",
+		            "{s:0.33} ",
+		            " {C:inactive,s:1}+NOTHING{C:inactive,s:1} time per level",
+		        }
+		    },
+            c_vic_pisces = {
+		        name = "Pisces",
+		        text = {
+		            "If played hand is {C:vic_5OAFlush,E:1}Five of a Flush{},",
+		            "{C:inactive}DO NOTHING",
+		            "{s:0.33} ",
+		            " {C:inactive,s:1}+NOTHING{C:inactive,s:1} time per level",
+		        }
+		    },
             c_vic_ophiucus = {
 				name = "Ophiucus",
 				text = {
@@ -549,6 +999,8 @@ return {
 			k_vic_quantum = "Quantum!",
 			k_vic_zodiac = "Zodiac",
             k_vic_auxiliary = "Auxiliary",
+            k_vic_hold_key_info_1 = "(Hold ",
+            k_vic_hold_key_info_2 = " for more info)",
             k_zodiac = "Zodiac",
 			k_token = "Token",
             b_zodiac_cards = "Zodiacs",
