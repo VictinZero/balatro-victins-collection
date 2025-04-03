@@ -2,12 +2,12 @@ local misc = NFS.load(SMODS.current_mod.path .. "/misc_functions.lua")()
 
 return {
     name = "The Tyrian Patriarch",
-    key = "final_patriarch", 
+    key = "final_patriarch",
     pos = { x = 0, y = 4 },
     atlas = "showdown_atlas",
     dollars = 8,
-    mult = 2, 
-    vars = {}, 
+    mult = 2,
+    vars = {},
     debuff = {},
     boss = {showdown = true, min = 1, max = 10},--showdown = true
     boss_colour = HEX('973ba5'),
@@ -46,7 +46,7 @@ return {
             return nodes_to_be_added
         end
 
-        misc.create_blind_tooltip(blind_choice, tmp) 
+        misc.create_blind_tooltip(blind_choice, tmp)
     end,
 
     set_blind = function(self)

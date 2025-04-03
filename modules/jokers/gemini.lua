@@ -46,7 +46,6 @@ return {
             return {
                 message = localize('k_again_ex'),
                 repetitions = card.ability.extra.base_repetitions + card.ability.extra.repetitions_mod * (level - 1),
-                card = card
             }
         end
     end,

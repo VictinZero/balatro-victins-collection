@@ -1,19 +1,15 @@
 return {
     key = 'gas_lamp',
-    config = {extra={extra_draw = 4, h_size = 1}},
+    config = {extra={extra_draw = 4}},
     rarity = 1,
     pos = { x = 0, y = 8 },
     atlas = 'joker_atlas',
-    cost = 5,
+    cost = 4,
     unlocked = true,
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
     soul_pos = nil,
-
-    add_to_deck = function(self, card, from_debuff)
-        G.hand:change_size(-card.ability.extra.h_size)
-    end,
 
     calculate = function(self, card, context)
         if context.first_hand_drawn and #G.deck.cards > 0 then
@@ -34,11 +30,7 @@ return {
         end
     end,
 
-    remove_from_deck = function(self, card, from_debuff)
-        G.hand:change_size(card.ability.extra.h_size)
-    end,
-
     loc_vars = function(self, info_queue, card)
-        return {vars = {card.ability.extra.extra_draw, card.ability.extra.h_size}}
+        return {vars = {card.ability.extra.extra_draw}}
     end,
 }

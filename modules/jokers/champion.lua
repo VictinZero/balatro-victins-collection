@@ -12,7 +12,7 @@ return {
         y = 8
     },
     atlas = 'joker_atlas',
-    cost = 5,
+    cost = 4,
     unlocked = true,
     discovered = true,
     blueprint_compat = false,
@@ -24,7 +24,7 @@ return {
     end,
 
     calculate = function(self, card, context)
-        if context.setting_blind and not self.getting_sliced and not context.blueprint then
+        if context.setting_blind and card:can_calculate() and not context.blueprint then
             local create_champion_event = function()
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',
@@ -71,7 +71,5 @@ return {
         }
     end,
 
-    subtitle = {
-        text = {"The game just got harder!"}
-    }
+    subtitle = "The game just got harder!"
 }

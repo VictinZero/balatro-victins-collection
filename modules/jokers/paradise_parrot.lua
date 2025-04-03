@@ -16,19 +16,11 @@ return {
     enhancement_gate = 'm_wild',
 
     calculate = function(self, card, context)
-        if context.repetition and context.other_card.ability.name == 'Wild Card' then
+        if context.repetition and SMODS.has_enhancement(context.other_card.ability.name, 'm_wild') then
             return {
                 message = localize('k_again_ex'),
                 repetitions = card.ability.extra.repetitions,
-                card = card
             }
         end
     end,
-
-    --[[loc_vars = function(self, info_queue, card)
-        -- info_queue[#info_queue+1] = G.P_CENTERS.m_wild
-        return {
-            vars = {card.ability.extra.repetitions}
-        }
-    end,]]
 }

@@ -19,7 +19,6 @@ return {
                 extra = {message = localize('k_upgrade_ex'), colour = G.C.CHIPS},
                 message = localize('k_upgrade_ex'),
                 colour = G.C.CHIPS,
-                card = card
             }
         elseif context.joker_main then
             return {

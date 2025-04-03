@@ -17,7 +17,6 @@ return {
 				return {
 					message = localize("k_again_ex"),
 					repetitions = 1,
-					card = card,
 				}
 			else
 				return nil, true

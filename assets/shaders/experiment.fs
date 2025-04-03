@@ -10,12 +10,12 @@
 // Values of this variable:
 // self.ARGS.send_to_shader[1] = math.min(self.VT.r*3, 1) + (math.sin(G.TIMERS.REAL/28) + 1) + (self.juice and self.juice.r*20 or 0) + self.tilt_var.amt
 // self.ARGS.send_to_shader[2] = G.TIMERS.REAL
-extern PRECISION vec2 balatrochrome;
+extern PRECISION vec2 experiment;
 
 extern PRECISION number dissolve;
 extern PRECISION number time;
 // [Note] sprite_pos_x _y is not a pixel position!
-//        To get pixel position, you need to multiply  
+//        To get pixel position, you need to multiply
 //        it by sprite_width _height (look flipped.fs)
 // (sprite_pos_x, sprite_pos_y, sprite_width, sprite_height) [not normalized]
 extern PRECISION vec4 texture_details;
@@ -27,7 +27,7 @@ extern PRECISION vec4 burn_colour_2;
 
 // NEW
 
-// [Required] 
+// [Required]
 // Apply dissolve effect (when card is being "burnt", e.g. when consumable is used)
 vec4 dissolve_mask(vec4 tex, vec2 texture_coords, vec2 uv);
 
@@ -39,18 +39,56 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
     // Position of a pixel within the sprite
 	vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
 
+    const vec3 BALATRO_FILTER = vec3(1.0, 0.604, 0.0);
+    const vec3 BALATRO_GREEN = vec3(0.294, 0.761, 0.572);
+    const vec3 BALATRO_PURPLE = vec3(0.529, 0.333, 0.749);
+
     const vec3 BALATRO_RED = vec3(0.992, 0.373, 0.333);
     const vec3 BALATRO_BLUE = vec3(0., 0.612, 0.992);
 
+
+
     // Invert the colors to preserve pure white
+    vec3 anti_balatro_filter = vec3(1.) - BALATRO_FILTER;
+    vec3 anti_balatro_green = vec3(1.) - BALATRO_GREEN;
+    vec3 anti_balatro_purple = vec3(1.) - BALATRO_PURPLE;
+
     vec3 anti_balatro_red = vec3(1.) - BALATRO_RED;
     vec3 anti_balatro_blue = vec3(1.) - BALATRO_BLUE;
+
     vec3 anti_tex = vec3(1.) - tex.rgb;
+
+    vec3 anti_filter_unit = anti_balatro_filter / length(anti_balatro_filter);
+    vec3 anti_green_unit = anti_balatro_green / length(anti_balatro_green);
+    vec3 anti_purple_unit = anti_balatro_purple / length(anti_balatro_purple);
+
+    vec3 anti_red_unit = anti_balatro_red / length(anti_balatro_red);
+    vec3 anti_blue_unit = anti_balatro_blue / length(anti_balatro_blue);
+
+    vec3 normal = cross(anti_red_unit, anti_blue_unit);
+    vec3 normal_proj = dot(anti_tex, normal) * normal / dot(normal, normal);
+    vec3 other_normal = cross(anti_purple_unit, anti_green_unit);
+    vec3 other_normal_proj = dot(anti_tex, other_normal) * other_normal / dot(other_normal, other_normal);
+
+    vec3 swapped_red_proj = dot(anti_tex, anti_red_unit) * anti_purple_unit;
+    vec3 swapped_blue_proj = dot(anti_tex, anti_blue_unit) * anti_green_unit;
+    vec3 swapped_normal_proj = dot(anti_tex, normal) * other_normal / dot(other_normal, other_normal);
+
+    tex.rgb = clamp(vec3(1.) - swapped_red_proj - swapped_blue_proj - swapped_normal_proj, 0., 1.);
+
+    // tex.rgb = vec3(1.) - clamp(anti_tex.r * anti_balatro_green + anti_tex.g * anti_balatro_purple + anti_tex.b * anti_balatro_filter, 0., 1.);
+
+    // Project the inverted original colors onto the inverted Balatro colors
+    // vec3 filter_proj = dot(anti_tex, anti_balatro_filter) * anti_balatro_filter / dot(anti_balatro_filter, anti_balatro_filter);
+    // vec3 green_proj = dot(anti_tex, anti_balatro_green) * anti_balatro_green / dot(anti_balatro_green, anti_balatro_green);
+    // vec3 purple_proj = dot(anti_tex, anti_balatro_purple) * anti_balatro_purple / dot(anti_balatro_purple, anti_balatro_purple);
+
+
 
     // OLD: Compute the normal to the plane defined by two colors,
     // then compute the projection onto that plane.
     // vec3 normal = cross(anti_balatro_red, anti_balatro_blue);
-    // vec3 normal_proj = dot(anti_tex, normal) * normal / dot(normal, normal);
+
     // vec3 plane_proj = anti_tex - normal_proj;
 
     // OLD: Invert to return to original space, then clamp to [0, 1].
@@ -59,14 +97,14 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
     // Project the inverted original colors onto the inverted Balatro colors
     // BUT swap the Balatro red and Balatro blue components
     // (think of it like swapping the red and blue channels)
-    vec3 swapped_red_proj = dot(anti_tex, anti_balatro_red) * anti_balatro_blue / dot(anti_balatro_blue, anti_balatro_blue);
-    vec3 swapped_blue_proj = dot(anti_tex, anti_balatro_blue) * anti_balatro_red / dot(anti_balatro_red, anti_balatro_red);
+    // vec3 swapped_red_proj = dot(anti_tex, anti_balatro_red) * anti_balatro_blue / dot(anti_balatro_blue, anti_balatro_blue);
+    // vec3 swapped_blue_proj = dot(anti_tex, anti_balatro_blue) * anti_balatro_red / dot(anti_balatro_red, anti_balatro_red);
 
     // Three steps in one line:
     // 1. Combine the projected colors to obtain the color in a 2D space;
     // 2. Invert the result to go back to the original, non-inverted space;
     // 3. Clamp the result to [0, 1].
-    tex.rgb = clamp(vec3(1.) - swapped_red_proj - swapped_blue_proj, 0., 1.);
+    // tex.rgb = clamp(vec3(1.) - swapped_red_proj - swapped_blue_proj, 0., 1.);
 
     // Maybe the clamp should have different, color-wise bounds,
     // but with the component swap, it's not clear what the bounds should be
@@ -78,7 +116,7 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
 
     // Does not do anything. Required for shader to not crash.
     if (uv.x > 2. * uv.x) {
-        uv = balatrochrome;
+        uv = experiment;
     }
 
     // required
@@ -96,7 +134,7 @@ vec4 dissolve_mask(vec4 tex, vec2 texture_coords, vec2 uv)
 	float t = time * 10.0 + 2003.;
 	vec2 floored_uv = (floor((uv*texture_details.ba)))/max(texture_details.b, texture_details.a);
     vec2 uv_scaled_centered = (floored_uv - 0.5) * 2.3 * max(texture_details.b, texture_details.a);
-	
+
 	vec2 field_part1 = uv_scaled_centered + 50.*vec2(sin(-t / 143.6340), cos(-t / 99.4324));
 	vec2 field_part2 = uv_scaled_centered + 50.*vec2(cos( t / 53.1532),  cos( t / 61.4532));
 	vec2 field_part3 = uv_scaled_centered + 50.*vec2(sin(-t / 87.53218), sin(-t / 49.0000));

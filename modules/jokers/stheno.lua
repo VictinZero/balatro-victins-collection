@@ -1,3 +1,11 @@
+local misc
+local init, error = SMODS.load_file("misc_functions.lua")
+if error then
+    sendErrorMessage("VictinsCollection :: Failed to load misc_functions with error " .. error)
+else
+    misc = init()
+end
+
 return {
     key = 'stheno',
     config = {},
@@ -31,7 +39,10 @@ return {
     end,
 
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue+1] = {key = "aux_vic_stheno", set = "Other"}
-        info_queue[#info_queue+1] = G.P_CENTERS.m_stone
+        if misc.check_hold_key_info() then
+            info_queue[#info_queue+1] = {key = "aux_vic_stheno", set = "Other"}
+            info_queue[#info_queue+1] = G.P_CENTERS.m_stone
+        end
+        return {main_end = misc.generate_main_end_hold_key_info(card)}
     end,
 }

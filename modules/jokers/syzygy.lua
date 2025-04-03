@@ -1,4 +1,4 @@
-local misc = NFS.load(SMODS.current_mod.path .. "/misc_functions.lua")()
+local misc = SMODS.load_file("misc_functions.lua")()
 
 local _generate_main_end = function(card)
     local content = {}
@@ -65,7 +65,7 @@ return {
                             func = function()
                                 attention_text({
                                     text = _name,
-                                    scale = 0.7, 
+                                    scale = 0.7,
                                     hold = delay - 0.2,
                                     backdrop_colour = G.C.SECONDARY_SET.Planet,
                                     align = 'bm',

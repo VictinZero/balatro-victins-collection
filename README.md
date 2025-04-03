@@ -7,4 +7,4 @@ Expect bugs that need to be fixed, and mechanical and flavor reworks on future u
 ## Partial credits
 As for art credits not elsewhere listed, the fire animation in Tyrian Patriarch is thanks to CharaMaster.
 
-Special thanks to various other modders for providing code wholesale or as reference, including, but not limited to: the Cult of Jimbo, Eremel, Firch, Mysthaps, and others.
+Special thanks to various other modders for providing code wholesale or as reference, including, but not limited to: AutumnMood, the Cult of Jimbo, Eremel, Firch, Mysthaps, and others.

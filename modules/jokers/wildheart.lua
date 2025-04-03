@@ -32,7 +32,7 @@ return {
     rarity = 2,
     pos = {
         x = 0,
-        y = 0
+        y = 8
     },
     atlas = 'joker_atlas',
     cost = 4,
@@ -53,7 +53,7 @@ return {
     end,
 
     calculate = function(self, card, context)
-        if context.check_enhancement and context.other_card.ability.name == 'Wild Card' then
+        if context.check_enhancement and context.other_card.config.center.key == 'm_wild' then
             return {
                 [card.ability.extra.current] = true
             }

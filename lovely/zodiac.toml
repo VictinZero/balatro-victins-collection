@@ -3,7 +3,7 @@ version = "1.0.0"
 dump_lua = true
 priority = 1
 
-# card_eval_status_text alignment patches 
+# card_eval_status_text alignment patches
 [[patches]]
 [patches.pattern]
 target = 'functions/common_events.lua'
@@ -11,7 +11,7 @@ match_indent = true
 position = 'before'
 pattern = '''elseif card.jimbo then'''
 payload = '''
-elseif card.area == G.ca_vic_zodiac then
+elseif not VIC_ALPHA_RELEASE and card.area == G.ca_vic_zodiac then
     y_off = 0.05*card.T.h
 '''
 
@@ -22,14 +22,34 @@ target = 'game.lua'
 match_indent = true
 position = 'before'
 pattern = 'self.deck = CardArea('
-payload = '''self.ca_vic_zodiac = CardArea(
-    G.TILE_W - 6*G.CARD_W - 2.95, -1.1*G.jokers.T.h - 1.1*G.jokers.T.h, -- hide it during alpha
-    G.jokers.T.w, G.jokers.T.h,
-    { type = "joker", card_limit = 13 }
-)
+payload = '''
+if not VIC_ALPHA_RELEASE then
+    self.ca_vic_zodiac = CardArea(
+        G.TILE_W - 6*G.CARD_W - 2.95, -1.1*G.jokers.T.h,
+        G.jokers.T.w, G.jokers.T.h,
+        { type = "joker", card_limit = 12, highlighted_limit = 0 }
+    )
 
--- SMODS.add_card{key = "j_vic_gemini", area = self.ca_vic_zodiac, skip_materialize = true, no_edition = true}
--- SMODS.add_card{key = "j_vic_cancer", area = self.ca_vic_zodiac, skip_materialize = true, no_edition = true}
+    local cardarea_set_ranks_ref = CardArea.set_ranks
+    CardArea.set_ranks = function(self)
+        if self == G.ca_vic_zodiac then
+            for k, card in ipairs(self.cards) do
+                card.rank = k
+                card.states.collide.can = true
+                card.states.drag.can = false
+            end
+        else
+            cardarea_set_ranks_ref(self)
+        end
+    end
+
+    local vic_zodiac = {"aries", "taurus", "gemini", "cancer", "leo", "virgo", "libra", "scorpio", "sagittarius", "capricorn", "aquarius", "pisces", }
+
+    for _, v in ipairs(vic_zodiac) do
+        local card_ = SMODS.add_card{key = "j_vic_"..v, area = self.ca_vic_zodiac, skip_materialize = true, no_edition = true}
+        SMODS.Stickers.eternal:apply(card_, true)
+    end
+end
 '''
 
 # Zodiac calculation
@@ -40,14 +60,16 @@ match_indent = true
 position = 'before'
 pattern = '-- TARGET: add your own CardAreas for joker evaluation'
 payload = '''
-local vic_joker_idx = 0
-for k, v in ipairs(t) do
-    vic_joker_idx = vic_joker_idx + 1
-    if v == G.jokers then
-       break
+if not VIC_ALPHA_RELEASE then
+    local vic_joker_idx = 0
+    for k, v in ipairs(t) do
+        vic_joker_idx = vic_joker_idx + 1
+        if v == G.jokers then
+        break
+        end
     end
+    table.insert(t, vic_joker_idx, G.ca_vic_zodiac)
 end
-table.insert(t, vic_joker_idx, G.ca_vic_zodiac)
 '''
 
 # UI
@@ -78,7 +100,7 @@ table.insert(t, vic_joker_idx, G.ca_vic_zodiac)
 #         G.GAME.current_round.current_hand.hand_level = vals.level
 #         else
 #         G.GAME.current_round.current_hand.hand_level = ' '..localize('k_lvl')..tostring(vals.level)
-#         if type(vals.level) == 'number' then 
+#         if type(vals.level) == 'number' then
 #         G.hand_text_area.hand_level.config.colour = G.C.HAND_LEVELS[math.min(vals.level, 7)]
 #         else
 #         G.hand_text_area.hand_level.config.colour = G.C.HAND_LEVELS[1]

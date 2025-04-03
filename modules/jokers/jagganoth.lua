@@ -148,39 +148,9 @@ return {
                 -- card.ability.extra.speech_state = card.ability.extra.speech_map[card.ability.extra.speech_state]
             end
         end
-        if context.joker_main then
-            card.ability.extra.highlighted_cards = {}
-            local sorting_helper = {}
-            sendDebugMessage("Full Hand")
-            for k, v in ipairs(context.full_hand) do
-                sendDebugMessage(tostring(k) .. " is " .. tostring(v.base.value) .. " of " .. tostring(v.base.suit))
-                table.insert(sorting_helper, v)
-            end
-            table.sort(sorting_helper, function(a, b)
-                return a.T.x < b.T.x
-            end)
-            sendDebugMessage("Sorting Helper")
-            for k, v in ipairs(sorting_helper) do
-                sendDebugMessage(tostring(k) .. " is " .. tostring(v.base.value) .. " of " .. tostring(v.base.suit))
-                table.insert(card.ability.extra.highlighted_cards, v)
-            end
-            local find_in_hand = function(_c)
-                for k, v in ipairs(context.full_hand) do
-                    if _c == v then
-                        return k
-                    end
-                end
-            end
-            table.sort(card.ability.extra.highlighted_cards, function(a, b)
-                return find_in_hand(a) < find_in_hand(b)
-            end)
-            sendDebugMessage("Joker Main")
-            for k, v in ipairs(card.ability.extra.highlighted_cards) do
-                sendDebugMessage(tostring(k) .. " is " .. tostring(v.base.value) .. " of " .. tostring(v.base.suit))
-            end
-        elseif context.end_of_round and (context.game_over ~= nil) then
-            card.ability.extra.cycles = 0
-            card.ability.extra.highlighted_cards = {}
+        if context.vic_replay_hand then
+            G.GAME.VictinsCollection.replay_hand = true
+            return {repetitions = 1, message = localize('k_again_ex')}
         end
     end
 }

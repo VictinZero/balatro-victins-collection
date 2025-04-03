@@ -1,22 +1,52 @@
--- _RELEASE_MODE = false -- DEBUG MODE :: REMOVE IN RELEASE
+_RELEASE_MODE = true -- DEBUG MODE :: REMOVE IN RELEASE
+
+VIC_ALPHA_RELEASE = true
+
+function VIC_tcat(t1, t2)
+    for i = 1, #t2 do
+        t1[#t1 + 1] = t2[i]
+    end
+    return t1
+end
+
+function VIC_process_data_by_version(t1, t2)
+    if not VIC_ALPHA_RELEASE then
+        VIC_tcat(t1, t2)
+    end
+    return t1
+end
+
+G.VictinsCollection = {}
 
 -- SMODS optional features
 SMODS.current_mod.optional_features = {
-    retrigger_joker = true,
-    quantum_enhancements = true
+    cardareas = {
+        deck = true,
+        unscored = true
+    },
+    quantum_enhancements = true,
+    retrigger_joker = true
 }
 
--- Colours
-local tmp_init, tmp_error = SMODS.load_file("colours.lua") -- NFS.load(SMODS.current_mod.path .. "colours.lua")
-if tmp_error then
-    sendErrorMessage("VictinsCollection :: Failed to load colours with error " .. tmp_error)
-else
-    local tmp_data = tmp_init()
-    sendDebugMessage("VictinsCollection :: Loaded : colours")
+-- Lib
+local lib_list = {"colours", "keybinds", "ui", "background_colours"}
+
+local lib_list_dev = {"focus"}
+
+VIC_process_data_by_version(lib_list, lib_list_dev)
+
+for _, lib in ipairs(lib_list) do
+    local init, error = SMODS.load_file("lib/" .. lib .. ".lua")
+    if error then
+        sendErrorMessage("VictinsCollection :: Failed to load lib " .. lib .. " with error " .. error)
+    else
+        local data = init()
+        sendDebugMessage("VictinsCollection :: Loaded lib: " .. lib)
+    end
 end
 
 -- Hooks
-local hook_list = {"misc_functions", "game", "card", "UI_definitions", "state_events", -- "button_callbacks",
+local hook_list = {"misc_functions", "game", "card", "UI_definitions", -- "button_callbacks",
 "cardarea", "blind", "common_events"}
 
 for _, hook in ipairs(hook_list) do
@@ -51,16 +81,44 @@ SMODS.Atlas {
     py = 95,
     path = 'vic_champions_belt.png'
 }
+SMODS.Atlas {
+    key = 'collared',
+    px = 101,
+    py = 95,
+    path = 'vic_collared.png'
+}
+SMODS.Atlas {
+    key = 'test',
+    px = 71,
+    py = 95,
+    path = 'vic_test.png'
+}
+SMODS.Atlas {
+    key = 'eye_test',
+    px = 71,
+    py = 95,
+    path = 'vic_eye_test.png'
+}
 
 -- Enable or disable additional jokers here
-local joker_list = {"up_your_sleeve", "ouroboros", "moody", "the_one", "champion", "champions_belt", "lvl_death",
-                    "gas_lamp", "the_one", "paradise_parrot", "skyscraper", "pippi_panini", "yurika_harako", "syzygy",
-                    "stheno", "tower_into_space" -- alpha --
--- "royal_straight_joker", "growing_tree", "chimera", "wildheart", -- "h_size_boost", "terraforming",
--- "fortune_cookie", "chai_tea", "brazilian_miku", "copies_commons", "nadia_om", "mammon", "solomon_david", "jagganoth",
---                    "makes_black_holes", "quantum_joker", "cosmic_egg", "blue_dwarf", "gemini", "cancer" -- "guarantees_enhancements",
+local joker_list = {"up_your_sleeve", "ouroboros", "moody", "trapezist", "dog", "hamster", "flush_spades",
+                    "flush_hearts", "flush_clubs", "flush_diamonds", "the_one", "champion", "champions_belt",
+                    "lvl_death", "gas_lamp", "paradise_parrot", "skyscraper", "pippi_panini", "yurika_harako",
+                    "wrapped_candy", "slingshot", "royal_straight_joker", "chimera", "double_negative", "jar_of_teeth",
+                    "broken_arm", "syzygy", "stheno", "tower_into_space", "binary_star"}
+
+local joker_list_dev = {"wrapped_candy", "slingshot", "jar_of_teeth", "broken_arm", "royal_straight_joker",
+                        "growing_tree", "chimera", "double_negative", "binary_star", "charon", -- "wildheart", -- "h_size_boost", "terraforming",
+                        "flush_spades", "flush_hearts", "flush_clubs", "flush_diamonds", "fortune_cookie", "chai_tea",
+                        "brazilian_miku", "collared", "test", "eye_test", --[["kill_consume_multiply_joker",]]
+                        "joker_devouring_its_son", "butcher_vanity", "copies_commons", "nadia_om", "mammon",
+                        "solomon_david", "jagganoth", "makes_black_holes", "quantum_joker", "cosmic_egg", "blue_dwarf",
+                        "aries", "taurus", "gemini", "cancer", "leo", "virgo", "libra", "scorpio", "sagittarius",
+                        "capricorn", "aquarius", "pisces" -- "guarantees_enhancements",
 -- "tour_guide", "grappling_hook", "bone",
 }
+
+VIC_process_data_by_version(joker_list, joker_list_dev)
 
 for _, joker in ipairs(joker_list) do
     local joker_name = (" " .. joker:gsub("_", " ")):gsub("%W%l", string.upper):sub(2)
@@ -83,7 +141,7 @@ end
     py = 95,
     path = 'vic_enhancement_atlas.png'
 }
-    
+
 SMODS.Atlas {
     key = 'enhancement_morning',
     px = 71,
@@ -109,24 +167,26 @@ local injectitems_ref = SMODS.injectItems
 
 SMODS.injectItems = function()
     injectitems_ref()
-    G.VictinsCollection = {
-        shared_sprites = {
-            confused_extra = Sprite(0, 0, 1, 1, G.ASSET_ATLAS['vic_disenhancement_confused'], {
-                x = 0,
-                y = 0
-            }),
-            me_first_extra = Sprite(0, 0, 1, 1, G.ASSET_ATLAS['vic_disenhancement_me_first'], {
-                x = 0,
-                y = 0
-            })
-        }
+    G.VictinsCollection.shared_sprites = G.VictinsCollection.shared_sprites or {
+        confused_extra = Sprite(0, 0, 1, 1, G.ASSET_ATLAS['vic_disenhancement_confused'], {
+            x = 0,
+            y = 0
+        }),
+        me_first_extra = Sprite(0, 0, 1, 1, G.ASSET_ATLAS['vic_disenhancement_me_first'], {
+            x = 0,
+            y = 0
+        })
     }
 end
 
 -- Enable or disable additional enhancements here
-local enhancement_list = { -- "blood",
-    -- "confused", "me_first" -- "morning",
+local enhancement_list = {}
+
+local enhancement_list_dev = { -- "blood",
+"flesh", "burning", "paralyzed", "confused", "me_first" -- "morning",
 }
+
+VIC_process_data_by_version(enhancement_list, enhancement_list_dev)
 
 for _, enhancement in ipairs(enhancement_list) do
     local enhancement_name = (" " .. enhancement:gsub("_", " ")):gsub("%W%l", string.upper):sub(2)
@@ -162,233 +222,68 @@ SMODS.Atlas({
 })
 
 -- Enable or disable additional blinds here
-local blind_list = {
-    "worm",
-    worm = true,
-    "rock",
-    rock = true,
-    "bell",
-    bell = true,
-    "spin",
-    spin = true,
-    "bottle",
-    bottle = true,
-    "loop",
-    loop = true,
-    "chaos",
-    chaos = false,
-    "dagger",
-    dagger = true,
-    "eclipse",
-    eclipse = false,
-    "final_prion",
-    final_prion = true,
-    "final_gold",
-    final_gold = true,
-    "final_ribbon",
-    final_ribbon = true,
-    "final_patriarch",
-    final_patriarch = true
-}
+local blind_list = {"worm", "rock", "bell", "spin", "bottle", "loop", "chaos", "dagger", "trash", "wind", "final_prion",
+                    "final_gold", "final_loop", "final_debuff", "final_patriarch", "final_dragon", "final_king"}
+
+local blind_list_dev = { --[["eclipse"]] }
+
+VIC_process_data_by_version(blind_list, blind_list_dev)
 
 for _, blind in ipairs(blind_list) do
-    if blind_list[blind] then
-        local blind_name = (" " .. blind:gsub("_", " ")):gsub("%W%l", string.upper):sub(2)
-        local init, error = SMODS.load_file("modules/blinds/" .. blind .. ".lua") -- NFS.load(SMODS.current_mod.path .. "modules/blinds/" .. blind ..".lua")
-        if error then
-            sendErrorMessage("VictinsCollection :: Failed to load " .. blind_name .. " with error " .. error)
-        else
-            local data = init()
-            local blind_obj = SMODS.Blind(data)
-
-            for k_, v_ in pairs(data) do
-                if type(v_) == 'function' then
-                    blind_obj[k_] = data[k_]
-                end
-            end
-
-            sendDebugMessage("VictinsCollection :: Loaded blind: " .. blind_name)
-        end
-    end
-end
-
--- from Bunco with permission
-
-local ease_background_colour_blind_ref = ease_background_colour_blind
-
-local function invert_color(color, invert_red, invert_green, invert_blue)
-    local inverted_color = {1 - (color[1] or 0), 1 - (color[2] or 0), 1 - (color[3] or 0), color[4] or 1}
-
-    if invert_red then
-        inverted_color[1] = color[1] or 0
-    end
-    if invert_green then
-        inverted_color[2] = color[2] or 0
-    end
-    if invert_blue then
-        inverted_color[3] = color[3] or 0
-    end
-
-    return inverted_color
-end
-
-local function increase_saturation(color, value)
-    -- Extract RGB components
-    local r = color[1] or 0
-    local g = color[2] or 0
-    local b = color[3] or 0
-
-    -- Convert RGB to HSL
-    local max_val = math.max(r, g, b)
-    local min_val = math.min(r, g, b)
-    local delta = max_val - min_val
-
-    local h, s, l = 0, 0, (max_val + min_val) / 2
-
-    if delta ~= 0 then
-        if l < 0.5 then
-            s = delta / (max_val + min_val)
-        else
-            s = delta / (2 - max_val - min_val)
-        end
-
-        if r == max_val then
-            h = (g - b) / delta
-        elseif g == max_val then
-            h = 2 + (b - r) / delta
-        else
-            h = 4 + (r - g) / delta
-        end
-
-        h = h * 60
-        if h < 0 then
-            h = h + 360
-        end
-    end
-
-    -- Increase saturation
-    s = math.min(s + value, 1)
-
-    -- Convert back to RGB
-    local c = (1 - math.abs(2 * l - 1)) * s
-    local x = c * (1 - math.abs((h / 60) % 2 - 1))
-    local m = l - c / 2
-
-    local r_new, g_new, b_new = 0, 0, 0
-
-    if h < 60 then
-        r_new, g_new, b_new = c, x, 0
-    elseif h < 120 then
-        r_new, g_new, b_new = x, c, 0
-    elseif h < 180 then
-        r_new, g_new, b_new = 0, c, x
-    elseif h < 240 then
-        r_new, g_new, b_new = 0, x, c
-    elseif h < 300 then
-        r_new, g_new, b_new = x, 0, c
+    local blind_name = (" " .. blind:gsub("_", " ")):gsub("%W%l", string.upper):sub(2)
+    local init, error = SMODS.load_file("modules/blinds/" .. blind .. ".lua")
+    if error then
+        sendErrorMessage("VictinsCollection :: Failed to load " .. blind_name .. " with error " .. error)
     else
-        r_new, g_new, b_new = c, 0, x
-    end
+        local data = init()
+        local blind_obj = SMODS.Blind(data)
 
-    -- Adjust RGB values
-    r_new, g_new, b_new = (r_new + m), (g_new + m), (b_new + m)
-
-    return {r_new, g_new, b_new, color[4] or 1}
-end
-
-function ease_background_colour_blind(state, blind_override)
-    local blindname = ((blind_override or (G.GAME.blind and G.GAME.blind.name ~= '' and G.GAME.blind.name)) or
-                          'Small Blind')
-    local blindname = (blindname == '' and 'Small Blind' or blindname)
-
-    for k, v in pairs(G.P_BLINDS) do
-        if v.name == blindname then
-            local boss_col = v.boss_colour
-            if v.boss and v.boss.showdown then
-                ease_background_colour {
-                    new_colour = increase_saturation(mix_colours(boss_col, invert_color(boss_col), 0.3), 1),
-                    special_colour = boss_col,
-                    tertiary_colour = darken(increase_saturation(
-                        mix_colours(boss_col, invert_color(boss_col, true, false, false), 0.3), 0.6), 0.4),
-                    contrast = 1.7
-                }
-                return
-            else
-                ease_background_colour_blind_ref(state, blind_override)
+        for k_, v_ in pairs(data) do
+            if type(v_) == 'function' then
+                blind_obj[k_] = data[k_]
             end
         end
-    end
-end
 
-local draw_from_play_to_discard_ref = G.FUNCS.draw_from_play_to_discard
-
-G.FUNCS.draw_from_play_to_discard = function(e)
-    draw_from_play_to_discard_ref(e)
-
-    if G.GAME.VictinsCollection.post_discard_draw then
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            delay = 0.1,
-            func = function()
-                local n = #G.GAME.VictinsCollection.post_discard_draw
-                local it = 1
-                for k, v in ipairs(G.GAME.VictinsCollection.post_discard_draw) do
-                    if v and not v.removed then
-                        draw_card(v.area, G.hand, it * 100 / n, 'up', true, v)
-                        it = it + 1
-                    end
-                end
-                G.GAME.VictinsCollection.post_discard_draw = false
-                return true
-            end
-        }))
+        sendDebugMessage("VictinsCollection :: Loaded blind: " .. blind_name)
     end
 end
 
 -- Consumables
 -- Zodiac
---[[
-SMODS.Rarity {
-    key = 'auxiliary',
-    default_weight = 0,
-    pools = {
-        ['Joker'] = true
+
+if not VIC_ALPHA_RELEASE then
+    SMODS.Rarity {
+        key = 'auxiliary',
+        default_weight = 0,
+        pools = {
+            ['Joker'] = true
+        }
     }
-}
 
-SMODS.ConsumableType({
-    key = 'Zodiac',
-    collection_rows = {6, 6},
-    primary_colour = G.C.VictinsCollection.OTHERS.Ophiucus, -- HEX('009cfd'),
-    secondary_colour = G.C.VictinsCollection.OTHERS.Zodiac, -- HEX("81cefd"),
-    loc_txt = {},
-    shop_rate = 2
-})
+    SMODS.ConsumableType({
+        key = 'Zodiac',
+        collection_rows = {6, 6},
+        primary_colour = G.C.VictinsCollection.OTHERS.Ophiucus, -- HEX('009cfd'),
+        secondary_colour = G.C.VictinsCollection.OTHERS.Zodiac, -- HEX("81cefd"),
+        loc_txt = {},
+        shop_rate = 2
+    })
 
-local zodiac_list = { -- "aries",
--- "taurus",
-"gemini", "cancer", -- "leo",
--- "virgo",
---  "libra",
---  "scorpio",
---  "sagittarius",
---  "capricorn",
---  "aquarius",
---  "pisces",
-"ophiucus"}
+    local zodiac_list = {"aries", "taurus", "gemini", "cancer", "leo", "virgo", "libra", "scorpio", "sagittarius",
+                         "capricorn", "aquarius", "pisces", "ophiucus"}
 
-for _, zodiac in ipairs(zodiac_list) do
-    local zodiac_name = (" " .. zodiac:gsub("_", " ")):gsub("%W%l", string.upper):sub(2)
-    local init, error = SMODS.load_file("modules/zodiac/" .. zodiac .. ".lua")
-    if error then
-        sendErrorMessage("VictinsCollection :: Failed to load " .. zodiac_name .. " with error " .. error)
-    else
-        local data = init()
-        SMODS.Consumable(data)
-        sendDebugMessage("VictinsCollection :: Loaded zodiac: " .. zodiac_name)
+    for _, zodiac in ipairs(zodiac_list) do
+        local zodiac_name = (" " .. zodiac:gsub("_", " ")):gsub("%W%l", string.upper):sub(2)
+        local init, error = SMODS.load_file("modules/zodiac/" .. zodiac .. ".lua")
+        if error then
+            sendErrorMessage("VictinsCollection :: Failed to load " .. zodiac_name .. " with error " .. error)
+        else
+            local data = init()
+            SMODS.Consumable(data)
+            sendDebugMessage("VictinsCollection :: Loaded zodiac: " .. zodiac_name)
+        end
     end
 end
-]]
 
 -- Tokens
 SMODS.ConsumableType({
@@ -399,23 +294,23 @@ SMODS.ConsumableType({
     shop_rate = 0
 })
 
-local consumable_list = {
-    "short_rest",
-    short_rest = true
-}
+local consumable_list = {"short_rest"}
+
+local consumable_list_dev = {}
+
+VIC_process_data_by_version(consumable_list, consumable_list_dev)
 
 for _, consumable in ipairs(consumable_list) do
-    if consumable_list[consumable] then
-        local consumable_name = (" " .. consumable:gsub("_", " ")):gsub("%W%l", string.upper):sub(2)
-        local init, error = SMODS.load_file("modules/consumables/" .. consumable .. ".lua") -- NFS.load(SMODS.current_mod.path .. "modules/consumables/" .. consumable ..".lua")
-        if error then
-            sendErrorMessage("VictinsCollection :: Failed to load " .. consumable_name .. " with error " .. error)
-        else
-            local data = init()
-            SMODS.Consumable(data)
-            sendDebugMessage("VictinsCollection :: Loaded consumable: " .. consumable_name)
-        end
+    local consumable_name = (" " .. consumable:gsub("_", " ")):gsub("%W%l", string.upper):sub(2)
+    local init, error = SMODS.load_file("modules/consumables/" .. consumable .. ".lua")
+    if error then
+        sendErrorMessage("VictinsCollection :: Failed to load " .. consumable_name .. " with error " .. error)
+    else
+        local data = init()
+        SMODS.Consumable(data)
+        sendDebugMessage("VictinsCollection :: Loaded consumable: " .. consumable_name)
     end
+
 end
 
 local set_cost_ref = Card.set_cost
@@ -446,65 +341,103 @@ SMODS.Blind:take_ownership('pillar', {
     end
 })
 
--- SMODS.Shader {
---     key = 'test',
---     path = 'test.fs',
--- }
--- SMODS.Edition {
---     key = "test",
---     shader = "test",
--- }
+if not VIC_ALPHA_RELEASE then
 
---[[SMODS.Shader {
-    key = 'chowder',
-    path = 'chowder.fs',
-    --[[
+    -- SMODS.Shader {
+    --     key = 'test',
+    --     path = 'test.fs',
+    -- }
+    -- SMODS.Edition {
+    --     key = "test",
+    --     shader = "test",
+    -- }
+
+    -- SMODS.Shader {
+    --     key = 'experiment',
+    --     path = 'experiment.fs',
+    -- }
+    -- SMODS.Edition {
+    --     key = "experiment",
+    --     shader = "experiment",
+    -- }
+
+    SMODS.Shader {
+        key = 'chowder',
+        path = 'chowder.fs',
+        --[[
         Additional variable passed to the shader, as defined in the main code.
         This scales the rendered texture size to approximate a regular Joker's size,
         which can depend on the game window size.
         Unsure if the passed variable is correct, as I couldn't find the exact scale used.
     --]]
---[[    send_vars = function(sprite, card)
-        return {
-            card_scale = card and (0.95 * G.TILESCALE) / 1.5 or 1.0
-        }
-    end
-}
-SMODS.Edition {
-    key = "chowder",
-    shader = "chowder",
-    disable_base_shader = true
-}
+        send_vars = function(sprite, card)
+            return {
+                card_scale = card and (0.95 * G.TILESCALE) / 1.5 or 1.0
+            }
+        end
+    }
+    SMODS.Edition {
+        key = "chowder",
+        shader = "chowder",
+        disable_base_shader = true
+    }
 
-SMODS.Shader {
-    key = 'gold',
-    path = 'gold.fs',
-    -- card can be nil if sprite.role.major is not Card
-    send_vars = function(sprite, card)
-        return {
-            lines_offset = card and card.edition.example_gold_seed or 0
-        }
-    end
-}
-SMODS.Shader {
-    key = 'antigold',
-    path = 'antigold.fs',
-    -- card can be nil if sprite.role.major is not Card
-    send_vars = function(sprite, card)
-        return {
-            lines_offset = card and card.edition.example_gold_seed or 0
-        }
-    end
-}
-SMODS.Edition {
-    key = "golden",
-    shader = "gold",
-    on_apply = function(card)
-        -- Randomize offset to -1..1
-        -- Save in card.edition table so it persists after game restart.
-        card.edition.example_gold_seed = pseudorandom('e_example_gold') * 2 - 1
-    end
-}]]
+    SMODS.Shader {
+        key = 'gold',
+        path = 'gold.fs',
+        -- card can be nil if sprite.role.major is not Card
+        send_vars = function(sprite, card)
+            return {
+                lines_offset = card and card.edition.example_gold_seed or 0
+            }
+        end
+    }
+    SMODS.Shader {
+        key = 'antigold',
+        path = 'antigold.fs',
+        -- card can be nil if sprite.role.major is not Card
+        send_vars = function(sprite, card)
+            return {
+                lines_offset = card and card.edition.example_gold_seed or 0
+            }
+        end
+    }
+    SMODS.Edition {
+        key = "golden",
+        shader = "gold",
+        on_apply = function(card)
+            -- Randomize offset to -1..1
+            -- Save in card.edition table so it persists after game restart.
+            card.edition.example_gold_seed = pseudorandom('e_example_gold') * 2 - 1
+        end
+    }
+
+    SMODS.Edition {
+        key = "shiny",
+        shader = false,
+        config = {
+            extra = {
+                repetitions = 1
+            }
+        },
+        calculate = function(self, card, context)
+            if context.other_card == card and
+                ((context.repetition and context.cardarea == G.play) or
+                    (context.retrigger_joker_check and not context.retrigger_joker)) then
+                return {
+                    message = localize("k_again_ex"),
+                    repetitions = self.config.extra.repetitions,
+                    card = card
+                }
+            end
+        end,
+        loc_vars = function(self, info_queue, center)
+            return {
+                vars = {center and center.edition and center.edition.extra.repetitions or self.config.extra.repetitions}
+            }
+        end
+    }
+end
 
 -- Stickers
 

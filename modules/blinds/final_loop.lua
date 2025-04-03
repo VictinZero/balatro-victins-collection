@@ -1,8 +1,8 @@
 local misc = NFS.load(SMODS.current_mod.path .. "/misc_functions.lua")()
 
 return {
-    name = "The Rouge Ribbon",
-    key = "final_ribbon",
+    name = "Lavender Loop",
+    key = "final_loop",
     pos = { x = 0, y = 2 },
     atlas = "showdown_atlas",
     dollars = 8,
@@ -10,7 +10,7 @@ return {
     vars = {},
     debuff = {},
     boss = {showdown = true, min = 1, max = 10},--showdown = true
-    boss_colour = HEX('B29CB2'),--HEX('A91101'),
+    boss_colour = HEX('996599'),--HEX('B29CB2'),--HEX('A91101'),
     discovered = true,
     loc_txt = {},
 
@@ -29,7 +29,7 @@ return {
             }}
         end
 
-        misc.create_blind_tooltip(blind_choice, tmp) 
+        misc.create_blind_tooltip(blind_choice, tmp)
     end,
 
     disable = function(self)

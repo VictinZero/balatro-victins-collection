@@ -160,13 +160,11 @@ function info_tip_from_rows(desc_nodes, name)
         }
     elseif name == "aux_vic_stheno" then
         return {
-            n = G.UIT.R, -- or G.UIT.C
+            n = G.UIT.R,
             config = {
                 align = "cm",
-                -- padding = 0.05,
-                colour = G.C.CLEAR, -- lighten(G.C.JOKER_GREY, 0.5),
+                colour = G.C.CLEAR,
                 r = 0.1
-                -- emboss = 0.05
             },
             nodes = misc.create_UIBox_blind_popup_with_icon('bl_vic_rock')
         }

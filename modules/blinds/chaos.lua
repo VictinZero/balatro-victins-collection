@@ -1,37 +1,31 @@
 return {
     name = "The Chaos",
-    key = "chaos", 
+    key = "chaos",
     pos = { x = 0, y = 0 },
     atlas = "blind_atlas",
-    dollars = 5, 
-    mult = 2, 
-    vars = {}, 
+    dollars = 5,
+    mult = 2,
+    vars = {},
     debuff = {},
     boss = {min = 1, max = 10},
     boss_colour = HEX('D0D2D6'),
     discovered = true,
     loc_txt = {},
 
-    debuff_card = function(self, card, from_blind)
-        if not self.disabled and card.area ~= G.jokers then --[[card:set_debuff(true);]] return true end
-        --card:set_debuff(false)
+    recalc_debuff = function(self, card, from_blind)
+        if not self.disabled and (card.ability.set == 'Default' or card.ability.set == 'Enhanced') then return true end
         return false
     end,
 
-    debuff_hand = function(self, cards, hand, handname, check)
-        if check == nil and next(hand['Straight']) or next(hand['Flush']) then
-            for k, v in ipairs(cards) do
-                v:set_debuff(false)
+    calculate = function(self, blind, context)
+        if context.before and (next(context.poker_hands['Straight']) or next(context.poker_hands['Flush'])) then
+            blind.disabled = true
+            for _, v in ipairs(G.playing_cards) do
+                blind:debuff_card(v)
             end
-            G.E_MANAGER:add_event(Event({
-                trigger = 'immediate',
-                func = function()
-                    G.GAME.blind:disable()
-                    return true
-                end
-            }))
+            G.GAME.blind:set_text()
+            G.GAME.blind:wiggle()
         end
-        return false
     end,
 
     disable = function(self)

@@ -262,4 +262,203 @@ misc.random_showdown_blind = function(seed)
     return boss
 end
 
+misc.destroy_cards = function(cards, instant)
+    if instant then
+        local cards_
+        if not type(cards) == 'table' then
+            cards_ = {cards}
+        else
+            cards_ = cards
+        end
+        local playing_cards = {}
+        for _, card in ipairs(cards_) do
+            if card and not card.removed then
+                if card.ability.name == 'Glass Card' then
+                    card:shatter()
+                else
+                    card:start_dissolve(nil) -- , i == #G.hand.highlighted)
+                end
+            end
+            if card.playing_card and G.jokers then
+                playing_cards[#playing_cards + 1] = card
+            end
+        end
+        if #playing_cards > 0 and G.jokers then
+            for j = 1, #G.jokers.cards do
+                eval_card(G.jokers.cards[j], {
+                    cardarea = G.jokers,
+                    remove_playing_cards = true,
+                    removed = playing_cards
+                })
+            end
+        end
+    else
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                local cards_
+                if not type(cards) == 'table' then
+                    cards_ = {cards}
+                else
+                    cards_ = cards
+                end
+                local playing_cards = {}
+                for _, card in ipairs(cards_) do
+                    if card and not card.removed then
+                        if card.ability.name == 'Glass Card' then
+                            card:shatter()
+                        else
+                            card:start_dissolve(nil) -- , i == #G.hand.highlighted)
+                        end
+                    end
+                    if card.playing_card and G.jokers then
+                        playing_cards[#playing_cards + 1] = card
+                    end
+                end
+                if #playing_cards > 0 and G.jokers then
+                    for j = 1, #G.jokers.cards do
+                        eval_card(G.jokers.cards[j], {
+                            cardarea = G.jokers,
+                            remove_playing_cards = true,
+                            removed = playing_cards
+                        })
+                    end
+                end
+                return true
+            end
+        }))
+    end
+end
+
+misc.a_consumes_b = function(consuming_card, consumed_card)
+    local old_debuff = consumed_card.debuff
+    consumed_card.debuff = nil
+
+    consuming_card.ability.perma_bonus = consuming_card.ability.perma_bonus + consumed_card:get_chip_bonus()
+    consuming_card.ability.perma_mult = consuming_card.ability.perma_mult + consumed_card:get_chip_mult()
+    consuming_card.ability.perma_x_mult = consuming_card.ability.perma_x_mult + consumed_card:get_chip_x_mult()
+    consuming_card.ability.perma_h_mult = consuming_card.ability.perma_h_mult + consumed_card:get_chip_h_mult()
+    consuming_card.ability.perma_h_x_mult = consuming_card.ability.perma_h_x_mult + consumed_card:get_chip_h_x_mult()
+    consuming_card.ability.perma_x_chips = consuming_card.ability.perma_x_chips + consumed_card:get_chip_x_bonus()
+    consuming_card.ability.perma_h_chips = consuming_card.ability.perma_h_chips + consumed_card:get_chip_h_bonus()
+    consuming_card.ability.perma_h_x_chips = consuming_card.ability.perma_h_x_chips + consumed_card:get_chip_h_x_bonus()
+    consuming_card.ability.perma_h_dollars = consuming_card.ability.perma_h_dollars + consumed_card:get_h_dollars()
+    consuming_card.ability.perma_p_dollars = consuming_card.ability.perma_p_dollars + consumed_card:get_p_dollars()
+
+    consumed_card.debuff = old_debuff
+end
+
+-- Card draw utility
+
+misc.find_playing_cards = function(rule, source_area, stop_on_first)
+    local area = source_area or G.deck
+    local available_cards = {}
+    if area and #area.cards > 0 then
+        for i = 1, #area.cards do
+            local candidate = area.cards[i]
+            if rule(candidate) then
+                available_cards[#available_cards + 1] = candidate
+                if stop_on_first then
+                    break
+                end
+            end
+        end
+    end
+    return available_cards
+end
+
+-- Note: `draw_card` already creates an Event for the card draw
+misc.draw_specific_card = function(target_card, source, destination, instant, draw_card_args)
+    local extra_args = draw_card_args or {}
+    if instant then
+        if target_card and not target_card.removed and target_card.area == (source or target_card.area) then
+            draw_card(source, destination, extra_args.percent, extra_args.dir or 'up', extra_args.sort, target_card, extra_args.delay, extra_args.mute, extra_args.stay_flipped or false, extra_args.vol, extra_args.discarded_only)
+        end
+    else
+        G.E_MANAGER:add_event(Event({
+            trigger = 'before',
+            func = function()
+                misc.draw_specific_card(target_card, source, destination, true, extra_args)
+                return true
+            end
+        }))
+    end
+end
+
+misc.find_and_draw_cards = function(rule, seed, destination, draw_card_args)
+    local extra_args = draw_card_args or {}
+
+    if not rule or not seed then
+        return
+    end
+
+    local candidates = misc.find_playing_cards(rule, extra_args.source)
+
+    if not candidates or #candidates <= 0 then
+        return
+    end
+
+    local target_card = pseudorandom_element(candidates, pseudoseed(seed))
+
+    misc.draw_specific_card(target_card, extra_args.source, destination, extra_args.instant, extra_args.extra)
+end
+
+-- Hold key for extra info
+
+misc.check_hold_key_info = function()
+    return G and G.CONTROLLER and G.CONTROLLER.held_keys['lalt']
+end
+
+misc.generate_main_end_hold_key_info = function(card)
+    local add_node = function(nodes, text, colour)
+        nodes[#nodes + 1] = {
+            n = G.UIT.T,
+            config = {
+                text = text,
+                colour = colour,
+                scale = 0.2
+            }
+        }
+    end
+
+    local nodes_ = {}
+
+    add_node(nodes_, localize('k_vic_hold_key_info_1'), G.C.UI.TEXT_INACTIVE)
+    nodes_[#nodes_ + 1] = {
+        n = G.UIT.C,
+        config = {
+            align = "m",
+            colour = G.C.UI.TEXT_INACTIVE,
+            r = 0.05,
+            padding = 0.03,
+            res = 0.15
+        },
+        nodes = {{
+            n = G.UIT.T,
+            config = {
+                text = 'ALT',
+                colour = G.C.WHITE,
+                scale = 0.2
+            }
+        }}
+    }
+    add_node(nodes_, localize('k_vic_hold_key_info_2'), G.C.UI.TEXT_INACTIVE)
+
+    return {{
+        n = G.UIT.C,
+        config = {
+            align = "bm",
+            padding = 0.02
+        },
+        nodes = {{
+            n = G.UIT.R,
+            config = {
+                align = "cm"
+            },
+            nodes = nodes_
+        }}
+    }}
+end
+
 return misc

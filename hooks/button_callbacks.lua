@@ -5,7 +5,7 @@ local reroll_boss_ref = G.FUNCS.reroll_boss
 G.FUNCS.reroll_boss = function(e)
 	--[[local previous_force_boss = G.FORCE_BOSS
 	local changed_force_boss = true]]
-	
+
 	sendDebugMessage("Force Boss?")
 
 	G.GAME.VictinsCollection.champions_belt = G.GAME.VictinsCollection.adding_champions_belt or (next(SMODS.find_card('j_vic_champions_belt')) and true) or false
@@ -44,24 +44,3 @@ G.FUNCS.reroll_boss = function(e)
 
 	return reroll_boss_val
 end
-
---[[[manifest]
-version = "1.0.0"
-dump_lua = true
-priority = 0
-
-# Champion's Belt
-[[patches]
-]
-[patches.pattern]
-target = "functions/common_events.lua"
-pattern = "elseif not v.boss.showdown and (v.boss.min <= math.max(1, G.GAME.round_resets.ante) and ((math.max(1, G.GAME.round_resets.ante))%G.GAME.win_ante ~= 0 or G.GAME.round_resets.ante < 2)) then"
-position = "before"
-payload = '''
-elseif next(SMODS.find_card("j_vic_champions_belt")) and v.boss.showdown then
-	eligible_bosses[k] = true
-elseif next(SMODS.find_card("j_vic_champions_belt")) and not v.boss.showdown then
-	eligible_bosses[k] = nil
-'''
-match_indent = true
-]]
