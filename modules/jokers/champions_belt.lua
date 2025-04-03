@@ -48,13 +48,11 @@ return {
     end,
 
     add_to_deck = function(self, card, from_debuff)
-        sendDebugMessage("Adding Champions' Belt")
         G.GAME.VictinsCollection.champions_belt = true -- (next(SMODS.find_card('j_vic_champions_belt')) and true) or false
         G.GAME.VictinsCollection.adding_champions_belt = true
         if (not (G.GAME.blind and G.GAME.blind:get_type() == 'Boss')) and
             (not G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss].boss.showdown) and not from_debuff then
             local boss = misc.random_showdown_blind()
-            sendDebugMessage("Boss is " .. tostring(boss))
             if boss then
                 G.FORCE_BOSS = boss
             end

@@ -20,7 +20,6 @@ return {
     soul_pos = nil,
 
     add_to_deck = function(self, card, from_debuff)
-        sendDebugMessage("Adding Stheno")
         G.GAME.VictinsCollection.stheno = true --(next(SMODS.find_card('j_vic_stheno')) and true) or false
         G.GAME.VictinsCollection.adding_stheno = true
         if (not (G.GAME.blind and G.GAME.blind:get_type() == 'Boss')) and (not G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss].boss.showdown) and (G.GAME.round_resets.blind_choices.Boss ~= 'bl_vic_rock') and not from_debuff then

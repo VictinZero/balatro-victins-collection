@@ -1,11 +1,11 @@
 return {
     name = "The Spin",
-    key = "spin", 
+    key = "spin",
     pos = { x = 0, y = 0 },
     atlas = "blind_atlas",
-    dollars = 5, 
-    mult = 2, 
-    vars = {}, 
+    dollars = 5,
+    mult = 2,
+    vars = {},
     debuff = {},
     boss = {min = 1, max = 10},
     boss_colour = HEX('D0D2D6'),
@@ -19,11 +19,8 @@ return {
     end,
 
     drawn_to_hand = function(self)
-        sendDebugMessage("The Spin : drawn_to_hand")
         if not self.disabled and self.prepped then
             G.E_MANAGER:add_event(Event({
-                --trigger = 'after',
-                --delay = 0.7,
                 func = function()
                     local any_selected = nil
 
@@ -47,7 +44,7 @@ return {
                     end
                     return true
                 end
-            })) 
+            }))
             if G.hand.cards[1] then self.triggered = true end
             delay(0.7)
         end
@@ -55,11 +52,6 @@ return {
     end,
 
     stay_flipped = function(self, area, card)
-        sendDebugMessage("The Spin : stay_flipped")
-        sendDebugMessage("Disabled? "..tostring(self.disabled))
-        sendDebugMessage("Played? "..tostring(G.GAME.current_round.hands_played))
-        sendDebugMessage("Discarded? "..tostring(G.GAME.current_round.discards_used))
-        sendDebugMessage("Prepped? "..tostring(self.prepped))
         if (not self.disabled) and G.GAME.current_round.hands_played == 0 and G.GAME.current_round.discards_used == 0 and self.prepped then
             return true
         end
