@@ -339,6 +339,13 @@ return {
                     "into {C:planet}Earth",
 		        }
 		    },
+            j_vic_red_hand = {
+				name = "The Red Hand",
+	        	text = {
+		            "When {C:attention}Blind{} is selected,",
+                    "swap {V:1}Hands{} and {V:2}Discards"
+		        }
+		    },
             j_vic_editor = {
 				name = "Editor",
 	        	text = {
@@ -834,6 +841,13 @@ return {
 				text = {
 					"{C:white}Original art by {E:1,C:white,S:1.1}B",
 					"{C:white}Joker text art by {E:1,C:white,S:1.1}Victin",
+				}
+			},
+            cr_vic_red_hand = {
+				name = "cr_vic_credits",
+				text = {
+					"{C:white}Background art by {E:1,C:white,S:1.1}Victin",
+					"{C:white}Hand art by {E:1,C:white,S:1.1}Gappie",
 				}
 			},
 			cr_vic_quantum_joker = {
