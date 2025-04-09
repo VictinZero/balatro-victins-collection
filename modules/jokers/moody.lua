@@ -17,7 +17,7 @@ return {
             for k, v in pairs(G.GAME.hands) do
                 if v.visible then _poker_hands[#_poker_hands+1] = k end
             end
-            pseudoshuffle(_poker_hands, pseudoseed("moody"))
+            pseudoshuffle(_poker_hands, pseudoseed("vic_moody"))
 
             local _hand = _poker_hands[1]
             update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3}, {

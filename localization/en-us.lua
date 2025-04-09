@@ -503,7 +503,7 @@ return {
 		    j_vic_makes_black_holes = {
 				name = "Makes Black Holes (Placeholder)",
 	        	text = {
-		            "After you {C:attetion}sell",
+		            "After you {C:attention}sell",
 		            "{C:attention}3{} {C:planet}Planet{} cards,",
 		            "create a {C:dark_edition,E:1}Black Hole",
 		            "{C:inactive}(Must have room)",
