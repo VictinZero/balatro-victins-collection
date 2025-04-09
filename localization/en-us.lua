@@ -309,6 +309,16 @@ return {
                     "{V:1}#2#",
                 }
             },
+            j_vic_goldfish = {
+                name = "Goldfish",
+                text = {
+                    "When {C:attention}round ends{},",
+                    "earn {C:money}$1{} for each",
+                    "poker hand of tier",
+                    "equal or lesser than",
+                    "winning poker hand",
+                }
+            },
             j_vic_charon = {
                 name = "Charon",
                 text = {
