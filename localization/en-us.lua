@@ -302,6 +302,13 @@ return {
                     "give them random {C:attention}Enhancements"
 		        }
 		    },
+            j_vic_starfish = {
+                name = "Starfish",
+                text = {
+                    "{C:attention}+#1#{} levels to",
+                    "{V:1}#2#",
+                }
+            },
             j_vic_charon = {
                 name = "Charon",
                 text = {
