@@ -319,6 +319,14 @@ return {
                     "winning poker hand",
                 }
             },
+            j_vic_clownfish = {
+                name = "Clownfish",
+                text = {
+                    "{C:mult}+#1#{} Mult per level of all",
+                    "poker hands of lower tier",
+                    "{C:inactive}(Currently {V:1}+#2#{C:inactive} Mult)",
+                }
+            },
             j_vic_charon = {
                 name = "Charon",
                 text = {
