@@ -1,50 +1,10 @@
-local misc = NFS.load(SMODS.current_mod.path .. "/misc_functions.lua")()
-
-local _generate_main_end = function(card)
-    local main_end = 0
-    if not misc.is_in_your_collection(card) then
-        local active = card.ability.extra.active
-
-        local colour = (active and G.C.GREEN) or G.C.RED
-        local txt = (active and localize('k_active')) or localize('k_vic_inactive')
-        main_end = {
-            {
-                n=G.UIT.C,
-                config={
-                    align = "bm",
-                    padding = 0.02
-                },
-                nodes={
-                    {
-                        n=G.UIT.C,
-                        config={
-                            align = "m",
-                            colour = colour,
-                            r = 0.05,
-                            padding = 0.05
-                        },
-                        nodes={
-                            {
-                                n=G.UIT.T, config={text = ' '..txt..' ', colour = G.C.UI.TEXT_LIGHT, scale = 0.3, shadow = true}
-                            },
-                        }
-                    }
-                }
-            }
-        }
-    else
-        main_end = nil
-    end
-    return main_end
-end
-
 return {
     key = 'terraforming',
-    config = { extra = {active = true} },
-    rarity = 1,
-    pos = { x = 0, y = 0 },
+    config = {},
+    rarity = 2,
+    pos = { x = 0, y = 8 },
     atlas = 'joker_atlas',
-    cost = 1,
+    cost = 4,
     unlocked = true,
     discovered = true,
     blueprint_compat = false,
@@ -52,40 +12,71 @@ return {
     soul_pos = nil,
 
     calculate = function(self, card, context)
-        if not context.blueprint then
-            if context.joker_main and card.ability.extra.active then
-                card.ability.extra.active = false
-                G.from_boss_tag = true
-                G.FUNCS.reroll_boss()
-                card:juice_up(1, 0.5)
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'immediate',
-                    delay = 0.0,
-                    func = function()
-                        local boss_ = G.GAME.round_resets.blind_choices.Boss
-                        card_eval_status_text(card, 'extra', nil, nil, nil, {
-                            message = localize{type = 'name_text', key = boss_, set = 'Blind'},
-                            colour = G.P_BLINDS[boss_].boss_colour or G.C.FILTER
-                        })
-                        return true
-                    end
-                }))
-            elseif context.end_of_round and not context.individual and not context.repetition and G.GAME.blind.boss then
-                card.ability.extra.active = true
-            elseif context.setting_blind and not card.getting_sliced then
-                if G.GAME.blind.boss then
-                    card.ability.extra.active = false
-                else
-                    local eval = function() return card.ability.extra.active end
-                    juice_card_until(card, eval, true)
+        if context.end_of_round and context.cardarea == G.jokers then
+            for i=1, #G.consumeables.cards do
+                local target_card = G.consumeables.cards[i]
+                if target_card:can_calculate(true) then
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'after',
+                        delay = 0.00,
+                        func = function()
+                            if target_card and not target_card.removed then
+                                local p_ = 1
+                                for i_ = 1, #G.consumeables.cards do
+                                    if #G.consumeables.cards[i_] == target_card then
+                                        p_ = 1.15 - (i_ - 0.999) / (##G.consumeables.cards - 0.998) * 0.3
+                                        break
+                                    end
+                                end
+                                target_card:flip()
+                                play_sound('card1', p_)
+                                target_card:juice_up(0.3, 0.3)
+                            end
+                            return true
+                        end
+                    }))
+                    delay(0.2)
+
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            if target_card and not target_card.removed then
+                                local earth = create_card(nil, nil, nil, nil, true, nil, 'c_earth', nil)
+                                earth:set_edition(target_card.edition or {}, nil, true)
+                                copy_card(earth, target_card)
+                                earth:remove()
+                            end
+                            return true
+                        end
+                    }))
+
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'after',
+                        delay = 0.3,
+                        func = function()
+                            if target_card and not target_card.removed then
+                                local p_ = 1
+                                for i_ = 1, #G.consumeables.cards do
+                                    if G.consumeables.cards[i_] == target_card then
+                                        p_ = 0.85 + (i_ - 0.999) / (#G.consumeables.cards - 0.998) * 0.3
+                                        break
+                                    end
+                                end
+                                target_card:flip()
+                                play_sound('tarot2', p_, 0.6)
+                                target_card:juice_up(0.3, 0.3)
+                            end
+                            return true
+                        end
+                    }))
+                    delay(0.05)
+
+                    break
                 end
-            elseif context.discard then
-                card.ability.extra.active = false
             end
         end
     end,
 
     loc_vars = function(self, info_queue, card)
-        return { main_end = _generate_main_end(card) }
+        info_queue[#info_queue + 1] = G.P_CENTERS.c_earth
     end
 }

@@ -333,6 +333,15 @@ return {
             j_vic_terraforming = {
 				name = "Terraforming",
 	        	text = {
+		            "When {C:attention}round ends{},",
+                    "transform your",
+                    "{C:attention}leftmost{} consumable",
+                    "into {C:planet}Earth",
+		        }
+		    },
+            j_vic_editor = {
+				name = "Editor",
+	        	text = {
 		            "When you {C:attention}play a Hand{} and",
                     "you haven't discarded this round,",
                     "reroll the {C:red,E:2}Boss Blind",

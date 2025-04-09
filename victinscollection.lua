@@ -107,10 +107,10 @@ local joker_list = {"up_your_sleeve", "ouroboros", "moody", "trapezist", "dog", 
                     "wrapped_candy", "slingshot", "royal_straight_joker", "chimera", "double_negative", "jar_of_teeth",
                     "broken_arm", "syzygy", "stheno", "tower_into_space", "binary_star"}
 
-local joker_list_dev = {"wrapped_candy", "slingshot", "jar_of_teeth", "broken_arm", "royal_straight_joker",
-                        "growing_tree", "chimera", "double_negative", "binary_star", "charon", -- "wildheart", -- "h_size_boost", "terraforming",
-                        "flush_spades", "flush_hearts", "flush_clubs", "flush_diamonds", "fortune_cookie", "chai_tea",
-                        "brazilian_miku", "collared", "test", "eye_test", --[["kill_consume_multiply_joker",]]
+local joker_list_dev = {
+                        "growing_tree", "charon", "terraforming", -- "wildheart", -- "h_size_boost",
+                        "fortune_cookie", "chai_tea",
+                        "brazilian_miku", "collared", --[["test", "eye_test",]] --[["kill_consume_multiply_joker",]]
                         "joker_devouring_its_son", "butcher_vanity", "copies_commons", "nadia_om", "mammon",
                         "solomon_david", "jagganoth", "makes_black_holes", "quantum_joker", "cosmic_egg", "blue_dwarf",
                         "aries", "taurus", "gemini", "cancer", "leo", "virgo", "libra", "scorpio", "sagittarius",
