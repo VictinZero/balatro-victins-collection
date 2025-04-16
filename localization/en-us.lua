@@ -337,6 +337,16 @@ return {
                     "{C:inactive}(Must have room)",
                 }
             },
+            j_vic_cherry = {
+                name = "Cherry",
+                text = {
+                    "After you use a Consumable,",
+                    "{C:attention}sell{} this card to create",
+                    "{C:attention}2{} copies of it"
+                    -- "Sell this card to create",
+                    -- "a {C:dark_edition}Liquidation Tag"
+                }
+            },
             j_vic_charon = {
                 name = "Charon",
                 text = {
