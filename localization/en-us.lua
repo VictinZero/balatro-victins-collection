@@ -327,6 +327,16 @@ return {
                     "{C:inactive}(Currently {V:1}+#2#{C:inactive} Mult)",
                 }
             },
+            j_vic_humbleing_bundle = {
+                name = "Humbleing Bundle",
+                text = {
+                    "When you {C:attention}buy{} a",
+                    "Joker, Consumable,",
+                    "or playing card,",
+                    "{C:attention}get{} another one",
+                    "{C:inactive}(Must have room)",
+                }
+            },
             j_vic_charon = {
                 name = "Charon",
                 text = {
