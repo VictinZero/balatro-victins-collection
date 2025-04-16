@@ -336,7 +336,7 @@ return {
                     -- "a playing card,",
                     -- "this Joker gains",
                     -- "{C:money}$#1#{} sell value",
-                    "When you {C:attention}destroy{} a playing card,",
+                    "When a playing card is {C:attention}destroyed{},",
                     "this Joker gains {C:money}$#1#{} sell value",
                     "{s:0.33} ",
                     -- "This Joker gives {C:chips}+#2#{} Chips",
