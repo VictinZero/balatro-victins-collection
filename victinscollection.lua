@@ -113,12 +113,11 @@ local joker_list = {"up_your_sleeve", "ouroboros", "moody", "trapezist", "dog", 
                     "wrapped_candy", "slingshot", "royal_straight_joker", "chimera", "double_negative", "jar_of_teeth",
                     "broken_arm", "syzygy", "stheno", "tower_into_space", "binary_star"}
 
-local joker_list_dev = {
-                        "growing_tree", "charon", "terraforming", "red_hand", "starfish", "goldfish", "clownfish", -- "wildheart", -- "h_size_boost",
-                        "fortune_cookie", "chai_tea",
-                        "brazilian_miku", "collared", --[["test", "eye_test",]] --[["kill_consume_multiply_joker",]]
+local joker_list_dev = {"growing_tree", "charon", "terraforming", "red_hand", "starfish", "goldfish", "clownfish",
+                        "event_horizon", -- "wildheart", -- "h_size_boost",
+"fortune_cookie", "chai_tea", "brazilian_miku", "collared", --[["test", "eye_test",]] --[["kill_consume_multiply_joker",]]
                         "joker_devouring_its_son", "butcher_vanity", "copies_commons", "nadia_om", "mammon",
-                        "solomon_david", "jagganoth", "makes_black_holes", "quantum_joker", "cosmic_egg", "blue_dwarf",
+                        "solomon_david", "jagganoth", "quantum_joker", "cosmic_egg", "blue_dwarf",
                         "aries", "taurus", "gemini", "cancer", "leo", "virgo", "libra", "scorpio", "sagittarius",
                         "capricorn", "aquarius", "pisces" -- "guarantees_enhancements",
 -- "tour_guide", "grappling_hook", "bone",

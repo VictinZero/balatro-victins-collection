@@ -500,15 +500,12 @@ return {
 		            "balance {C:blue}Chips{} and {C:red}Mult"
 		        }
 		    },
-		    j_vic_makes_black_holes = {
-				name = "Makes Black Holes (Placeholder)",
+		    j_vic_event_horizon = {
+				name = "Event Horizon",
 	        	text = {
-		            "After you {C:attention}sell",
-		            "{C:attention}3{} {C:planet}Planet{} cards,",
+		            "Every {C:attention}#1#{C:inactive} #2##3##4#{C:planet}Planet{} cards sold,",
 		            "create a {C:dark_edition,E:1}Black Hole",
 		            "{C:inactive}(Must have room)",
-                    "{s:0.33} ",
-		            "{C:attention}#1#{C:inactive} left"
 		        }
 		    },
 			j_vic_quantum_joker = {
@@ -873,6 +870,12 @@ return {
 				text = {
 					"{C:white}Background art by {E:1,C:white,S:1.1}Victin",
 					"{C:white}Hand art by {E:1,C:white,S:1.1}Gappie",
+				}
+			},
+            cr_vic_event_horizon = {
+				name = "cr_vic_credits",
+				text = {
+					"{C:white}Art by {E:1,C:white,S:1.1}SadCube",
 				}
 			},
 			cr_vic_quantum_joker = {
