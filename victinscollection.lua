@@ -127,7 +127,7 @@ VIC_process_data_by_version(joker_list, joker_list_dev)
 
 for _, joker in ipairs(joker_list) do
     local joker_name = (" " .. joker:gsub("_", " ")):gsub("%W%l", string.upper):sub(2)
-    local init, error = SMODS.load_file("modules/jokers/" .. joker .. ".lua")
+    local init, error = SMODS.load_file("content/jokers/" .. joker .. ".lua")
     if error then
         sendErrorMessage("VictinsCollection :: Failed to load " .. joker_name .. " with error " .. error)
     else
@@ -195,7 +195,7 @@ VIC_process_data_by_version(enhancement_list, enhancement_list_dev)
 
 for _, enhancement in ipairs(enhancement_list) do
     local enhancement_name = (" " .. enhancement:gsub("_", " ")):gsub("%W%l", string.upper):sub(2)
-    local init, error = SMODS.load_file("modules/enhancements/" .. enhancement .. ".lua")
+    local init, error = SMODS.load_file("content/enhancements/" .. enhancement .. ".lua")
     if error then
         sendErrorMessage("VictinsCollection :: Failed to load " .. enhancement_name .. " with error " .. error)
     else
@@ -236,7 +236,7 @@ VIC_process_data_by_version(blind_list, blind_list_dev)
 
 for _, blind in ipairs(blind_list) do
     local blind_name = (" " .. blind:gsub("_", " ")):gsub("%W%l", string.upper):sub(2)
-    local init, error = SMODS.load_file("modules/blinds/" .. blind .. ".lua")
+    local init, error = SMODS.load_file("content/blinds/" .. blind .. ".lua")
     if error then
         sendErrorMessage("VictinsCollection :: Failed to load " .. blind_name .. " with error " .. error)
     else
@@ -279,7 +279,7 @@ if not VIC_ALPHA_RELEASE then
 
     for _, zodiac in ipairs(zodiac_list) do
         local zodiac_name = (" " .. zodiac:gsub("_", " ")):gsub("%W%l", string.upper):sub(2)
-        local init, error = SMODS.load_file("modules/zodiac/" .. zodiac .. ".lua")
+        local init, error = SMODS.load_file("content/zodiac/" .. zodiac .. ".lua")
         if error then
             sendErrorMessage("VictinsCollection :: Failed to load " .. zodiac_name .. " with error " .. error)
         else
@@ -307,7 +307,7 @@ VIC_process_data_by_version(consumable_list, consumable_list_dev)
 
 for _, consumable in ipairs(consumable_list) do
     local consumable_name = (" " .. consumable:gsub("_", " ")):gsub("%W%l", string.upper):sub(2)
-    local init, error = SMODS.load_file("modules/consumables/" .. consumable .. ".lua")
+    local init, error = SMODS.load_file("content/consumables/" .. consumable .. ".lua")
     if error then
         sendErrorMessage("VictinsCollection :: Failed to load " .. consumable_name .. " with error " .. error)
     else
