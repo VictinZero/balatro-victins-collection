@@ -40,10 +40,11 @@ return {
                     G.E_MANAGER:add_event(Event({
                         func = function()
                             if target_card and not target_card.removed then
-                                local earth = create_card(nil, nil, nil, nil, true, nil, 'c_earth', nil)
+                                --[[local earth = create_card(nil, nil, nil, nil, true, nil, 'c_earth', nil)
                                 earth:set_edition(target_card.edition or {}, nil, true)
                                 copy_card(earth, target_card)
-                                earth:remove()
+                                earth:remove()]]
+                                target_card:set_ability('c_earth')
                             end
                             return true
                         end
