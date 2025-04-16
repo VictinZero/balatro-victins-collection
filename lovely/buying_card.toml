@@ -1,0 +1,17 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# Blind tooltips
+[[patches]]
+[patches.pattern]
+target = "functions/button_callbacks.lua"
+pattern = "SMODS.calculate_context({buying_card = true, card = c1})"
+position = "before"
+payload = '''
+for i = 1, #G.GAME.tags do
+    G.GAME.tags[i]:apply_to_run({type = 'vic_buying_card', card = c1})
+end
+'''
+match_indent = true

@@ -910,6 +910,27 @@ return {
 				}
 			}
 		},
+        Tag = {
+            tag_vic_rebate_tag = {
+                name = "Rebate Tag",
+                text = {
+                    -- "When you {C:attention}buy{} a {C:dark_edition}Consumable{},",
+                    -- "{C:attention}get a copy{}",
+                    "Gives a copy of the",
+                    "next {C:dark_edition}Consumable{} you buy",
+                    "{C:inactive}(Must have room)",
+                }
+            },
+            tag_vic_liquidation_tag = {
+                name = "Liquidation Tag",
+                text = {
+                    "{C:attention}Next shop{}, whenever you",
+                    "{C:attention}buy{} a Joker, Consumable, or",
+                    "playing card, {C:attention}get{} another one",
+                    "{C:inactive}(Must have room)",
+                }
+            },
+		},
         Zodiac = {
             c_vic_aries = {
 		        name = "Aries",
