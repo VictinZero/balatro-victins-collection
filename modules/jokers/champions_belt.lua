@@ -1,4 +1,4 @@
-local misc = NFS.load(SMODS.current_mod.path .. "/misc_functions.lua")()
+local misc = SMODS.load_file("misc_functions.lua")()
 
 return {
     key = 'champions_belt',
