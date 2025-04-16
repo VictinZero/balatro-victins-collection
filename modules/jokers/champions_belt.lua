@@ -29,21 +29,21 @@ return {
             local champions_belt_scale_mod = -0.065 + 0.015 * math.sin(2.0 * G.TIMERS.REAL)
             card.children.floating_sprite:draw_shader('dissolve', nil, nil, nil, card.children.center,
                 2 * champions_belt_scale_mod, 2 * rotate_mod, nil, 0.3 + 0.1 * math.sin(0.8 * G.TIMERS.REAL), nil, 0.6)
-            card.children.floating_sprite_vic_belt:draw_shader('dissolve', nil, nil, nil, card.children.center, nil,
+            card.children.vic_floating_sprite:draw_shader('dissolve', nil, nil, nil, card.children.center, nil,
                 rotate_mod, nil, -0.125 + 0.225 * math.sin(1.2 * G.TIMERS.REAL), nil, 0.6)
         end
     },
 
     set_sprites = function(self, card, front)
         if self.discovered or card.bypass_discovery_center then
-            card.children.floating_sprite_vic_belt = Sprite(card.T.x, card.T.y, card.T.w, card.T.h,
+            card.children.vic_floating_sprite = Sprite(card.T.x, card.T.y, card.T.w, card.T.h,
                 G.ASSET_ATLAS[card.config.center.atlas], {
                     x = 0,
                     y = 2
                 })
-            card.children.floating_sprite_vic_belt.role.draw_major = card
-            card.children.floating_sprite_vic_belt.states.hover.can = false
-            card.children.floating_sprite_vic_belt.states.click.can = false
+            card.children.vic_floating_sprite.role.draw_major = card
+            card.children.vic_floating_sprite.states.hover.can = false
+            card.children.vic_floating_sprite.states.click.can = false
         end
     end,
 

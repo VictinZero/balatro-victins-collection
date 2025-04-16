@@ -24,21 +24,21 @@ return {
             card.children.floating_sprite:draw_shader('dissolve', nil, nil, nil, card.children.center,
                 (1.025 + 0.05 * math.sin(0.5 * G.TIMERS.REAL)) * scale_mod, (1.00 + 0.05 * math.sin(1.2 * G.TIMERS.REAL)) * rotate_mod, nil,
                 -0.025 + 0.05 * math.sin(0.8 * G.TIMERS.REAL), nil, 0.6)
-            card.children.floating_sprite_vic_collared:draw_shader('dissolve', nil, nil, nil, card.children.center,
+            card.children.vic_floating_sprite:draw_shader('dissolve', nil, nil, nil, card.children.center,
                 (1.05 + 0.1 * math.sin(0.8 * G.TIMERS.REAL)) * scale_mod, 2. * rotate_mod, nil, nil, nil, 0.6)
         end
     },
 
     set_sprites = function(self, card, front)
         if self.discovered or card.bypass_discovery_center then
-            card.children.floating_sprite_vic_collared = Sprite(card.T.x, card.T.y, card.T.w, card.T.h,
+            card.children.vic_floating_sprite = Sprite(card.T.x, card.T.y, card.T.w, card.T.h,
                 G.ASSET_ATLAS[card.config.center.atlas], {
                     x = 0,
                     y = 2
                 })
-            card.children.floating_sprite_vic_collared.role.draw_major = card
-            card.children.floating_sprite_vic_collared.states.hover.can = false
-            card.children.floating_sprite_vic_collared.states.click.can = false
+            card.children.vic_floating_sprite.role.draw_major = card
+            card.children.vic_floating_sprite.states.hover.can = false
+            card.children.vic_floating_sprite.states.click.can = false
         end
     end
 }

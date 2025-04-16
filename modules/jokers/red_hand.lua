@@ -48,9 +48,9 @@ return {
             local interpol = 0.8 * ease_num ^ 2 - 0.6 * ease_num
             local interpol_shadow = -(2 / 15) * ease_num ^ 2 + (13 / 30) * ease_num
 
-            card.children.floating_sprite_vic_red_hand:draw_shader('dissolve', 0, nil, nil, card.children.center,
+            card.children.vic_floating_sprite:draw_shader('dissolve', 0, nil, nil, card.children.center,
                 red_hand_scale_alt, 1.15 * red_hand_rotate_alt, nil, -0.2 + 0.75 * interpol_shadow, nil, 0.6)
-            card.children.floating_sprite_vic_red_hand:draw_shader('dissolve', nil, nil, nil, card.children.center,
+            card.children.vic_floating_sprite:draw_shader('dissolve', nil, nil, nil, card.children.center,
                 red_hand_scale_alt, 1.15 * red_hand_rotate_alt, nil, -0.2 + interpol, nil, 0.6)
 
             card.children.floating_sprite:draw_shader('dissolve', 0, nil, nil, card.children.center, red_hand_scale_mod,
@@ -67,14 +67,14 @@ return {
 
     set_sprites = function(self, card, front)
         if self.discovered or card.bypass_discovery_center then
-            card.children.floating_sprite_vic_red_hand = Sprite(card.T.x, card.T.y, card.T.w, card.T.h,
+            card.children.vic_floating_sprite = Sprite(card.T.x, card.T.y, card.T.w, card.T.h,
                 G.ASSET_ATLAS[card.config.center.atlas], {
                     x = 0,
                     y = 2
                 })
-            card.children.floating_sprite_vic_red_hand.role.draw_major = card
-            card.children.floating_sprite_vic_red_hand.states.hover.can = false
-            card.children.floating_sprite_vic_red_hand.states.click.can = false
+            card.children.vic_floating_sprite.role.draw_major = card
+            card.children.vic_floating_sprite.states.hover.can = false
+            card.children.vic_floating_sprite.states.click.can = false
         end
     end,
 
