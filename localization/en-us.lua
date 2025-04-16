@@ -347,6 +347,15 @@ return {
                     -- "a {C:dark_edition}Liquidation Tag"
                 }
             },
+            j_vic_training_weights = {
+                name = "Training Weights",
+                text = {
+                    "After {C:attention}scoring{},",
+                    "increase rank of",
+                    "scored cards by {C:attention}1",
+                    "{C:inactive}({C:attention}#1#{C:inactive} cards left)",
+                }
+            },
             j_vic_charon = {
                 name = "Charon",
                 text = {
