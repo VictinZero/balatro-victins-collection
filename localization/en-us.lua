@@ -907,6 +907,12 @@ return {
 					"{C:white}Art by {E:1,C:white,S:1.1}SadCube",
 				}
 			},
+            cr_vic_binary_star = {
+				name = "cr_vic_credits",
+				text = {
+					"{C:white}Art by {E:1,C:white,S:1.1}Akai",
+				}
+			},
 			cr_vic_quantum_joker = {
 				name = "cr_vic_credits",
 				text = {

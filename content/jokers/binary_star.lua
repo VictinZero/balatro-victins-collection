@@ -7,8 +7,8 @@ return {
     },
     rarity = 2,
     pos = {
-        x = 0,
-        y = 8
+        x = 8,
+        y = 7
     },
     atlas = 'joker_atlas',
     cost = 6,
@@ -31,6 +31,10 @@ return {
     end,
 
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = {
+            key = "cr_vic_binary_star",
+            set = "Other"
+        }
         return {
             vars = {card.ability.extra.reuses, (card.ability.extra.reuses == 1 and '') or 's'}
         }
