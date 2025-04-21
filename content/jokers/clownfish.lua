@@ -37,7 +37,6 @@ local eval_UI = function(card)
         txt = txt,
         colour = colour
     }
-
 end
 
 return {
