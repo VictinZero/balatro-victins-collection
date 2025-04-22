@@ -3,7 +3,7 @@ version = "1.0.0"
 dump_lua = true
 priority = 0
 
-# Blind tooltips
+# Buying card
 [[patches]]
 [patches.pattern]
 target = "functions/button_callbacks.lua"
@@ -12,6 +12,20 @@ position = "before"
 payload = '''
 for i = 1, #G.GAME.tags do
     G.GAME.tags[i]:apply_to_run({type = 'vic_buying_card', card = c1})
+end
+'''
+match_indent = true
+
+# Using consumeable
+[[patches]]
+[patches.pattern]
+target = "functions/button_callbacks.lua"
+pattern = "SMODS.calculate_context({using_consumeable = true, consumeable = card, area = card.from_area})"
+position = "before"
+payload = '''
+sendDebugMessage('using_consumeable')
+for i = 1, #G.GAME.tags do
+    G.GAME.tags[i]:apply_to_run({type = 'vic_using_consumeable', card = card, area = card.from_area})
 end
 '''
 match_indent = true

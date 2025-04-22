@@ -461,4 +461,23 @@ misc.generate_main_end_hold_key_info = function(card)
     }}
 end
 
+misc.juice_tag_until = function(tag, eval_func, first, delay)
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = delay or 0.1,
+        blocking = false,
+        blockable = false,
+        timer = 'REAL',
+        func = (function()
+            if eval_func(tag) then
+                if not first or first then
+                    tag:juice_up(0.1, 0.1)
+                end
+                juice_card_until(tag, eval_func, nil, 0.8)
+            end
+            return true
+        end)
+    }))
+end
+
 return misc

@@ -966,17 +966,21 @@ return {
 			}
 		},
         Tag = {
-            tag_vic_rebate_tag = {
+            tag_vic_rebate = {
                 name = "Rebate Tag",
                 text = {
                     -- "When you {C:attention}buy{} a {C:dark_edition}Consumable{},",
                     -- "{C:attention}get a copy{}",
-                    "Gives a copy of the",
-                    "next {C:dark_edition}Consumable{} you buy",
-                    "{C:inactive}(Must have room)",
+                    -- "Gives a copy of the",
+                    -- "next {C:dark_edition}Consumable{} you buy",
+                    -- "{C:inactive}(Must have room)",
+                    "When you {C:attention}use",
+                    "a {C:attention}Consumable{},",
+                    "get {C:attention}#1#{C:chips} Temporary",
+                    "{C:dark_edition}Negative{} copies of it",
                 }
             },
-            tag_vic_liquidation_tag = {
+            tag_vic_liquidation = {
                 name = "Liquidation Tag",
                 text = {
                     "{C:attention}Next shop{}, whenever you",
