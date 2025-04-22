@@ -989,6 +989,13 @@ return {
                     "{C:inactive}(Must have room)",
                 }
             },
+            tag_vic_litter = {
+                name = "Litter Tag",
+                text = {
+                    "{C:red}+#1#{} discards",
+                    "next round"
+                }
+            },
 		},
         Zodiac = {
             c_vic_aries = {
