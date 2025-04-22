@@ -39,7 +39,18 @@ return {
             if not target_card then
                 return
             end
-            misc.destroy_cards({target_card})
+
+            G.GAME.consumeable_buffer = G.GAME.consumeable_buffer - ((target_card.edition and target_card.edition.negative and 0) or 1)
+
+            misc.destroy_cards({ target_card })
+
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    G.GAME.consumeable_buffer = 0
+                    return true
+                end
+            }))
+
             return {
                 xmult = target_card.ability.set == 'Planet' and card.ability.extra.xmult_planet or
                     card.ability.extra.xmult
@@ -49,7 +60,7 @@ return {
 
     loc_vars = function(self, info_queue, card)
         return {
-            vars = {card.ability.extra.xmult, card.ability.extra.xmult_planet}
+            vars = { card.ability.extra.xmult, card.ability.extra.xmult_planet }
         }
     end
 }
