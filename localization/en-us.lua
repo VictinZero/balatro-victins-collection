@@ -158,9 +158,9 @@ return {
             j_vic_wrapped_candy = {
                 name = "Wrapped Candy",
                 text ={
-                    "When {C:attention}Blind is selected{},",
-                    "gain {C:red}+#1#{} Discards",
-                    "{C:inactive}({C:attention}#2#{C:inactive} Rounds left)"
+                    "When you {C:attention}leave the shop{},",
+                    "create a {C:red}Litter Tag",
+                    "{C:inactive}({C:attention}#1#{C:inactive} left)",
                 }
             },
             j_vic_slingshot = {
