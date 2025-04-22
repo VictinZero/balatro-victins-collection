@@ -409,6 +409,14 @@ return {
                     "{C:inactive}(Must have room)",
 		        }
 		    },
+            j_vic_neat = {
+				name = "???",
+	        	text = {
+		            "If last {C:attention}winning hand",
+                    "was {C:vic_Straight}Straight{},",
+                    "{C:attention}+2{} hand size",
+		        }
+		    },
             j_vic_editor = {
 				name = "Editor",
 	        	text = {

@@ -114,7 +114,7 @@ local joker_list = {"up_your_sleeve", "ouroboros", "moody", "trapezist", "dog", 
                     "broken_arm", "syzygy", "stheno", "tower_into_space", "binary_star"}
 
 local joker_list_dev = {"growing_tree", "charon", "terraforming", "red_hand", "starfish", "goldfish", "clownfish",
-                        "humbleing_bundle", "event_horizon", "cherry", "golden_ratio", "training_weights", "paranoia", -- "wildheart", -- "h_size_boost",
+                        "humbleing_bundle", "event_horizon", "cherry", "golden_ratio", "training_weights", "paranoia", "neat", -- "wildheart", -- "h_size_boost",
 "fortune_cookie", "chai_tea", "brazilian_miku", "collared", --[["test", "eye_test",]] --[["kill_consume_multiply_joker",]]
                         "joker_devouring_its_son", "butcher_vanity", "copies_commons", "nadia_om", "mammon",
                         "solomon_david", "jagganoth", "quantum_joker", "cosmic_egg", "blue_dwarf",
