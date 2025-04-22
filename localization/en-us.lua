@@ -1005,6 +1005,14 @@ return {
                     "{C:inactive}(Currently {C:money}$#2#{C:inactive})",
                 }
             },
+            tag_vic_gift = {
+                name = "Gift Tag",
+                text = {
+                    "Gives {C:money}$#1#{} sell value",
+                    "to each {C:attention}Joker",
+                    "and {C:attention}Consumable",
+                }
+            },
 		},
         Zodiac = {
             c_vic_aries = {
