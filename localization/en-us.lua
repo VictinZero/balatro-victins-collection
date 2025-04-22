@@ -400,6 +400,15 @@ return {
                     "swap {V:1}Hands{} and {V:2}Discards"
 		        }
 		    },
+            j_vic_paranoia = {
+				name = "Paranoia",
+	        	text = {
+		            "If {C:attention}final hand of round",
+                    "doesn't contain a {C:attention}Pair{},",
+                    "{C:attention}get{} a {C:spectral}Spectral{} card",
+                    "{C:inactive}(Must have room)",
+		        }
+		    },
             j_vic_editor = {
 				name = "Editor",
 	        	text = {
