@@ -996,6 +996,15 @@ return {
                     "next round"
                 }
             },
+            tag_vic_satellite = {
+                name = "Satellite Tag",
+                text = {
+                    "Gives {C:money}$#1#{} per",
+                    "unique {C:planet}Planet{} card",
+                    "used this run",
+                    "{C:inactive}(Currently {C:money}$#2#{C:inactive})",
+                }
+            },
 		},
         Zodiac = {
             c_vic_aries = {
