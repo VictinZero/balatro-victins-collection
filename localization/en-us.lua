@@ -1013,6 +1013,14 @@ return {
                     "and {C:attention}Consumable",
                 }
             },
+            tag_vic_foolish = {
+                name = "Foolish Tag",
+                text = {
+                    "Gives {C:attention}#1#{} copies",
+                    "of {C:tarot}The Fool",
+                    "{C:inactive}(Must have room)"
+                }
+            },
 		},
         Zodiac = {
             c_vic_aries = {
