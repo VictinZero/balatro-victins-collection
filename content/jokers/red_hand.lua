@@ -110,8 +110,8 @@ return {
         local hand_UI = G.HUD:get_UIE_by_ID('hand_UI_count')
         local discard_UI = G.HUD:get_UIE_by_ID('discard_UI_count')
 
-        hand_UI.config.object.colours = {G.C.BLUE}
-        discard_UI.config.object.colours = {G.C.RED}
+        if hand_UI then hand_UI.config.object.colours = {G.C.BLUE} end
+        if discard_UI then discard_UI.config.object.colours = {G.C.RED} end
 
         card.ability.extra.active = false
 
@@ -122,8 +122,8 @@ return {
         local hand_UI = G.HUD:get_UIE_by_ID('hand_UI_count')
         local discard_UI = G.HUD:get_UIE_by_ID('discard_UI_count')
 
-        hand_UI.config.object.colours = {G.C.BLUE}
-        discard_UI.config.object.colours = {G.C.RED}
+        if hand_UI then hand_UI.config.object.colours = {G.C.BLUE} end
+        if discard_UI then discard_UI.config.object.colours = {G.C.RED} end
 
         card.ability.extra.active = false
     end,
