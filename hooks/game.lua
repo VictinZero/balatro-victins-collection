@@ -7,10 +7,6 @@ function Game:init_game_object()
 
     init_game_object_val.VictinsCollection = {
         equalize = false,
-        champions_belt = false,
-        adding_champions_belt = false,
-        stheno = false,
-        adding_stheno = false,
 
         replay_hand = false,
 

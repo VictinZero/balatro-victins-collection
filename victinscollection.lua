@@ -46,8 +46,7 @@ for _, lib in ipairs(lib_list) do
 end
 
 -- Hooks
-local hook_list = {"misc_functions", "game", "card", "UI_definitions", -- "button_callbacks",
-"cardarea", "blind", "common_events"}
+local hook_list = {"misc_functions", "game", "card", "UI_definitions", "cardarea", "blind", "common_events"}
 
 for _, hook in ipairs(hook_list) do
     local init, error = SMODS.load_file("hooks/" .. hook .. ".lua") -- NFS.load(SMODS.current_mod.path .. "hooks/" .. hook ..".lua")

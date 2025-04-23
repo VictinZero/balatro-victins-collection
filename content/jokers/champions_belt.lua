@@ -48,18 +48,22 @@ return {
     end,
 
     add_to_deck = function(self, card, from_debuff)
-        G.GAME.VictinsCollection.champions_belt = true -- (next(SMODS.find_card('j_vic_champions_belt')) and true) or false
-        G.GAME.VictinsCollection.adding_champions_belt = true
-        if (not (G.GAME.blind and G.GAME.blind:get_type() == 'Boss')) and
-            (not G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss].boss.showdown) and not from_debuff then
-            local boss = misc.random_showdown_blind()
-            if boss then
-                G.FORCE_BOSS = boss
+        G.E_MANAGER:add_event(Event({
+            trigger = 'immediate',
+            func = function()
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'immediate',
+                    func = function()
+                        if (not (G.GAME.blind and G.GAME.blind:get_type() == 'Boss')) and (not G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss].boss.showdown) and not from_debuff then
+                            G.from_boss_tag = true
+                            G.FUNCS.reroll_boss()
+                        end
+                        return true
+                    end
+                }))
+                return true
             end
-            G.from_boss_tag = true
-            G.FUNCS.reroll_boss()
-        end
-        G.GAME.VictinsCollection.adding_champions_belt = false
+        }))
     end,
 
     calculate = function(self, card, context)
@@ -68,17 +72,17 @@ return {
                 message = localize {
                     type = 'variable',
                     key = 'a_xmult',
-                    vars = {card.ability.extra.Xmult}
+                    vars = { card.ability.extra.Xmult }
                 },
                 Xmult_mod = card.ability.extra.Xmult
             }
         end
-    end,
-
-    remove_from_deck = function(self, card, from_debuff)
-        if not from_debuff then
-            G.FORCE_BOSS = nil
-            G.GAME.VictinsCollection.champions_belt = (next(SMODS.find_card('j_vic_champions_belt')) and true) or false
+        if context.vic_modify_boss_pool then
+            if context.vic_boss_blind.boss and context.vic_boss_blind.boss.showdown then
+                return { vic_add_to_pool = true, add_to_hand = true }
+            else
+                return { vic_remove_from_pool = true, remove_from_hand = true }
+            end
         end
     end,
 
@@ -88,7 +92,7 @@ return {
             set = "Other"
         }
         return {
-            vars = {card.ability.extra.Xmult}
+            vars = { card.ability.extra.Xmult }
         }
     end,
 

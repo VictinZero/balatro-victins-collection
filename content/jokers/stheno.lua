@@ -20,20 +20,31 @@ return {
     soul_pos = nil,
 
     add_to_deck = function(self, card, from_debuff)
-        G.GAME.VictinsCollection.stheno = true --(next(SMODS.find_card('j_vic_stheno')) and true) or false
-        G.GAME.VictinsCollection.adding_stheno = true
-        if (not (G.GAME.blind and G.GAME.blind:get_type() == 'Boss')) and (not G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss].boss.showdown) and (G.GAME.round_resets.blind_choices.Boss ~= 'bl_vic_rock') and not from_debuff then
-            G.FORCE_BOSS = 'bl_vic_rock'
-            G.from_boss_tag = true
-            G.FUNCS.reroll_boss()
-        end
-        G.GAME.VictinsCollection.adding_stheno = false
+        G.E_MANAGER:add_event(Event({
+            trigger = 'immediate',
+            func = function()
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'immediate',
+                    func = function()
+                        if (not (G.GAME.blind and G.GAME.blind:get_type() == 'Boss')) and (not G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss].boss.showdown) and (G.GAME.round_resets.blind_choices.Boss ~= 'bl_vic_rock') and not from_debuff then
+                            G.from_boss_tag = true
+                            G.FUNCS.reroll_boss()
+                        end
+                        return true
+                    end
+                }))
+                return true
+            end
+        }))
     end,
 
-    remove_from_deck = function(self, card, from_debuff)
-        if not from_debuff then
-            G.FORCE_BOSS = nil
-            G.GAME.VictinsCollection.champions_belt = (next(SMODS.find_card('j_vic_stheno')) and true) or false
+    calculate = function(self, card, context)
+        if context.vic_modify_boss_pool then
+            if context.vic_boss_key == 'bl_vic_rock' then
+                return { vic_add_to_pool = true, add_to_hand = true }
+            elseif context.vic_boss_blind.boss and not (context.vic_boss_blind.boss.showdown) then
+                return { vic_remove_from_pool = true, remove_from_hand = true }
+            end
         end
     end,
 

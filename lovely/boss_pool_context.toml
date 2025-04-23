@@ -1,0 +1,25 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''elseif v.boss.showdown and (G.GAME.round_resets.ante)%G.GAME.win_ante == 0 and G.GAME.round_resets.ante >= 2 then
+            eligible_bosses[k] = true
+        end'''
+position = "after"
+payload = '''
+local effects = {}
+local context = {vic_modify_boss_pool = true, vic_boss_key = k, vic_boss_blind = v}
+
+context.main_eval = true
+SMODS.calculate_card_areas('jokers', context, effects, { joker_area = true })
+context.main_eval = nil
+
+local flags = SMODS.trigger_effects(effects, nil)
+if flags.add_to_hand --[[vic_add_to_pool]] then eligible_bosses[k] = true end
+if flags.remove_from_hand --[[vic_remove_from_pool]] then eligible_bosses[k] = nil end
+'''
+match_indent = true
