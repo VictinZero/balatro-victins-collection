@@ -29,7 +29,7 @@ SMODS.current_mod.optional_features = {
 }
 
 -- Lib
-local lib_list = {"colours", "keybinds", "ui", "background_colours"}
+local lib_list = {"colours", "keybinds", "ui", "background_colours", "drawsteps"}
 
 local lib_list_dev = {"focus"}
 
@@ -92,6 +92,12 @@ SMODS.Atlas {
     px = 71,
     py = 95,
     path = 'vic_red_hand.png'
+}
+SMODS.Atlas {
+    key = 'paranoia',
+    px = 71,
+    py = 87,
+    path = 'vic_paranoia.png'
 }
 SMODS.Atlas {
     key = 'test',
