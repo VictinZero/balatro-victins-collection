@@ -1,24 +1,20 @@
 local misc = SMODS.load_file("misc_functions.lua")()
 
 return {
-    name = "The Tyrian Patriarch",
-    key = "final_patriarch",
-    pos = { x = 0, y = 4 },
+    key = "final_mask",
+    pos = { x = 0, y = 5 },
     atlas = "showdown_atlas",
     dollars = 8,
     mult = 2,
     vars = {},
     debuff = {},
-    boss = {showdown = true, min = 1, max = 10},--showdown = true
-    boss_colour = HEX('973ba5'),
+    boss = { min = 4, max = 10 },
+    boss_colour = HEX('0bda51'),
     discovered = true,
     loc_txt = {},
 
     vic_tooltip = function(blind_choice)
-        local tooltip_blinds = {
-            G.GAME.VictinsCollection.patriarch_blinds[1] or 'bl_goad',
-            G.GAME.VictinsCollection.patriarch_blinds[2] or 'bl_plant'
-        }
+        local tooltip_blinds = G.GAME.VictinsCollection.malachite_blinds or {'bl_final_bell', 'bl_final_leaf', 'bl_final_vessel'}
 
         local function tmp()
             local tooltips_to_be_added = {}
@@ -50,39 +46,17 @@ return {
     end,
 
     set_blind = function(self)
-        if (not G.GAME.blind.vic_patriarch_blinds) and (not G.GAME.blind.disabled) then
-            sendDebugMessage("Setting Final Patriarch when there are no Patriarch Blinds")
+        if (not G.GAME.blind.disabled) then
             local original_blind = G.GAME.blind.config.blind.key
 
-            local blind_1 = G.GAME.VictinsCollection.patriarch_blinds[1] or 'bl_goad'
-            local blind_2 = G.GAME.VictinsCollection.patriarch_blinds[2] or 'bl_plant'
-            local blinds = {blind_1, blind_2, 'bl_vic_final_patriarch'}
+            local options = G.GAME.VictinsCollection.malachite_blinds or {'bl_final_bell', 'bl_final_leaf', 'bl_final_vessel'}
 
-            G.E_MANAGER:add_event(Event({
-                trigger = 'immediate',
-                func = function()
-                    local card = create_card('Token', G.consumeables, nil, nil, nil, nil, 'c_vic_short_rest', 'placeholder')
-                    card:set_edition({negative = true})
-                    card:add_to_deck()
-                    G.consumeables:emplace(card)
-                    return true
-                end
-            }))
-
-            local next_blind = table.remove(blinds, 1)
-
-            sendDebugMessage("Original blind is "..tostring(original_blind))
-
-            sendDebugMessage("Next blind is "..tostring(next_blind))
-
-            sendNestedMessage(G.P_BLINDS[next_blind])
+            local next_blind = pseudorandom_element(options, pseudoseed('vic_final_mask'))
 
             G.GAME.blind:set_blind(G.P_BLINDS[next_blind])
             G.GAME.blind.dollars = G.P_BLINDS[original_blind].dollars
             G.GAME.current_round.dollars_to_be_earned = G.GAME.blind.dollars > 0 and (string.rep(localize('$'), G.GAME.blind.dollars)..'') or ('')
             G.GAME.blind.vic_original_blind = original_blind
-            G.GAME.blind.vic_patriarch_blinds = blinds
-            sendDebugMessage("Finish setting Final Patriarch when there are no Patriarch Blinds")
         end
     end,
 

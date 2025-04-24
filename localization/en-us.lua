@@ -832,6 +832,12 @@ return {
 					"winning hand",
 				}
 			},
+            bl_vic_mask = {
+				name = "The Mask",
+				text = {
+					"???"
+				}
+			},
 			bl_vic_final_gold = {
 				name = "Black Gold",
 				text = {
@@ -887,6 +893,12 @@ return {
 				text = {
 					"After you play a hand,",
 					"play it again"
+				}
+			},
+            bl_vic_final_mask = {
+				name = "Malachite Mask",
+				text = {
+					"???"
 				}
 			},
 		},
