@@ -838,6 +838,15 @@ return {
 					"???"
 				}
 			},
+            bl_vic_thief = {
+				name = "The Thief",
+				text = {
+                    "Steals your money",
+                    "and escapes after #1#",
+                    "plays and/or discards",
+				}
+			},
+			},
 			bl_vic_final_gold = {
 				name = "Black Gold",
 				text = {

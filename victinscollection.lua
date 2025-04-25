@@ -235,7 +235,7 @@ SMODS.Atlas({
 local blind_list = {"worm", "rock", "bell", "spin", "bottle", "loop", "chaos", "dagger", "trash", "wind", "final_prion",
                     "final_gold", "final_loop", "final_debuff", "final_patriarch", "final_dragon", "final_king"}
 
-local blind_list_dev = { "mask", "final_mask", --[["eclipse"]] }
+local blind_list_dev = { "mask", "final_mask", "thief" --[["eclipse"]] }
 
 VIC_process_data_by_version(blind_list, blind_list_dev)
 

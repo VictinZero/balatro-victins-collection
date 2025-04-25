@@ -58,6 +58,8 @@ function Game:init_game_object()
 
         bottle_hand_size = 0,
 
+        thief_countdown = 5,
+
         n_flipped_cards = 0,
 
         zodiac = {
