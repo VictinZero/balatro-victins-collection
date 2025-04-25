@@ -841,8 +841,9 @@ return {
 			bl_vic_final_gold = {
 				name = "Black Gold",
 				text = {
-					"Base Chips can't be greater",
-					"than 50% of money"--"$#1#"
+					"Debuffs Jokers with",
+					"$5 of sell value",
+                    "or more"
 				}
 			},
 			bl_vic_final_prion = {
@@ -880,13 +881,11 @@ return {
 			},
             bl_vic_final_dragon = {
 				name = "Golden Dragon",
-				text = {
-                    --"When selected,",
-					"+#1# Blind size",
-					"per $1 of",
-                    "total sell value",
-					"above $10"
-				}
+                text = {
+                    "Base Chips can't be",
+                    "greater than",
+                    "50% of money"
+                }
 			},
             bl_vic_final_king = {
 				name = "Red King",

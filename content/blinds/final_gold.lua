@@ -12,8 +12,26 @@ return {
     discovered = true,
     loc_txt = {},
 
-    modify_hand = function(self, cards, poker_hands, text, mult, hand_chips)
-        G.GAME.blind.triggered = true
-        return mult, math.max(math.min(hand_chips, math.floor(0.5*(G.GAME.dollars + (G.GAME.dollar_buffer or 0)))), 1), true
+    calculate = function(self, blind, context)
+        if (context.hand_drawn or context.press_play or context.pre_discard or context.selling_card or
+            context.card_added) and not blind.disabled then
+            for i = 1, #G.jokers.cards do
+                local card = G.jokers.cards[i]
+                if card.sell_cost >= 5 then card:set_debuff(true) else card:set_debuff(false) end
+            end
+            --[[for i = 1, #G.consumeables.cards do
+                local card = G.consumeables.cards[i]
+                if card.sell_cost >= 5 then card:set_debuff(true) else card:set_debuff(false) end
+            end]]
+        end
     end,
+
+    disable = function(self)
+        for i = 1, #G.jokers.cards do
+            G.jokers.cards[i]:set_debuff(true)
+        end
+        --[[for i = 1, #G.consumeables.cards do
+            G.consumeables.cards[i]:set_debuff(true)
+        end]]
+    end
 }
