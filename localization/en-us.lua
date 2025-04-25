@@ -755,8 +755,9 @@ return {
 			bl_vic_worm = {
 				name = "The Worm",
 				text = {
-					"Base Chips are equal",
-					"to X5 Poker Hand's level"
+					"Base Chips are",
+					"equal to X5",
+                    "Poker Hand's level"
 				}
 			},
 			bl_vic_rock = {
@@ -791,15 +792,15 @@ return {
             bl_vic_bottle = {
 				name = "The Bottle",
 				text = {
-					"Double hand size,",
-					"but discard the deck",
+					"Doubles hand size,",
+					"but discards the deck",
 					"after first hand drawn"
 				}
 			},
 			bl_vic_chaos = {
 				name = "The Chaos",
 				text = {
-					"Cards are debuffed until",
+					"Debuffs cards until",
 					"played hand contains",
 					"Flush or Straight"
 				}
@@ -814,7 +815,7 @@ return {
             bl_vic_trash = {
 				name = "The Trash",
 				text = {
-					"Discard a copy of",
+					"Discards a copy of",
                     "your first discard",
 				}
 			},
