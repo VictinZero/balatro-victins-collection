@@ -847,7 +847,6 @@ return {
                     "plays and/or discards",
 				}
 			},
-			},
 			bl_vic_final_gold = {
 				name = "Black Gold",
 				text = {
