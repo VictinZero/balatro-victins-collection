@@ -304,7 +304,7 @@ SMODS.ConsumableType({
     shop_rate = 0
 })
 
-local consumable_list = {"short_rest"}
+local consumable_list = {"long_rest"}
 
 local consumable_list_dev = {}
 

@@ -61,8 +61,9 @@ return {
             G.E_MANAGER:add_event(Event({
                 trigger = 'immediate',
                 func = function()
-                    local card = create_card('Token', G.consumeables, nil, nil, nil, nil, 'c_vic_short_rest', 'placeholder')
+                    local card = create_card('Token', G.consumeables, nil, nil, nil, nil, 'c_vic_long_rest', 'placeholder')
                     card:set_edition({negative = true})
+                    SMODS.Stickers.vic_temporary:apply(card, true)
                     card:add_to_deck()
                     G.consumeables:emplace(card)
                     return true

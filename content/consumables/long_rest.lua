@@ -1,10 +1,9 @@
 return {
-    key = 'short_rest',
-    name = "Short Rest",
+    key = 'long_rest',
     config = {},
     set = "Token",
     cost = 0,
-    pos = {x = 0, y = 0},
+    pos = {x = 0, y = 8},
     atlas = 'joker_atlas',
     loc_txt = {},
     discovered = true,
