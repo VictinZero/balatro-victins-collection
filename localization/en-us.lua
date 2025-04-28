@@ -410,7 +410,7 @@ return {
 		        }
 		    },
             j_vic_neat = {
-				name = "???",
+				name = "Vector (Placeholder?)",
 	        	text = {
 		            "If last {C:attention}winning hand",
                     "was {C:vic_Straight}Straight{},",
