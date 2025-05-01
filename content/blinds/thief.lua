@@ -1,6 +1,6 @@
 return {
     key = "thief",
-    pos = { x = 0, y = 0 },
+    pos = { x = 0, y = 13 },
     atlas = "blind_atlas",
     dollars = 5,
     mult = 2,

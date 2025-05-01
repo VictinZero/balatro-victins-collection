@@ -1,7 +1,7 @@
 return {
     name = "The Rock",
     key = "rock",
-    pos = { x = 0, y = 2 },
+    pos = { x = 0, y = 1 },
     atlas = "blind_atlas",
     dollars = 5,
     mult = 2,

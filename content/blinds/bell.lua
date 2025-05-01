@@ -3,7 +3,7 @@ return {
     key = "bell",
     pos = {
         x = 0,
-        y = 3
+        y = 2
     },
     atlas = "blind_atlas",
     dollars = 5,

@@ -3,7 +3,7 @@ return {
     key = "trash",
     pos = {
         x = 0,
-        y = 0
+        y = 13
     },
     atlas = "blind_atlas",
     dollars = 5,

@@ -2,7 +2,7 @@ local misc = SMODS.load_file("misc_functions.lua")()
 
 return {
     key = "mask",
-    pos = { x = 0, y = 5 },
+    pos = { x = 0, y = 4 },
     atlas = "blind_atlas",
     dollars = 5,
     mult = 2,

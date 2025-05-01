@@ -2,7 +2,7 @@ return {
     name = "Purpura Prion",
     key = "final_prion",
     pos = { x = 0, y = 0 },
-    atlas = "blind_atlas",
+    atlas = "showdown_atlas",
     dollars = 8,
     mult = 2,
     vars = {},
