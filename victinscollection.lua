@@ -1,4 +1,4 @@
-VIC_ALPHA_RELEASE = false
+VIC_ALPHA_RELEASE = true
 
 if not VIC_ALPHA_RELEASE then _RELEASE_MODE = false end
 
@@ -116,13 +116,13 @@ local joker_list = {"up_your_sleeve", "ouroboros", "moody", "trapezist", "dog", 
                     "flush_hearts", "flush_clubs", "flush_diamonds", "the_one", "champion", "champions_belt",
                     "lvl_death", "gas_lamp", "paradise_parrot", "skyscraper", "pippi_panini", "yurika_harako",
                     "wrapped_candy", "slingshot", "royal_straight_joker", "chimera", "double_negative", "jar_of_teeth",
-                    "broken_arm", "syzygy", "stheno", "tower_into_space", "binary_star"}
+                    "broken_arm", "growing_tree", "charon", "training_weights", "paranoia", "neat", "syzygy", "stheno", "tower_into_space", "starfish", "goldfish", "clownfish", "terraforming", "binary_star", "quantum_joker", "cosmic_egg", "blue_dwarf", "event_horizon", "red_hand",
+                    "humbleing_bundle"}
 
-local joker_list_dev = {"growing_tree", "charon", "terraforming", "red_hand", "starfish", "goldfish", "clownfish",
-                        "humbleing_bundle", "event_horizon", "cherry", "golden_ratio", "training_weights", "paranoia", "neat", -- "wildheart", -- "h_size_boost",
+local joker_list_dev = { "cherry", "golden_ratio", -- "wildheart", -- "h_size_boost",
 "fortune_cookie", "chai_tea", "brazilian_miku", "collared", --[["test", "eye_test",]] --[["kill_consume_multiply_joker",]]
                         "joker_devouring_its_son", "butcher_vanity", "copies_commons", "nadia_om", "mammon",
-                        "solomon_david", "jagganoth", "quantum_joker", "cosmic_egg", "blue_dwarf",
+                        "solomon_david", "jagganoth",
                         "aries", "taurus", "gemini", "cancer", "leo", "virgo", "libra", "scorpio", "sagittarius",
                         "capricorn", "aquarius", "pisces" -- "guarantees_enhancements",
 -- "tour_guide", "grappling_hook", "bone",
@@ -232,10 +232,10 @@ SMODS.Atlas({
 })
 
 -- Enable or disable additional blinds here
-local blind_list = {"worm", "rock", "bell", "spin", "bottle", "loop", "chaos", "dagger", "trash", "wind", "final_prion",
-                    "final_gold", "final_loop", "final_debuff", "final_patriarch", "final_dragon", "final_king"}
+local blind_list = {"worm", "rock", "bell", "spin", "bottle", "loop", "chaos", "dagger", "trash", "wind", "mask", "thief", "final_prion",
+                    "final_gold", "final_loop", "final_debuff", "final_patriarch", "final_dragon", "final_king", "final_mask"}
 
-local blind_list_dev = { "mask", "final_mask", "thief" --[["eclipse"]] }
+local blind_list_dev = { --[["eclipse"]] }
 
 VIC_process_data_by_version(blind_list, blind_list_dev)
 
