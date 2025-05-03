@@ -1,4 +1,4 @@
-VIC_ALPHA_RELEASE = true
+VIC_ALPHA_RELEASE = false
 
 if not VIC_ALPHA_RELEASE then _RELEASE_MODE = false end
 
