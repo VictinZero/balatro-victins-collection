@@ -3,7 +3,7 @@ return {
     config = {
         extra = {
             downgrade = 1,
-            dollars = 6
+            dollars = 7
         }
     },
     rarity = 2,
