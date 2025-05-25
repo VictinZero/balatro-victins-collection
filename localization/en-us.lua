@@ -302,6 +302,14 @@ return {
                     "give them random {C:attention}Enhancements"
 		        }
 		    },
+            j_vic_golden_ratio = {
+				name = "Golden Ratio",
+	        	text = {
+                    "When {C:attention}round ends{},",
+		            "each {C:attention}Ace{}, {C:attention}2{}, {C:attention}3{}, {C:attention}5{}, or {C:attention}8",
+                    "{C:attention}held in hand{} gives {C:money}$#1#",
+		        }
+		    },
             j_vic_jovial_merryment = {
 				name = "Jovial Merryment",
 	        	text = {
