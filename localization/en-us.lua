@@ -35,6 +35,14 @@ return {
 		            "and {C:attention}-#2#{} level to another"
 		        }
 		    },
+            j_vic_heartbreak = {
+				name = "Heartbreak",
+                text = {
+                    "When a {C:hearts}Heart{} card is {C:attention}destroyed{},",
+                    "this Joker gains {C:mult}+#1#{} Mult",
+                    "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
+                }
+		    },
 		    j_vic_growing_tree = {
 				name = "Growing Tree",
 	        	text = {
@@ -323,6 +331,15 @@ return {
 		            "When you {C:attention}skip a Blind{},",
                     "{C:attention}get{} a {C:spectral}#1#",
                     "{C:inactive}(Must have room)",
+		        }
+		    },
+            j_vic_fearsome_fate = {
+				name = "Fearsome Fate",
+	        	text = {
+                    "Each {C:attention}scoring card with a Seal",
+		            "has {C:green}#1# in #2#{} chance to create",
+                    "a {C:chips}Temporary {C:dark_edition}Negative{} copy",
+                    "{C:inactive}(except Negative cards)",
 		        }
 		    },
             j_vic_starfish = {

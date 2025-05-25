@@ -43,7 +43,8 @@ return {
     key = 'clownfish',
     config = {
         extra = {
-            mult = 2
+            mult = 2,
+            cache = {}
         }
     },
     rarity = 1,
