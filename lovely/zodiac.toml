@@ -9,7 +9,7 @@ priority = 1
 target = 'functions/common_events.lua'
 match_indent = true
 position = 'before'
-pattern = '''elseif card.jimbo then'''
+pattern = '''elseif card.jimbo  then'''
 payload = '''
 elseif not VIC_ALPHA_RELEASE and card.area == G.ca_vic_zodiac then
     y_off = 0.05*card.T.h
