@@ -507,6 +507,17 @@ return {
                     "{C:attention}get{} a {C:attention}Flesh{} card",
                 }
             },
+            j_vic_nine_lives = {
+                name = "Nine Lives",
+                text = {
+                    "After {C:attention}losing{} with",
+                    "{C:attention}no hands remaining{},",
+                    "set {C:blue}Hands{} to {C:attention}1",
+                    --"After scoring your {C:attention}final hand{} and {C:attention}losing{},",
+                    --"set current and maximum {C:blue}Hands{} to {C:attention}1",
+                    "{C:inactive}({C:attention}#1#{C:inactive} lives left)",
+                }
+            },
             j_vic_copies_commons = {
                 name = "Copies Commons",
                 text = {
