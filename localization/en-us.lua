@@ -302,6 +302,14 @@ return {
                     "give them random {C:attention}Enhancements"
 		        }
 		    },
+            j_vic_jovial_merryment = {
+				name = "Jovial Merryment",
+	        	text = {
+		            "When you {C:attention}skip a Blind{},",
+                    "{C:attention}get{} a {C:spectral}#1#",
+                    "{C:inactive}(Must have room)",
+		        }
+		    },
             j_vic_starfish = {
                 name = "Starfish",
                 text = {
