@@ -173,6 +173,13 @@ return {
                     "{X:red,C:white} X#2# {} Mult instead"
 		        }
 		    },
+            j_vic_brass_knuckles = {
+				name = "Brass Knuckles",
+	        	text = {
+                    "{X:red,C:white}X#2#{} Mult if you have",
+                    "{C:attention}exactly #1# {X:blue,C:white}Common{C:attention} Jokers",
+		        }
+		    },
             j_vic_jar_of_teeth = {
 				name = "Jar of Teeth",
 	        	text = {
