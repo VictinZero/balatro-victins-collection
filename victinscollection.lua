@@ -29,9 +29,9 @@ SMODS.current_mod.optional_features = {
 }
 
 -- Lib
-local lib_list = {"colours", "keybinds", "ui", "background_colours", "drawsteps"}
+local lib_list = { "colours", "keybinds", "ui", "background_colours", "drawsteps" }
 
-local lib_list_dev = {"focus"}
+local lib_list_dev = { "focus" }
 
 VIC_process_data_by_version(lib_list, lib_list_dev)
 
@@ -46,7 +46,7 @@ for _, lib in ipairs(lib_list) do
 end
 
 -- Hooks
-local hook_list = {"misc_functions", "game", "card", "UI_definitions", "cardarea", "blind", "common_events"}
+local hook_list = { "misc_functions", "game", "card", "UI_definitions", "cardarea", "blind", "common_events" }
 
 for _, hook in ipairs(hook_list) do
     local init, error = SMODS.load_file("hooks/" .. hook .. ".lua") -- NFS.load(SMODS.current_mod.path .. "hooks/" .. hook ..".lua")
@@ -272,15 +272,15 @@ if not VIC_ALPHA_RELEASE then
 
     SMODS.ConsumableType({
         key = 'Zodiac',
-        collection_rows = {6, 6},
+        collection_rows = { 6, 6 },
         primary_colour = G.C.VictinsCollection.OTHERS.Ophiucus, -- HEX('009cfd'),
         secondary_colour = G.C.VictinsCollection.OTHERS.Zodiac, -- HEX("81cefd"),
         loc_txt = {},
         shop_rate = 2
     })
 
-    local zodiac_list = {"aries", "taurus", "gemini", "cancer", "leo", "virgo", "libra", "scorpio", "sagittarius",
-                         "capricorn", "aquarius", "pisces", "ophiucus"}
+    local zodiac_list = { "aries", "taurus", "gemini", "cancer", "leo", "virgo", "libra", "scorpio", "sagittarius",
+        "capricorn", "aquarius", "pisces", "ophiucus" }
 
     for _, zodiac in ipairs(zodiac_list) do
         local zodiac_name = (" " .. zodiac:gsub("_", " ")):gsub("%W%l", string.upper):sub(2)
@@ -298,13 +298,13 @@ end
 -- Tokens
 SMODS.ConsumableType({
     key = 'Token',
-    primary_colour = HEX('e083b0'), -- HEX('009cfd'),
+    primary_colour = HEX('e083b0'),   -- HEX('009cfd'),
     secondary_colour = HEX('8755bf'), -- HEX("81cefd"),
     loc_txt = {},
     shop_rate = 0
 })
 
-local consumable_list = {"long_rest"}
+local consumable_list = { "long_rest" }
 
 local consumable_list_dev = {}
 
@@ -320,7 +320,6 @@ for _, consumable in ipairs(consumable_list) do
         SMODS.Consumable(data)
         sendDebugMessage("VictinsCollection :: Loaded consumable: " .. consumable_name)
     end
-
 end
 
 local set_cost_ref = Card.set_cost
@@ -352,7 +351,6 @@ SMODS.Blind:take_ownership('pillar', {
 })
 
 if not VIC_ALPHA_RELEASE then
-
     -- SMODS.Shader {
     --     key = 'test',
     --     path = 'test.fs',
@@ -443,7 +441,7 @@ if not VIC_ALPHA_RELEASE then
         end,
         loc_vars = function(self, info_queue, center)
             return {
-                vars = {center and center.edition and center.edition.extra.repetitions or self.config.extra.repetitions}
+                vars = { center and center.edition and center.edition.extra.repetitions or self.config.extra.repetitions }
             }
         end
     }
@@ -495,9 +493,9 @@ SMODS.Atlas({
 })
 
 -- Enable or disable additional tags here
-local tag_list = {"foolish", "liquidation", "litter", "satellite", "gift"}
+local tag_list = { "foolish", "liquidation", "litter", "satellite", "gift" }
 
-local tag_list_dev = {"rebate"}
+local tag_list_dev = { "rebate" }
 
 VIC_process_data_by_version(tag_list, tag_list_dev)
 
