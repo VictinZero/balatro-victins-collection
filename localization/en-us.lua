@@ -347,7 +347,7 @@ return {
                 text = {
                     "{C:mult}+#1#{} Mult per level of all",
                     "poker hands of lower tier",
-                    "{C:inactive}(Currently {V:1}+#2#{C:inactive} Mult)",
+                    "{C:inactive}(#2# {V:1}+#3#{C:inactive} Mult)",
                 }
             },
             j_vic_humbleing_bundle = {

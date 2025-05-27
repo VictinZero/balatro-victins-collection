@@ -2,7 +2,8 @@ local misc = SMODS.load_file("misc_functions.lua")()
 
 local eval_UI = function(card)
     local mult = 0
-    local txt = 0
+    local txt = "Currently"
+    local txt_mult = 0
     local colour = G.C.RED
     local order
 
@@ -17,7 +18,6 @@ local eval_UI = function(card)
             end
         end
 
-        local active = (not backwards)
         if handname and handname ~= 'NULL' then
             for k, v in ipairs(G.handlist) do
                 if not order and handname == v then
@@ -27,14 +27,18 @@ local eval_UI = function(card)
                     mult = mult + G.GAME.hands[v].level
                 end
             end
+        elseif (G.GAME.blind and G.GAME.blind.in_blind) and card.ability.extra.cache.round == G.GAME.round then
+            txt = "Previously"
+            mult = card.ability.extra.cache.mult
         end
 
         colour = (backwards and G.C.FILTER) or G.C.RED
-        txt = (backwards and "???") or card.ability.extra.mult*mult
+        txt_mult = (backwards and "???") or card.ability.extra.mult * mult
     end
 
     return {
         txt = txt,
+        mult = txt_mult,
         colour = colour
     }
 end
@@ -43,7 +47,8 @@ return {
     key = 'clownfish',
     config = {
         extra = {
-            mult = 2
+            mult = 2,
+            cache = { mult = 0, round = 0 },
         }
     },
     rarity = 1,
@@ -73,6 +78,9 @@ return {
                 end
             end
 
+            card.ability.extra.cache.mult = mult
+            card.ability.extra.cache.round = G.GAME.round
+
             if mult > 0 then
                 return {
                     mult = card.ability.extra.mult * mult
@@ -87,7 +95,8 @@ return {
             vars = {
                 card.ability.extra.mult,
                 UI_data.txt,
-                colours = {UI_data.colour}
+                UI_data.mult,
+                colours = { UI_data.colour }
             }
         }
     end
