@@ -482,6 +482,72 @@ SMODS.Sticker {
     end
 }
 
+local vic_hungry_difficulty = 1.05
+
+SMODS.Sticker {
+    key = "hungry",
+    atlas = "sticker_atlas",
+    pos = {
+        x = 1,
+        y = 0
+    },
+    badge_colour = HEX('DD5B23'),
+    default_compat = true,
+    sets = {
+        Joker = true
+    },
+    rate = 0.,
+
+    calculate = function(self, card, context)
+        if context.setting_blind and card:can_calculate() and not context.blueprint then
+            local create_hungry_event = function()
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 0.8,
+                    func = function()
+                        if G.hand_text_area.blind_chips then
+                            local difficulty = vic_hungry_difficulty
+                            local new_chips = math.floor(G.GAME.blind.chips * difficulty)
+                            local mod_text = number_format(
+                                math.floor(G.GAME.blind.chips * difficulty) - G.GAME.blind.chips
+                            )
+                            G.GAME.blind.chips = new_chips
+                            G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+
+                            local chips_UI = G.hand_text_area.blind_chips
+                            G.FUNCS.blind_chip_UI_scale(G.hand_text_area.blind_chips)
+                            G.HUD_blind:recalculate()
+
+                            attention_text({
+                                text = '+' .. mod_text,
+                                scale = 0.8,
+                                hold = 0.7,
+                                cover = chips_UI.parent,
+                                cover_colour = G.C.RED,
+                                align = 'cm'
+                            })
+
+                            chips_UI:juice_up()
+
+                            play_sound('chips2')
+                        else
+                            return false
+                        end
+                        return true
+                    end
+                }))
+            end
+            create_hungry_event()
+        end
+    end,
+
+    loc_vars = function(self, info_queue, center)
+        return {
+            vars = { vic_hungry_difficulty }
+        }
+    end
+}
+
 -- Tags
 
 -- Registers the atlas

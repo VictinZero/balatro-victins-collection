@@ -1017,6 +1017,13 @@ return {
 					"When {C:attention}round ends{},",
 					"{C:red,E:2}destroy{} this card",
 				}
+			},
+			vic_hungry = {
+				name = "Hungry",
+				text = {
+					"When {C:attention}Blind is selected{},",
+		            "{X:red,C:white} X#1# {} {C:red,E:2}Blind size",
+				}
 			}
 		},
         Tag = {
@@ -1225,6 +1232,7 @@ return {
             zodiac = "Zodiac",
 			token = "Token",
 			vic_temporary = "Temporary",
+            vic_hungry = "Hungry",
 		},
 		quips = {
 			vic_solomon_title_1 = {
