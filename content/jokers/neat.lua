@@ -1,6 +1,6 @@
 return {
     key = 'neat',
-    config = {extra = {hand_size = 2, status = false}},
+    config = { extra = { hand_size = 2, status = false } },
     rarity = 1,
     pos = { x = 3, y = 2 },
     atlas = 'joker_soul_atlas',
@@ -9,7 +9,7 @@ return {
     discovered = true,
     blueprint_compat = false,
     eternal_compat = true,
-    soul_pos = { x = 3, y = 3},
+    soul_pos = { x = 3, y = 3 },
 
     add_to_deck = function(self, card, from_debuff)
         if G.GAME.last_hand_played == 'Straight' then
