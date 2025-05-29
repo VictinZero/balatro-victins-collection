@@ -59,6 +59,12 @@ return {
     eternal_compat = false,
     soul_pos = nil,
 
+    draw = function(self, card, layer)
+        if card.config.center.discovered or card.bypass_discovery_center then
+            card.children.center:draw_shader('negative_shine', nil, card.ARGS.send_to_shader)
+        end
+    end,
+
     calculate = function(self, card, context)
         if context.selling_self and card.ability.extra.blinds_defeated >= card.ability.extra.blinds_to_defeat then
             G.E_MANAGER:add_event(Event({
