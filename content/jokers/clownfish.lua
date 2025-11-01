@@ -7,7 +7,7 @@ local eval_UI = function(card)
     local colour = G.C.RED
     local order
 
-    if not misc.is_in_your_collection(card) then
+    if (not misc.is_in_your_collection(card)) and G.hand then
         local handname, _ = G.FUNCS.get_poker_hand_info(G.hand.highlighted)
 
         local backwards = false

@@ -338,15 +338,16 @@ return {
                     "When {C:attention}round ends{},",
                     "earn {C:money}$1{} for each",
                     "poker hand of tier",
-                    "equal or lesser than",
+                    "{C:attention}equal or lower{} than",
                     "winning poker hand",
                 }
             },
             j_vic_clownfish = {
                 name = "Clownfish",
                 text = {
-                    "{C:mult}+#1#{} Mult per level of all",
-                    "poker hands of lower tier",
+                    "{C:mult}+#1#{} Mult per {C:attention}level{} of all",
+                    "poker hands of a {C:attention}lower{} tier",
+                    "than played poker hand",
                     "{C:inactive}(#2# {V:1}+#3#{C:inactive} Mult)",
                 }
             },
