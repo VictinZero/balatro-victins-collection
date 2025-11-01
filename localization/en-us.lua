@@ -460,11 +460,11 @@ return {
             j_vic_fortune_cookie = {
                 name = "Fortune Cookie",
                 text = {
-                    "{X:green,C:white} X#1# {} Luck {C:inactive}(e.g., {C:green}1 in 3{C:inactive} -> {C:green}#2# in 3{C:inactive}#4#)",
+                    "{X:green,C:white} +#1# {} Luck {C:inactive}(e.g., {C:green}1 in 3{C:inactive} -> {C:green}#2# in 3{C:inactive}#4#)",
                     "{s:0.33} ",
                     "When {C:attention}round ends{}, {C:green}#2# in #3#{} chance to",
                     "destroy this and create a {C:money}Golden {C:tarot}Tarot{}.",
-                    "Otherwise, this gains {X:green,C:white} X#5# {} Luck",
+                    "Otherwise, this gains {X:green,C:white} +#5# {} Luck",
                 }
             },
             j_vic_chai_tea = {

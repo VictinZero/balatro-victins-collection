@@ -21,9 +21,14 @@ return {
     soul_pos = nil,
 
     calculate = function(self, card, context)
+        if context.mod_probability and not context.blueprint then
+            return {
+                numerator = context.numerator + card.ability.extra.fortune,
+            }
+        end
         if context.end_of_round and context.game_over ~= nil and not context.blueprint then -- and not context.repetition and not context.blueprint then
             sendDebugMessage("Trying to calculate Fortune Cookie")
-            if (pseudorandom('vic_fortune_cookie') < G.GAME.probabilities.normal / card.ability.extra.odds) then
+            if SMODS.pseudorandom_probability(card, 'vic_fortune_cookie', 0, card.ability.extra.odds) then
                 sendDebugMessage("Eaten!")
                 card_eval_status_text(card, 'extra', nil, nil, nil, {
                     message = localize('k_eaten_ex')
@@ -65,30 +70,18 @@ return {
                 end
             else
                 sendDebugMessage("Not eaten!")
-                if not card.debuff then
-                    G.GAME.probabilities.normal = G.GAME.probabilities.normal / card.ability.extra.fortune
-                end
                 card.ability.extra.fortune = card.ability.extra.fortune + 1
-                if not card.debuff then
-                    G.GAME.probabilities.normal = G.GAME.probabilities.normal * card.ability.extra.fortune
-                end
             end
         end
     end,
 
-    add_to_deck = function(self, card, from_debuff)
-        G.GAME.probabilities.normal = G.GAME.probabilities.normal * card.ability.extra.fortune
-    end,
-
-    remove_from_deck = function(self, card, from_debuff)
-        G.GAME.probabilities.normal = G.GAME.probabilities.normal / card.ability.extra.fortune
-    end,
-
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS.e_vic_golden
+
+        local numerator, denominator = SMODS.get_probability_vars(card, 0, card.ability.extra.odds)
         return {
-            vars = {card.ability.extra.fortune, G.GAME and G.GAME.probabilities.normal or 1, card.ability.extra.odds,
-                    (card.ability.extra.fortune == 1 and "... ?") or "!!!", card.ability.extra.fortune_mod}
+            vars = { card.ability.extra.fortune, numerator, denominator,
+                (card.ability.extra.fortune == 1 and "... ?") or "!!!", card.ability.extra.fortune_mod }
         }
     end
 }

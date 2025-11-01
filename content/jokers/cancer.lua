@@ -5,8 +5,11 @@ local loc_vars = function(self, info_queue, card)
     local Xmult = card.ability.extra.base_Xmult + card.ability.extra.Xmult_mod * (level - 1)
     local dollars = card.ability.extra.base_dollars + card.ability.extra.dollars_mod * (level - 1)
 
-    return {G.GAME and G.GAME.probabilities.normal or 1, card.ability.extra.Xmult_den, Xmult,
-            G.GAME and G.GAME.probabilities.normal or 1, card.ability.extra.dollars_den, dollars,
+    local numerator_Xmult, denominator_Xmult = SMODS.get_probability_vars(card, 1, card.ability.extra.Xmult_den)
+    local numerator_dollars, denominator_dollars = SMODS.get_probability_vars(card, 1, card.ability.extra.dollars_den)
+
+    return {numerator_Xmult, denominator_Xmult, Xmult,
+            numerator_dollars, denominator_dollars, dollars,
             card.ability.extra.Xmult_mod, card.ability.extra.dollars_mod}
 end
 
@@ -48,37 +51,25 @@ return {
             card.ability.extra.hand_type then
             card.ability.extra.level = G.GAME.VictinsCollection.zodiac.cancer
             local level = card.ability.extra.level
-            if pseudorandom('vic_cancer_Xmult') < G.GAME.probabilities.normal / card.ability.extra.Xmult_den then
-                local Xmult = card.ability.extra.base_Xmult + card.ability.extra.Xmult_mod * (level - 1)
-                SMODS.eval_this(card, {
-                    Xmult_mod = Xmult,
-                    message = localize {
-                        type = 'variable',
-                        key = 'a_xmult',
-                        vars = {Xmult}
-                    },
-                    color = G.C.MULT
-                })
+
+            local xmult = 0
+
+            if SMODS.pseudorandom_probability(card, 'vic_cancer_Xmult', 1, card.ability.extra.Xmult_den) then
+                xmult = card.ability.extra.base_Xmult + card.ability.extra.Xmult_mod * (level - 1)
             end
 
-            if pseudorandom('vic_cancer_dollars') < G.GAME.probabilities.normal / card.ability.extra.dollars_den then
-                local dollars = card.ability.extra.base_dollars + card.ability.extra.dollars_mod * (level - 1)
+            local dollars = 0
 
-                ease_dollars(dollars)
-                G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + dollars
-                G.E_MANAGER:add_event(Event({
-                    func = (function()
-                        G.GAME.dollar_buffer = 0;
-                        return true
-                    end)
-                }))
+            if SMODS.pseudorandom_probability(card, 'vic_cancer_dollars', 1, card.ability.extra.dollars_den) then
+                dollars = card.ability.extra.base_dollars + card.ability.extra.dollars_mod * (level - 1)
+            end
 
-                return {
-                    message = localize('$') .. dollars,
-                    dollars = dollars,
-                    colour = G.C.MONEY
+            return {
+                xmult = xmult,
+                extra = {
+                    dollars = dollars
                 }
-            end
+            }
         end
     end,
 

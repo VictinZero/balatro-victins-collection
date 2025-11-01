@@ -21,7 +21,7 @@ return {
     soul_pos = nil,
 
     calc_dollar_bonus = function(self, card)
-        if (pseudorandom('vic_pippi_panini') < G.GAME.probabilities.normal / card.ability.extra.odds) then
+        if SMODS.pseudorandom_probability(card, 'vic_pippi_panini', 1, card.ability.extra.odds) then
             -- card_eval_status_text(card, 'dollars', card.ability.extra.payout)
             return card.ability.extra.payout
         else
@@ -31,8 +31,10 @@ return {
     end,
 
     loc_vars = function(self, info_queue, card)
+        local numerator, denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds)
+
         return {
-            vars = {G.GAME and G.GAME.probabilities.normal or 1, card.ability.extra.odds, card.ability.extra.payout,
+            vars = {numerator, denominator, card.ability.extra.payout,
                     card.ability.extra.penalty}
         }
     end
