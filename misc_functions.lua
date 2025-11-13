@@ -1,5 +1,34 @@
 local misc = {}
 
+--- Append a text node to a UI nodes list.
+--- @param nodes table List of UI nodes; the function will append a text node to this list
+--- @param text string The text content for the new node
+--- @param colour table|any Colour entry (usually a G.C.* colour table)
+--- @param scale number|nil Optional text scaling factor. Default: 0.3
+--- @return nil
+misc.add_node = function(nodes, text, colour, scale)
+    nodes[#nodes + 1] = {
+        n = G.UIT.T,
+        config = {
+            text = text,
+            colour = colour,
+            scale = scale or 0.3
+        }
+    }
+end
+
+--- Append a row node to a UI nodes list.
+--- @param nodes table List of UI nodes; the function will append a row node with align = 'cm'
+--- @return nil
+misc.add_row = function(nodes)
+    nodes[#nodes + 1] = {
+        n = G.UIT.R,
+        config = {
+            align = "cm"
+        }
+    }
+end
+
 misc.create_blind_tooltip = function(blind_choice, func)
     if not blind_choice.animation.alerted then
         G.E_MANAGER:add_event(Event({

@@ -8,25 +8,9 @@ end
 
 local _generate_main_end = function(card)
     if not misc.is_in_your_collection(card) then
-        local add_node = function(nodes, text, colour)
-            nodes[#nodes + 1] = {
-                n = G.UIT.T,
-                config = {
-                    text = text,
-                    colour = colour,
-                    scale = 0.3
-                }
-            }
-        end
+        local add_node = misc.add_node
 
-        local add_row = function(nodes)
-            nodes[#nodes + 1] = {
-                n = G.UIT.R,
-                config = {
-                    align = "cm"
-                }
-            }
-        end
+        local add_row = misc.add_row
 
         local nodes_ = {}
 

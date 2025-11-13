@@ -2,16 +2,7 @@ local misc = SMODS.load_file("misc_functions.lua")()
 
 local _generate_main_end = function(card)
     if not misc.is_in_your_collection(card) then
-        local add_node = function(nodes, text, colour)
-            nodes[#nodes + 1] = {
-                n = G.UIT.T,
-                config = {
-                    text = text,
-                    colour = colour,
-                    scale = 0.3
-                }
-            }
-        end
+        local add_node = misc.add_node
 
         if G.hand and G.hand.highlighted and #G.hand.highlighted > 0 then
             local order = {}
