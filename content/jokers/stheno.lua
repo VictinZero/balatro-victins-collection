@@ -41,8 +41,10 @@ return {
     calculate = function(self, card, context)
         if context.vic_modify_boss_pool then
             if context.vic_boss_key == 'bl_vic_rock' then
+                sendDebugMessage("Adding Boss Blind to pool due to Stheno")
                 return { vic_add_to_pool = true, add_to_hand = true }
             elseif context.vic_boss_blind.boss and not (context.vic_boss_blind.boss.showdown) then
+                sendDebugMessage("Removing Boss Blind from pool due to Stheno")
                 return { vic_remove_from_pool = true, remove_from_hand = true }
             end
         end
