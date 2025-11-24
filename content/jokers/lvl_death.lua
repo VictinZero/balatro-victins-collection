@@ -2,7 +2,7 @@ local misc = SMODS.load_file("misc_functions.lua")()
 
 local _generate_main_end = function(card)
     local main_end
-    if not misc.is_in_your_collection(card) then
+    if not misc.is_in_your_collection(card) and G.STAGE ~= G.STAGES.MAIN_MENU then
         local handname, _ = G.FUNCS.get_poker_hand_info(G.hand.highlighted)
 
         local backwards = false
